@@ -8,7 +8,7 @@
 
 ## Fonctionnalités
 
-> La plupart des fonctionnalités sont encore en cours de développement
+> La plupart des fonctionnalités sont toujours en cours de développement
 
 - Marquage d'erreurs syntaxique \[en cours]
 - Multi-onglet pour avoir plusieurs fichiers par TP \[en cours]
