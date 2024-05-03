@@ -77,7 +77,6 @@ Ceci a pour but de :
 > Vous trouverez ci-dessous les différentes étapes nécessaires au lancement du projet
 <br/>
 
-**Partie incomplète !!**
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Prérequis
