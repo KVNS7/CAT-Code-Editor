@@ -35,7 +35,7 @@
 ## A propos du projet
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 
-[![IDE interface][ide-screenshot]](http://localhost:5173/)
+[![IDE interface][IDE-screenshot]](http://localhost:5173/)
 
 L'objectif de ce projet est de proposer une solution contenant un IDE multi-fenêtre, proposant une coloration et affichage d'erreur syntaxique compatible avec plusieurs langages pouvant être intégré à <a href="https://www.cat.savoircoder.fr/accueil/" target="_blank" rel="noopener noreferrer"> CAT</a>.
 
