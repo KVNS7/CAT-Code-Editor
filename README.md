@@ -84,7 +84,7 @@ Ceci a pour but de :
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 <br/>
 
-Il faut préalablement installer <a href = "https://nodejs.org/en/download">Node.js</a> pour pouvoir lancer le projet.
+Il faut préalablement installer <a href = "https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">Node.js</a> pour pouvoir lancer le projet.
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Installation
