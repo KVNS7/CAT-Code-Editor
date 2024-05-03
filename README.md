@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://www.cat.savoircoder.fr/accueil/" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.cat.savoircoder.fr/accueil/" target = "_blank" rel = "noopener noreferrer">
     <img width="100" src="https://www.cat.savoircoder.fr/static/moulinette/img/logo/home_logo.png" alt="CAT logo">
   </a>
 </p>
@@ -7,7 +7,7 @@
 <h1 align="center">Code Editor pour CAT</h1>
   
 <!--          Sommaire          -->
-
+<br/>
 <details>
   <summary>Sommaire</summary>
   <ol>
@@ -30,23 +30,26 @@
   </ol>
 </details>
 
-
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## A propos du projet
 <!------------------------------------------------------------------------------------------------------------------------------------------>
+<br/>
 
-[![IDE interface][IDE-screenshot]](http://localhost:5173/)
+<p align = "center" >
+  <a href = "http://localhost:5173/" target ="_blank" rel ="noopener noreferrer">
+    <img width="600" src="public/img/interface-IDE.png" alt="Interface IDE">
+  </a>
+</p>
 
-L'objectif de ce projet est de proposer une solution contenant un IDE multi-fenêtre, proposant une coloration et affichage d'erreur syntaxique compatible avec plusieurs langages pouvant être intégré à <a href="https://www.cat.savoircoder.fr/accueil/" target="_blank" rel="noopener noreferrer"> CAT</a>.
+L'objectif de ce projet est de proposer une solution contenant un IDE multi-fenêtre, proposant une coloration et affichage d'erreur syntaxique compatible avec plusieurs langages pouvant être intégré à <a href="https://www.cat.savoircoder.fr/accueil/" target ="_blank" rel ="noopener noreferrer"> CAT</a>.
 
-Celui-ci sera finalement relié à un terminal réalisé par <a href="https://github.com/PiravineJEYAMOHAN" target="_blank" rel="noopener noreferrer">Piravine JEYAMOHAN</a>, ce qui permettra de pouvoir exécuter le code et de réaliser des commandes sur les fichiers qui seront stockés sur un Docker sous un dossier spécifique à chaque étudiant.
+Celui-ci sera finalement relié à un terminal réalisé par <a href="https://github.com/PiravineJEYAMOHAN" target = "_blank" rel = "noopener noreferrer">Piravine JEYAMOHAN</a>, ce qui permettra de pouvoir exécuter le code et de réaliser des commandes sur les fichiers qui seront stockés sur un Docker sous un dossier spécifique à chaque étudiant.
 <br/><br/>
 
 Ceci a pour but de :
-- simplfiier le travail des étudiants sur CAT en leur permettant de compiler et exécuter leurs projets directement sur le site (évite les allé-retour entre IDE et CAT)
-- inciter les étudiants à utiliser le terminal qui est de moins en moins utiliser étant donné le grand nombre d'interfaces créées masquant son usage
+- simplifier le travail des étudiants sur CAT en leur permettant de compiler et exécuter leurs projets directement sur le site (évite les allé-retour entre IDE et CAT)
+- inciter les étudiants à utiliser le terminal qui est de moins en moins utilisé, étant donné le grand nombre d'interfaces créées masquant son usage
 - permettre aux enseignants un suivi du code des étudiants
-
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Créé avec 
@@ -71,52 +74,49 @@ Ceci a pour but de :
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## Pour commencer
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-
 > Vous trouverez ci-dessous les différentes étapes nécessaires au lancement du projet
+<br/>
 
 **Partie incomplète !!**
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Prérequis
 <!------------------------------------------------------------------------------------------------------------------------------------------>
+<br/>
 
-> Partie incomplète
+Il faut préalablement installer <a href = "https://nodejs.org/en/download" target = "_blank" rel = "noopener noreferrer">Node.js</a> pour pouvoir lancer le projet.
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Installation
 <!------------------------------------------------------------------------------------------------------------------------------------------>
+<br/>
 
-> Partie incomplète
+Une fois le projet importé, il suffit de se placer dans celui-ci avec un terminal et d'exécuter la commande suivante :
 
-<!--
 ```sh
-npm install 
+npm install
 ```
+
+Puis pour lancer le serveur :
+
 ```sh
 npm run dev 
 ```
-```sh
-npm i @chakra-ui/react @emotion/react @emotion/styled frame
-```
-```sh
-npm install @monaco-editor/react
-```
-```sh
-npm install axios
-```
--->
+
+Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au site.
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## Utilisation
 <!------------------------------------------------------------------------------------------------------------------------------------------>
+> Partie incomplète
+<br/>
 
-
+<br/>
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## Feuille de route
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-
-> La plupart des fonctionnalités sont toujours en cours de développement
+<br/>
 
 - [x] Ajouter le bloc d'éditeur de code à la page
 - [ ] Fenêtre ouvrante avec des paramètres de l'editeur de code (thème, taille de la police, etc... )
@@ -127,20 +127,21 @@ npm install axios
 - [ ] Bouton importer permettant d'importer un fichier / un dossier au tp
 - [ ] Affichage (souligner) des erreurs syntaxiques ( ';' manquant, etc... )
 
+<br/>
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## Contact
 <!------------------------------------------------------------------------------------------------------------------------------------------>
+<br/>
 
 Kevin Soares - ksoares@outlook.fr
 
 Projet : [https://github.com/KVNS7/Code-editor-cat/tree/main](https://github.com/KVNS7/Code-editor-cat/tree/main)
 
+<br/>
 
 
 <!--              --Variables--              -->
-
-[IDE-screenshot]: public/img/interface-IDE.png
 
 [JavaScript-badge]: https://img.shields.io/badge/JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&labelColor=grey
 [JavaScript-url]: https://developer.mozilla.org/fr/docs/Web/JavaScript
