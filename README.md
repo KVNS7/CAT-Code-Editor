@@ -36,7 +36,7 @@
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 
 <p align = "center" >
-  <a href = "http://localhost:5173/">
+  <a href = "http://localhost:5173/" target="_blank">
     <img width="600" src="public/img/interface-IDE.png" alt="Interface IDE" align = "center">
   </a>
 </p>
