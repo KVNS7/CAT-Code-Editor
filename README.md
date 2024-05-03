@@ -21,8 +21,6 @@
 
 [![React version](https://img.shields.io/badge/React%20v18.3.1-%2361DAFB?style=for-the-badge&logo=react&labelColor=grey)](https://fr.legacy.reactjs.org/)
 
-[![React2](https://img.shields.io/badge/v18.3.1-%2361DAFB?style=for-the-badge&logo=react&label=React&labelColor=grey)](#)
-
 [![Vite version](https://img.shields.io/badge/Vite%20v1.6.8-%23646CFF?style=for-the-badge&logo=vite&labelColor=grey)](https://vitejs.fr/)
 
 [![ChakraUI version](https://img.shields.io/badge/Chakra%20v2.8.2-%23319795?style=for-the-badge&logo=chakraui&labelColor=grey)](https://v2.chakra-ui.com/docs/components)
