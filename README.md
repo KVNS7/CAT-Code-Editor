@@ -89,26 +89,20 @@ Ceci a pour but de :
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Installation
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-> Partie incomplète
 <br/>
+Une fois le projet importé, il suffit de se placer dans celui-ci avec un terminal et d'exécuter la commande suivante :
 
-<!--
 ```sh
-npm install 
+npm install vite
 ```
+
+Puis pour lancer le serveur :
+
 ```sh
 npm run dev 
 ```
-```sh
-npm i @chakra-ui/react @emotion/react @emotion/styled frame
-```
-```sh
-npm install @monaco-editor/react
-```
-```sh
-npm install axios
-```
--->
+
+Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au site.
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## Utilisation
