@@ -56,7 +56,7 @@ Celui-ci sera finalement relié à un terminal réalisé par <a href="https://gi
 > La plupart des fonctionnalités sont toujours en cours de développement
 
 - [x] Ajouter le bloc d'éditeur de code à la page
-- [ ] Fenêtre ouvrante avec des paramètres de l'editeur de code
+- [ ] Fenêtre ouvrante avec des paramètres de l'editeur de code (thème, taille de la police, etc... )
 - [ ] Onglets pour avoir plusieurs fichiers
 - [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers :
   - [ ] En local sur machine dans le dossier téléchargement
