@@ -47,7 +47,7 @@ Celui-ci sera finalement relié à un terminal réalisé par <a href="https://gi
 <br/><br/>
 
 Ceci a pour but de :
-- simplfiier le travail des étudiants sur CAT en leur permettant de compiler et exécuter leurs projets directement sur le site (évite les allé-retour entre IDE et CAT)
+- simplfier le travail des étudiants sur CAT en leur permettant de compiler et exécuter leurs projets directement sur le site (évite les allé-retour entre IDE et CAT)
 - inciter les étudiants à utiliser le terminal qui est de moins en moins utiliser étant donné le grand nombre d'interfaces créées masquant son usage
 - permettre aux enseignants un suivi du code des étudiants
 
