@@ -6,7 +6,9 @@
 
 # Projet Stage L3 - Code Editor pour CAT
 
+<!---------------------------------------------------------------------------------------------------------------------------------------------------->
 ## Fonctionnalités
+<!---------------------------------------------------------------------------------------------------------------------------------------------------->
 
 > La plupart des fonctionnalités sont toujours en cours de développement
 
@@ -15,7 +17,10 @@
 - Importation d'un ou plusieurs fichiers (projet) **\[en cours]**
 - Sauvegarde du/des fichiers du TP ( sur un dossier propre a l'étudiant ex : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]* ) qui serait sur un docker **\[en cours]**
 
+<!---------------------------------------------------------------------------------------------------------------------------------------------------->
 ## Bibliothèques et outils utilisées
+<!---------------------------------------------------------------------------------------------------------------------------------------------------->
+
 
 [![JavaScript version](https://img.shields.io/badge/JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&labelColor=grey)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
 
@@ -40,3 +45,7 @@
 |    Axios           |    [![Axios version](https://img.shields.io/badge/v1.6.8-blue?logo=axios&labelColor=grey)](https://axios-http.com/fr/docs/intro)        |
 |    Piston          |    [![Piston version](https://img.shields.io/badge/x-blue)](https://piston.readthedocs.io/en/latest/)                                   |
 -->
+
+<!---------------------------------------------------------------------------------------------------------------------------------------------------->
+## Lancement du projet
+<!---------------------------------------------------------------------------------------------------------------------------------------------------->
