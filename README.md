@@ -86,6 +86,7 @@ Ceci a pour but de :
 
 > Partie incomplète
 
+<!--
 ```sh
 npm install 
 ```
@@ -101,6 +102,7 @@ npm install @monaco-editor/react
 ```sh
 npm install axios
 ```
+-->
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## Utilisation
