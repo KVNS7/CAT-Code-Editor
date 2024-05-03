@@ -1,8 +1,27 @@
-# React + Vite
+<p align="center">
+  <a href="https://www.cat.savoircoder.fr/accueil/" target="_blank" rel="noopener noreferrer">
+    <img width="180" src="https://www.cat.savoircoder.fr/static/moulinette/img/logo/home_logo.png" alt="CAT logo">
+  </a>
+</p>
+<br/>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Projet Stage L3 - Code Editor pour CAT
 
-Currently, two official plugins are available:
+## Fonctionnalités
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> La plupart des fonctionnalités sont encore en cours de développement
+
+- Marquage d'erreurs syntaxique \[en cours]
+- Multi-onglet pour avoir plusieurs fichiers par TP \[en cours]
+- Importation d'un ou plusieurs fichiers (projet) \[en cours]
+- Sauvegarde du/des fichiers du TP ( sur un dossier propre a l'étudiant ex : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]* ) qui serait sur un docker \[en cours]
+
+## Bibliothèques / API / outils utilisées
+
+|    Outil      |    Version    |
+|---------------|:--------------|
+|    Vite JS    |    [![Vite version](https://img.shields.io/badge/v5.2.10-blue)](https://vitejs.fr/)     |
+|    Chakra UI  |    [![Chakra version](https://img.shields.io/badge/v2.8.2-blue)](https://v2.chakra-ui.com/docs/components)     |
+| Monaco Editor |    [![MonacoEditor version](https://img.shields.io/badge/v0.48.0-blue)](https://microsoft.github.io/monaco-editor/docs.html)    |
+|    Axios      |    [![Axios version](https://img.shields.io/badge/v1.6.8-blue)](https://axios-http.com/fr/docs/intro)     |
+|    Piston     |    [![Piston version](https://img.shields.io/badge/X-blue)](https://piston.readthedocs.io/en/latest/)         |
