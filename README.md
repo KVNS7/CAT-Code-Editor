@@ -17,7 +17,8 @@
 
 ## Bibliothèques / API / outils utilisées
 
-[![React version](https://img.shields.io/badge/React%20v18.3.1-%2361DAFB?style=for-the-badge&logo=react&labelColor=grey)]()
+[![JavaScript version](https://img.shields.io/badge/JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&labelColor=grey)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
+[![React version](https://img.shields.io/badge/React%20v18.3.1-%2361DAFB?style=for-the-badge&logo=react&labelColor=grey)](https://fr.legacy.reactjs.org/)
 [![Vite version](https://img.shields.io/badge/Vite%20v1.6.8-%23646CFF?style=for-the-badge&logo=vite&labelColor=grey)](https://vitejs.fr/)
 [![ChakraUI version](https://img.shields.io/badge/Chakra%20v2.8.2-%23319795?style=for-the-badge&logo=chakraui&labelColor=grey)](https://v2.chakra-ui.com/docs/components)
 [![Monaco Editor version](https://img.shields.io/badge/Monaco%20Editor%20v0.48.0-%2361DAFB?style=for-the-badge&labelColor=grey)](https://microsoft.github.io/monaco-editor/docs.html)
