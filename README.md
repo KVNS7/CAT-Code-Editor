@@ -18,10 +18,10 @@
 
 ## Bibliothèques / API / outils utilisées
 
-|    Outil      |    Version    |
-|---------------|:--------------|
-|    Vite JS    |    [![Vite version](https://img.shields.io/badge/v5.2.10-blue)](https://vitejs.fr/)     |
-|    Chakra UI  |    [![Chakra version](https://img.shields.io/badge/v2.8.2-blue)](https://v2.chakra-ui.com/docs/components)     |
+|    Outil      |                                                            Version                                                              |
+|---------------|:--------------------------------------------------------------------------------------------------------------------------------|
+|    Vite JS    |    [![Vite version](https://img.shields.io/badge/v5.2.10-blue)](https://vitejs.fr/)                                             |
+|    Chakra UI  |    [![Chakra version](https://img.shields.io/badge/v2.8.2-blue)](https://v2.chakra-ui.com/docs/components)                      |
 | Monaco Editor |    [![MonacoEditor version](https://img.shields.io/badge/v0.48.0-blue)](https://microsoft.github.io/monaco-editor/docs.html)    |
-|    Axios      |    [![Axios version](https://img.shields.io/badge/v1.6.8-blue)](https://axios-http.com/fr/docs/intro)     |
-|    Piston     |    [![Piston version](https://img.shields.io/badge/X-blue)](https://piston.readthedocs.io/en/latest/)         |
+|    Axios      |    [![Axios version](https://img.shields.io/badge/v1.6.8-blue)](https://axios-http.com/fr/docs/intro)                           |
+|    Piston     |    [![Piston version](https://img.shields.io/badge/X-blue)](https://piston.readthedocs.io/en/latest/)                           |
