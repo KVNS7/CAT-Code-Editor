@@ -7,7 +7,7 @@
 <h1 align="center">Code Editor pour CAT</h1>
   
 <!--          Sommaire          -->
-
+<br/>
 <details>
   <summary>Sommaire</summary>
   <ol>
@@ -30,14 +30,14 @@
   </ol>
 </details>
 
-
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## A propos du projet
 <!------------------------------------------------------------------------------------------------------------------------------------------>
+<br/>
 
 <p align = "center" >
-  <a href = "http://localhost:5173/" target="_blank">
-    <img width="600" src="public/img/interface-IDE.png" alt="Interface IDE" align = "center">
+  <a href = "http://localhost:5173/" target="_blank" rel="noopener noreferrer">
+    <img width="600" src="public/img/interface-IDE.png" alt="Interface IDE">
   </a>
 </p>
 
@@ -47,10 +47,11 @@ Celui-ci sera finalement relié à un terminal réalisé par <a href="https://gi
 <br/><br/>
 
 Ceci a pour but de :
-- simplfier le travail des étudiants sur CAT en leur permettant de compiler et exécuter leurs projets directement sur le site (évite les allé-retour entre IDE et CAT)
-- inciter les étudiants à utiliser le terminal qui est de moins en moins utiliser étant donné le grand nombre d'interfaces créées masquant son usage
+- simplifier le travail des étudiants sur CAT en leur permettant de compiler et exécuter leurs projets directement sur le site (évite les allé-retour entre IDE et CAT)
+- inciter les étudiants à utiliser le terminal qui est de moins en moins utilisé, étant donné le grand nombre d'interfaces créées masquant son usage
 - permettre aux enseignants un suivi du code des étudiants
 
+<br/>
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Créé avec 
@@ -71,26 +72,28 @@ Ceci a pour but de :
 
 [![Piston version][Piston-badge]][Piston-url]
 
+<br/>
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## Pour commencer
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-
 > Vous trouverez ci-dessous les différentes étapes nécessaires au lancement du projet
+<br/>
 
 **Partie incomplète !!**
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Prérequis
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-
 > Partie incomplète
+<br/>
+
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Installation
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-
 > Partie incomplète
+<br/>
 
 <!--
 ```sh
@@ -113,14 +116,14 @@ npm install axios
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## Utilisation
 <!------------------------------------------------------------------------------------------------------------------------------------------>
+<br/>
 
-
+<br/>
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## Feuille de route
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-
-> La plupart des fonctionnalités sont toujours en cours de développement
+<br/>
 
 - [x] Ajouter le bloc d'éditeur de code à la page
 - [ ] Fenêtre ouvrante avec des paramètres de l'editeur de code (thème, taille de la police, etc... )
@@ -131,10 +134,12 @@ npm install axios
 - [ ] Bouton importer permettant d'importer un fichier / un dossier au tp
 - [ ] Affichage (souligner) des erreurs syntaxiques ( ';' manquant, etc... )
 
+<br/>
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## Contact
 <!------------------------------------------------------------------------------------------------------------------------------------------>
+<br/>
 
 Kevin Soares - ksoares@outlook.fr
 
