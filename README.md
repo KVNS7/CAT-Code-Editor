@@ -140,7 +140,7 @@ Projet : [https://github.com/KVNS7/Code-editor-cat/tree/main](https://github.com
 
 <!--              --Variables--              -->
 
-[IDE-screenshot]: public/img/interface-ide.png
+[IDE-screenshot]: public/img/interface-IDE.png
 
 [JavaScript-badge]: https://img.shields.io/badge/JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&labelColor=grey
 [JavaScript-url]: https://developer.mozilla.org/fr/docs/Web/JavaScript
