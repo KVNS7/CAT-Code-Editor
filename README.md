@@ -50,15 +50,18 @@ Celui-ci sera finalement relié à un terminal réalisé par <a href="https://gi
 
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-## Fonctionnalités
+## Feuille de route
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 
 > La plupart des fonctionnalités sont toujours en cours de développement
 
-- Marquage d'erreurs syntaxique **\[en cours]**
-- Multi-onglet pour avoir plusieurs fichiers par TP **\[en cours]**
-- Importation d'un ou plusieurs fichiers (projet) **\[en cours]**
-- Sauvegarde du/des fichiers du TP ( sur un dossier propre a l'étudiant ex : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]* ) qui serait sur un docker **\[en cours]**
+- [x] Ajouter le bloc d'éditeur de code à la page
+- [ ] Onglets pour avoir plusieurs fichiers
+- [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers dans un dossier propre à l'étudiant sur le docker
+  - exemple : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]*
+- [ ] Bouton importer permettant d'importer un fichier / un dossier au tp
+- [ ] Affichage (souligner) des erreurs syntaxiques ( ';' manquant, etc... )
+
 
 
 
