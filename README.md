@@ -6,11 +6,36 @@
 
 # Projet Stage L3 - Code Editor pour CAT
 
+<!--          Sommaire          -->
+
+<details>
+  <summary>Sommaire</summary>
+  <ol>
+    <li>
+      <a href="#a-propos-du-projet">A propos du projet</a>
+      <ul>
+        <li><a href="#créé-avec">Créé avec</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#pour-commencer">Pour commencer</a>
+      <ul>
+        <li><a href="#prérequis">Prérequis</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#utilisation">Utilisation</a></li>
+    <li><a href="#feuille-de-route">Feuille de route</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
+
+
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ## A propos du projet
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 
-L'objectif de ce projet est de proposer une solution contenant un IDE multi-fenêtre, proposant une coloration et affichage d'erreur syntaxique compatible avec plusieurs langages pouvant être intégré à <a href="https://www.cat.savoircoder.fr/accueil/" target="_blank" rel="noopener noreferrer"> CAT </a>.
+L'objectif de ce projet est de proposer une solution contenant un IDE multi-fenêtre, proposant une coloration et affichage d'erreur syntaxique compatible avec plusieurs langages pouvant être intégré à <a href="https://www.cat.savoircoder.fr/accueil/" target="_blank" rel="noopener noreferrer"> CAT</a>.
 
 Celui-ci sera finalement relié à un terminal réalisé par <a href="https://github.com/PiravineJEYAMOHAN" target="_blank" rel="noopener noreferrer">Piravine JEYAMOHAN</a>, ce qui permettra de pouvoir exécuter le code et de réaliser des commandes sur les fichiers qui seront stockés sur un Docker sous un dossier spécifique à chaque étudiant.
 <br/><br/>
@@ -20,8 +45,9 @@ Ceci a pour but de :
 - inciter les étudiants à utiliser le terminal qui est de moins en moins utiliser étant donné le grand nombre d'interfaces créées masquant son usage
 - permettre aux enseignants un suivi du code des étudiants
 
+
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-## Créé avec 
+### Créé avec 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 <br/>
 
@@ -46,11 +72,20 @@ Ceci a pour but de :
 
 > Vous trouverez ci-dessous les différentes étapes nécessaires au lancement du projet
 
-
+<!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Prérequis
+<!------------------------------------------------------------------------------------------------------------------------------------------>
 
 
+<!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Installation
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+
+
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+## Utilisation
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+
 
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
@@ -76,6 +111,7 @@ Ceci a pour but de :
 Kevin Soares - ksoares@outlook.fr
 
 Projet : [https://github.com/KVNS7/Code-editor-cat/tree/main](https://github.com/KVNS7/Code-editor-cat/tree/main)
+
 
 
 <!--              --Variables--              -->
