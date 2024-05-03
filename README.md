@@ -23,19 +23,20 @@
 > Liste avec lien des outils utilisés ainsi que leur version
 
 
-[![JavaScript version](https://img.shields.io/badge/JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&labelColor=grey)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
 
-[![React version](https://img.shields.io/badge/React%20v18.3.1-%2361DAFB?style=for-the-badge&logo=react&labelColor=grey)](https://fr.legacy.reactjs.org/)
+[![JavaScript version][JavaScript-badge]][JavaScript-url]
 
-[![Vite version](https://img.shields.io/badge/Vite%20v1.6.8-%23646CFF?style=for-the-badge&logo=vite&labelColor=grey)](https://vitejs.fr/)
+[![React version][React-badge]][React-url]
 
-[![ChakraUI version](https://img.shields.io/badge/Chakra%20v2.8.2-%23319795?style=for-the-badge&logo=chakraui&labelColor=grey)](https://v2.chakra-ui.com/docs/components)
+[![Vite version][Vite-badge]][Vite-url]
 
-[![Monaco Editor version](https://img.shields.io/badge/Monaco%20Editor%20v0.48.0-%23007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=%23007ACC&labelColor=grey)](https://microsoft.github.io/monaco-editor/docs.html)
+[![ChakraUI version][Chakra-badge]][Chakra-url]
 
-[![Axios version](https://img.shields.io/badge/Axios%20v1.6.8-%235A29E4?style=for-the-badge&logo=axios&logoColor=%235A29E4&labelColor=grey)](https://axios-http.com/fr/docs/intro)
+[![Monaco Editor version][MonacoEditor-badge]][MonacoEditor-url]
 
-[![Piston version](https://img.shields.io/badge/Piston-rgb(67%2C126%2C180)?style=for-the-badge&labelColor=black)](https://piston.readthedocs.io/en/latest/)
+[![Axios version][Axios-badge]][Axios-url]
+
+[![Piston version][Piston-badge]][Piston-url]
 
 <!--
 |    Outil           |    Version                                                                                                                              |
@@ -51,3 +52,28 @@
 ## Installation
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 > 
+
+
+
+<!--              --Variables--              -->
+
+[JavaScript-badge]: https://img.shields.io/badge/JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&labelColor=grey
+[JavaScript-url]: https://developer.mozilla.org/fr/docs/Web/JavaScript
+
+[React-badge]: https://img.shields.io/badge/React%20v18.3.1-%2361DAFB?style=for-the-badge&logo=react&labelColor=grey
+[React-url]: https://fr.legacy.reactjs.org/
+
+[Vite-badge]: https://img.shields.io/badge/Vite%20v1.6.8-%23646CFF?style=for-the-badge&logo=vite&labelColor=grey
+[Vite-url]: https://vitejs.fr/
+
+[Chakra-badge]: https://img.shields.io/badge/Chakra%20v2.8.2-%23319795?style=for-the-badge&logo=chakraui&labelColor=grey
+[Chakra-url]: https://v2.chakra-ui.com/docs/components
+
+[MonacoEditor-badge]: https://img.shields.io/badge/Monaco%20Editor%20v0.48.0-%23007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=%23007ACC&labelColor=grey
+[MonacoEditor-url]: https://microsoft.github.io/monaco-editor/docs.html
+
+[Axios-badge]: https://img.shields.io/badge/Axios%20v1.6.8-%235A29E4?style=for-the-badge&logo=axios&logoColor=%235A29E4&labelColor=grey
+[Axios-url]: https://axios-http.com/fr/docs/intro
+
+[Piston-badge]: https://img.shields.io/badge/Piston-rgb(67%2C126%2C180)?style=for-the-badge&labelColor=black
+[Piston-url]: https://piston.readthedocs.io/en/latest/
