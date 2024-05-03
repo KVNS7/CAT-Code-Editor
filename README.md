@@ -51,8 +51,6 @@ Ceci a pour but de :
 - inciter les étudiants à utiliser le terminal qui est de moins en moins utilisé, étant donné le grand nombre d'interfaces créées masquant son usage
 - permettre aux enseignants un suivi du code des étudiants
 
-<br/>
-
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Créé avec 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
