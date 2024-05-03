@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://www.cat.savoircoder.fr/accueil/" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.cat.savoircoder.fr/accueil/" target = "_blank" rel = "noopener noreferrer">
     <img width="100" src="https://www.cat.savoircoder.fr/static/moulinette/img/logo/home_logo.png" alt="CAT logo">
   </a>
 </p>
@@ -36,14 +36,14 @@
 <br/>
 
 <p align = "center" >
-  <a href = "http://localhost:5173/" target="_blank" rel="noopener noreferrer">
+  <a href = "http://localhost:5173/" target ="_blank" rel ="noopener noreferrer">
     <img width="600" src="public/img/interface-IDE.png" alt="Interface IDE">
   </a>
 </p>
 
-L'objectif de ce projet est de proposer une solution contenant un IDE multi-fenêtre, proposant une coloration et affichage d'erreur syntaxique compatible avec plusieurs langages pouvant être intégré à <a href="https://www.cat.savoircoder.fr/accueil/" target="_blank" rel="noopener noreferrer"> CAT</a>.
+L'objectif de ce projet est de proposer une solution contenant un IDE multi-fenêtre, proposant une coloration et affichage d'erreur syntaxique compatible avec plusieurs langages pouvant être intégré à <a href="https://www.cat.savoircoder.fr/accueil/" target ="_blank" rel ="noopener noreferrer"> CAT</a>.
 
-Celui-ci sera finalement relié à un terminal réalisé par <a href="https://github.com/PiravineJEYAMOHAN" target="_blank" rel="noopener noreferrer">Piravine JEYAMOHAN</a>, ce qui permettra de pouvoir exécuter le code et de réaliser des commandes sur les fichiers qui seront stockés sur un Docker sous un dossier spécifique à chaque étudiant.
+Celui-ci sera finalement relié à un terminal réalisé par <a href="https://github.com/PiravineJEYAMOHAN" target = "_blank" rel = "noopener noreferrer">Piravine JEYAMOHAN</a>, ce qui permettra de pouvoir exécuter le code et de réaliser des commandes sur les fichiers qui seront stockés sur un Docker sous un dossier spécifique à chaque étudiant.
 <br/><br/>
 
 Ceci a pour but de :
@@ -84,7 +84,7 @@ Ceci a pour but de :
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 <br/>
 
-Il faut préalablement installer <a href = "https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">Node.js</a> pour pouvoir lancer le projet.
+Il faut préalablement installer <a href = "https://nodejs.org/en/download" target = "_blank" rel = "noopener noreferrer">Node.js</a> pour pouvoir lancer le projet.
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Installation
