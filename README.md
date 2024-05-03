@@ -7,22 +7,19 @@
 # Projet Stage L3 - Code Editor pour CAT
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-## Fonctionnalités
+## A propos du projet
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 
-> La plupart des fonctionnalités sont toujours en cours de développement
+L'objectif de ce projet est de proposer une solution contenant un IDE multi-fenêtre, proposant une coloration et affichage d'erreur syntaxique compatible avec plusieurs langages pouvant être intégré à <a href="https://www.cat.savoircoder.fr/accueil/" target="_blank" rel="noopener noreferrer"> CAT </a>.
 
-- Marquage d'erreurs syntaxique **\[en cours]**
-- Multi-onglet pour avoir plusieurs fichiers par TP **\[en cours]**
-- Importation d'un ou plusieurs fichiers (projet) **\[en cours]**
-- Sauvegarde du/des fichiers du TP ( sur un dossier propre a l'étudiant ex : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]* ) qui serait sur un docker **\[en cours]**
+Celui-ci sera finalement relié à un terminal réalisé par <a href="https://github.com/PiravineJEYAMOHAN" target="_blank" rel="noopener noreferrer">Piravine JEYAMOHAN</a>, ce qui permettra de pouvoir exécuter le code et de réaliser des commandes sur les fichiers qui seront stockés sur un Docker sous un dossier spécifique à chaque étudiant.
+
+
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-## Bibliothèques et outils utilisées
+## Créé avec 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-> Liste avec lien des outils utilisés ainsi que leur version
-
-
+<br/>
 
 [![JavaScript version][JavaScript-badge]][JavaScript-url]
 
@@ -38,20 +35,33 @@
 
 [![Piston version][Piston-badge]][Piston-url]
 
-<!--
-|    Outil           |    Version                                                                                                                              |
-|--------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
-|    Vite JS         |    [![Vite version](https://img.shields.io/badge/v5.2.11-blue?logo=vite&labelColor=grey)](https://vitejs.fr/)                           |
-|    Chakra UI       |    [![Chakra version](https://img.shields.io/badge/v2.8.2-blue?logo=chakraui&labelColor=grey)](https://v2.chakra-ui.com/docs/components)|
-|    Monaco Editor   |    [![MonacoEditor version](https://img.shields.io/badge/v0.48.0-blue)](https://microsoft.github.io/monaco-editor/docs.html)            |
-|    Axios           |    [![Axios version](https://img.shields.io/badge/v1.6.8-blue?logo=axios&labelColor=grey)](https://axios-http.com/fr/docs/intro)        |
-|    Piston          |    [![Piston version](https://img.shields.io/badge/x-blue)](https://piston.readthedocs.io/en/latest/)                                   |
--->
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-## Installation
+## Pour commencer
 <!------------------------------------------------------------------------------------------------------------------------------------------>
-> 
+
+> Vous trouverez ci-dessous les différentes étapes nécessaires au lancement du projet
+
+
+### Prérequis
+
+
+### Installation
+
+
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+## Fonctionnalités
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+
+> La plupart des fonctionnalités sont toujours en cours de développement
+
+- Marquage d'erreurs syntaxique **\[en cours]**
+- Multi-onglet pour avoir plusieurs fichiers par TP **\[en cours]**
+- Importation d'un ou plusieurs fichiers (projet) **\[en cours]**
+- Sauvegarde du/des fichiers du TP ( sur un dossier propre a l'étudiant ex : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]* ) qui serait sur un docker **\[en cours]**
+
+
+
 
 
 
