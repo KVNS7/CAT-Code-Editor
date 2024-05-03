@@ -35,6 +35,8 @@
 ## A propos du projet
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 
+[![IDE interface][ide-screenshot]](http://localhost:5173/)
+
 L'objectif de ce projet est de proposer une solution contenant un IDE multi-fenêtre, proposant une coloration et affichage d'erreur syntaxique compatible avec plusieurs langages pouvant être intégré à <a href="https://www.cat.savoircoder.fr/accueil/" target="_blank" rel="noopener noreferrer"> CAT</a>.
 
 Celui-ci sera finalement relié à un terminal réalisé par <a href="https://github.com/PiravineJEYAMOHAN" target="_blank" rel="noopener noreferrer">Piravine JEYAMOHAN</a>, ce qui permettra de pouvoir exécuter le code et de réaliser des commandes sur les fichiers qui seront stockés sur un Docker sous un dossier spécifique à chaque étudiant.
@@ -137,6 +139,8 @@ Projet : [https://github.com/KVNS7/Code-editor-cat/tree/main](https://github.com
 
 
 <!--              --Variables--              -->
+
+[IDE-screenshot]: public/img/interface-ide.png
 
 [JavaScript-badge]: https://img.shields.io/badge/JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&labelColor=grey
 [JavaScript-url]: https://developer.mozilla.org/fr/docs/Web/JavaScript
