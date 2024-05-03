@@ -3,6 +3,7 @@
     <img width="100" src="https://www.cat.savoircoder.fr/static/moulinette/img/logo/home_logo.png" alt="CAT logo">
   </a>
 </p>
+
 # Projet Stage L3 - Code Editor pour CAT
 
 ## Fonctionnalités
