@@ -10,10 +10,10 @@
 
 > La plupart des fonctionnalités sont toujours en cours de développement
 
-- Marquage d'erreurs syntaxique \[en cours]
-- Multi-onglet pour avoir plusieurs fichiers par TP \[en cours]
-- Importation d'un ou plusieurs fichiers (projet) \[en cours]
-- Sauvegarde du/des fichiers du TP ( sur un dossier propre a l'étudiant ex : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]* ) qui serait sur un docker \[en cours]
+- Marquage d'erreurs syntaxique **\[en cours]**
+- Multi-onglet pour avoir plusieurs fichiers par TP **\[en cours]**
+- Importation d'un ou plusieurs fichiers (projet) **\[en cours]**
+- Sauvegarde du/des fichiers du TP ( sur un dossier propre a l'étudiant ex : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]* ) qui serait sur un docker **\[en cours]**
 
 ## Bibliothèques et outils utilisées
 
