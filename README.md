@@ -35,7 +35,7 @@
 ## A propos du projet
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 
-[![IDE interface][ide-screenshot]](http://localhost:5173/)
+[![IDE interface][IDE-screenshot]](http://localhost:5173/)
 
 L'objectif de ce projet est de proposer une solution contenant un IDE multi-fenêtre, proposant une coloration et affichage d'erreur syntaxique compatible avec plusieurs langages pouvant être intégré à <a href="https://www.cat.savoircoder.fr/accueil/" target="_blank" rel="noopener noreferrer"> CAT</a>.
 
@@ -140,7 +140,7 @@ Projet : [https://github.com/KVNS7/Code-editor-cat/tree/main](https://github.com
 
 <!--              --Variables--              -->
 
-[IDE-screenshot]: public/img/interface-ide.png
+[IDE-screenshot]: public/img/interface-IDE.png
 
 [JavaScript-badge]: https://img.shields.io/badge/JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&labelColor=grey
 [JavaScript-url]: https://developer.mozilla.org/fr/docs/Web/JavaScript
