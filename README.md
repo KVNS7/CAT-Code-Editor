@@ -56,6 +56,7 @@ Celui-ci sera finalement relié à un terminal réalisé par <a href="https://gi
 > La plupart des fonctionnalités sont toujours en cours de développement
 
 - [x] Ajouter le bloc d'éditeur de code à la page
+- [ ] Fenêtre ouvrante avec des paramètres de l'editeur de code
 - [ ] Onglets pour avoir plusieurs fichiers
 - [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers dans un dossier propre à l'étudiant sur le docker
   - exemple : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]*
