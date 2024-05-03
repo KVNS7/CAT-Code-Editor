@@ -17,10 +17,10 @@
 
 ## Bibliothèques / API / outils utilisées
 
-|    Outil           |    Version                                                                                                                      |
-|--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
-|    Vite JS         |    [![Vite version](https://img.shields.io/badge/v5.2.11-blue?logo=vite&labelColor=grey)](https://vitejs.fr/)                                             |
-|    Chakra UI       |    [![Chakra version](https://img.shields.io/badge/v2.8.2-blue)](https://v2.chakra-ui.com/docs/components)                      |
-|    Monaco Editor   |    [![MonacoEditor version](https://img.shields.io/badge/v0.48.0-blue)](https://microsoft.github.io/monaco-editor/docs.html)    |
-|    Axios           |    [![Axios version](https://img.shields.io/badge/v1.6.8-blue)](https://axios-http.com/fr/docs/intro)                           |
-|    Piston          |    [![Piston version](https://img.shields.io/badge/x-blue)](https://piston.readthedocs.io/en/latest/)                           |
+|    Outil           |    Version                                                                                                                              |
+|--------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
+|    Vite JS         |    [![Vite version](https://img.shields.io/badge/v5.2.11-blue?logo=vite&labelColor=grey)](https://vitejs.fr/)                           |
+|    Chakra UI       |    [![Chakra version](https://img.shields.io/badge/v2.8.2-blue?logo=chakraui&labelColor=grey)](https://v2.chakra-ui.com/docs/components)|
+|    Monaco Editor   |    [![MonacoEditor version](https://img.shields.io/badge/v0.48.0-blue)](https://microsoft.github.io/monaco-editor/docs.html)            |
+|    Axios           |    [![Axios version](https://img.shields.io/badge/v1.6.8-blue?logo=axios&labelColor=grey)](https://axios-http.com/fr/docs/intro)        |
+|    Piston          |    [![Piston version](https://img.shields.io/badge/x-blue)](https://piston.readthedocs.io/en/latest/)                                   |
