@@ -58,8 +58,9 @@ Celui-ci sera finalement relié à un terminal réalisé par <a href="https://gi
 - [x] Ajouter le bloc d'éditeur de code à la page
 - [ ] Fenêtre ouvrante avec des paramètres de l'editeur de code
 - [ ] Onglets pour avoir plusieurs fichiers
-- [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers dans un dossier propre à l'étudiant sur le docker
-  - exemple : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]*
+- [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers :
+  - [ ] En local sur machine dans le dossier téléchargement
+  - [ ] Sur Docker dans un dossier propre à l'étudiant, exemple : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]*
 - [ ] Bouton importer permettant d'importer un fichier / un dossier au tp
 - [ ] Affichage (souligner) des erreurs syntaxiques ( ';' manquant, etc... )
 
