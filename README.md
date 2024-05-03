@@ -94,7 +94,7 @@ Il faut préalablement installer <a href = "https://nodejs.org/en/download" targ
 Une fois le projet importé, il suffit de se placer dans celui-ci avec un terminal et d'exécuter la commande suivante :
 
 ```sh
-npm install vite
+npm install
 ```
 
 Puis pour lancer le serveur :
