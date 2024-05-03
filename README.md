@@ -91,10 +91,13 @@ Il faut préalablement installer <a href = "https://nodejs.org/en/download" targ
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 <br/>
 
-Une fois le projet importé, il suffit de se placer dans celui-ci avec un terminal et d'exécuter la commande suivante :
+Une fois le projet importé, il suffit de se placer dans celui-ci avec un terminal et d'exécuter les commandes suivantes :
 
 ```sh
 npm install
+```
+```sh
+npm update
 ```
 
 Puis pour lancer le serveur :
