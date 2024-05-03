@@ -25,7 +25,7 @@
 
 [![ChakraUI version](https://img.shields.io/badge/Chakra%20v2.8.2-%23319795?style=for-the-badge&logo=chakraui&labelColor=grey)](https://v2.chakra-ui.com/docs/components)
 
-[![Monaco Editor version](https://img.shields.io/badge/Monaco%20Editor%20v0.48.0-%2361DAFB?style=for-the-badge&labelColor=grey)](https://microsoft.github.io/monaco-editor/docs.html)
+[![Monaco Editor version](https://img.shields.io/badge/Monaco%20Editor%20v0.48.0-%23007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=%23007ACC&labelColor=grey)](https://microsoft.github.io/monaco-editor/docs.html)
 
 [![Axios version](https://img.shields.io/badge/Axios%20v1.6.8-%235A29E4?style=for-the-badge&logo=axios&logoColor=%235A29E4&labelColor=grey)](https://axios-http.com/fr/docs/intro)
 
