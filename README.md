@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.cat.savoircoder.fr/accueil/" target="_blank" rel="noopener noreferrer">
-    <img width="180" src="https://www.cat.savoircoder.fr/static/moulinette/img/logo/home_logo.png" alt="CAT logo">
+    <img width="120" src="https://www.cat.savoircoder.fr/static/moulinette/img/logo/home_logo.png" alt="CAT logo">
   </a>
 </p>
 <br/>
