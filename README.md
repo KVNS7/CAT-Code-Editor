@@ -19,7 +19,7 @@
 
 [![React version](https://img.shields.io/badge/React%20v18.3.1-%2361DAFB?style=for-the-badge&logo=react&labelColor=grey)]()
 [![Vite version](https://img.shields.io/badge/Vite%20v1.6.8-%23646CFF?style=for-the-badge&logo=vite&labelColor=grey)](https://vitejs.fr/)
-[![ChakraUI version](https://img.shields.io/badge/Chakra%20v2.8.2-%23%23319795?style=for-the-badge&logo=chakraui&labelColor=grey)](https://v2.chakra-ui.com/docs/components)
+[![ChakraUI version](https://img.shields.io/badge/Chakra%20v2.8.2-%23319795?style=for-the-badge&logo=chakraui&labelColor=black)](https://v2.chakra-ui.com/docs/components)
 [![Monaco Editor version](https://img.shields.io/badge/Monaco%20Editor%20v0.48.0-%2361DAFB?style=for-the-badge&labelColor=black)](https://microsoft.github.io/monaco-editor/docs.html)
 [![Axios version](https://img.shields.io/badge/Axios%20v1.6.8-%235A29E4?style=for-the-badge&logo=axios&labelColor=grey)](https://axios-http.com/fr/docs/intro)
 [![Piston version](https://img.shields.io/badge/Piston-rgb(67%2C126%2C180)?style=for-the-badge&labelColor=black)](https://piston.readthedocs.io/en/latest/)
