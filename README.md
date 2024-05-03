@@ -64,9 +64,13 @@ Celui-ci sera finalement relié à un terminal réalisé par <a href="https://gi
 - [ ] Affichage (souligner) des erreurs syntaxiques ( ';' manquant, etc... )
 
 
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+## Contact
+<!------------------------------------------------------------------------------------------------------------------------------------------>
 
+Kevin Soares - ksoares@outlook.fr
 
-
+Projet : [https://github.com/KVNS7/Code-editor-cat/tree/main](https://github.com/KVNS7/Code-editor-cat/tree/main)
 
 
 <!--              --Variables--              -->
