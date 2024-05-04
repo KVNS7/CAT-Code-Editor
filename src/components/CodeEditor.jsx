@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { Box, HStack, Button, Text, Flex, useToast, Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Divider, Menu, MenuButton, MenuList, MenuItem, Switch } from "@chakra-ui/react"
+import { useRef, useState, useEffect } from "react";
+import { Box, HStack, Button, Text, Flex, useToast, Drawer, DrawerBody, DrawerHeader, DrawerContent, DrawerCloseButton, useDisclosure, Divider, Menu, MenuButton, MenuList, MenuItem, Switch, Kbd } from "@chakra-ui/react"
 import { SettingsIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
@@ -7,7 +7,6 @@ import { CODE_SNIPPETS, VS_THEMES } from "../constantes";
 import Output from "./Output";
 
 // TODO : onglets pour avoir plusieurs fichiers
-// TODO : switch activation minimap
 // TODO : bouton sauvegarder fonctionnel
 // TODO : bouton importer fonctionnel
 
@@ -23,11 +22,34 @@ const CodeEditor = () => {
     const [theme, setTheme] = useState("vs-dark")       // Variable : theme de l'IDE (sombre par défaut)
     const [minimap, setMinimap] = useState(false)       // Variable : activer/desactiver la minimap
 
-    const onMount = (editor) => {                       // Met le focus sur l'éditeur quand il a fini de charger
+    useEffect(() => {
+        const handleKeyDown = (event) => {  
+            if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '=')) {  // Inclure '=' pour les claviers où '+' nécessite Shift
+                event.preventDefault();  // Empêche que le raccourci navigateur prime
+                increaseFontSize();
+            } else if ((event.ctrlKey || event.metaKey) && event.key === '-') {
+                event.preventDefault();
+                decreaseFontSize();
+            } else if ((event.ctrlKey || event.metaKey) && event.key === 'm'){
+                event.preventDefault();
+                toggleMinimap();
+            }
+        };
+    
+        document.addEventListener('keydown', handleKeyDown);
+    
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [fontSize, minimap]);  // Inclure fontSize pour s'assurer que les fonctions utilisent les valeurs à jour
+             
+
+
+    const onMount = (editor) => {               // Met le focus sur l'éditeur quand il a fini de charger
         editorRef.current = editor;
         editor.focus();
     };
-
+        
     const onSelectLanguage = (language) => {            // Change le langage de programmation de l'éditeur
         setLanguage(language);
         setValue(CODE_SNIPPETS[language])               // Ajoute l'exemple de code associé au langage selectionné dans l'IDE
@@ -77,9 +99,9 @@ const CodeEditor = () => {
                         isOpen = {isOpen}
                         placement = 'right'
                         onClose = {onClose}
-                        size = "xs"
+                        size = "sm"
                     >
-                        <DrawerContent>
+                        <DrawerContent bg = "#333644">
                             <DrawerCloseButton/>
 
                             <DrawerHeader>
@@ -91,7 +113,7 @@ const CodeEditor = () => {
                                 {/* Boutons pour changer la taille de la police */}
                                 <Box>
                                     <Text mb = {2} fontSize = 'lg'>     
-                                            Taille de la police : 
+                                            Taille de la police : {fontSize}
                                     </Text>
                                     <HStack spacing = {4}>
                                         <Button onClick={decreaseFontSize} width = "50%"> - </Button>
@@ -127,7 +149,7 @@ const CodeEditor = () => {
                                                     </MenuItem>
                                                 ))}
                                             </MenuList>
-                                            
+
                                         </Menu>
                                     </Box>
                                 </Box>
@@ -142,6 +164,33 @@ const CodeEditor = () => {
                                 </Box>
 
                                 <Divider my = "4" borderWidth = {1}/>
+
+                                <Box>
+                                    <Text mb = {2} fontSize = 'lg'>     
+                                            Raccourcis clavier : 
+                                    </Text>
+                                    
+                                    <Text mb={2}>
+                                        <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>+</Kbd> : augmenter la taille de la police
+                                    </Text>
+
+                                    <Text mb={2}>
+                                        <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>+</Kbd> : augmenter la taille de la police
+                                    </Text>
+
+                                    <Text mb={2}>
+                                        <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>m</Kbd> : activer / désactiver la minimap
+                                    </Text>
+
+                                    <Text mb={2}>
+                                        <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>s</Kbd> : sauvegarder les fichiers 
+                                    </Text>
+
+                                    <Text mb={2}>
+                                        <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>m</Kbd> : importer un fichier / dossier
+                                    </Text>
+
+                                </Box>
 
                             </DrawerBody>
                         </DrawerContent>
@@ -184,7 +233,10 @@ const CodeEditor = () => {
                     onMount = {onMount}     // Fonction pour le focus du curseur
                     value = {value}
                     onChange = {(value) => setValue(value)}
-                    options = {{ minimap: {enabled: minimap,}, fontSize: fontSize }}  // Applique la taille de la police à l'éditeur
+                    options = {{ 
+                        minimap: {enabled: minimap,},       // Active / desactive la minimap
+                        fontSize: fontSize,                 // Applique la taille de la police à l'éditeur
+                    }}  
                 />
 
             </Box>
