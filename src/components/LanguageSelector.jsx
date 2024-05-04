@@ -8,7 +8,7 @@ const COULEUR_SELECTION = "blue.600"
 const COULEUR_FOND = "gray.900"
 const COULEUR_VERSION = "gray.600"
 
-const LanguageSelector = ({language, onSelect}) => {
+const LanguageSelector = ({language, onSelectLanguage}) => {
   return (
     <Box mb = {4}>
 
@@ -32,7 +32,7 @@ const LanguageSelector = ({language, onSelect}) => {
                         color = {lang === language ? COULEUR_SELECTIONNE : ""}
                         background = {lang === language ? COULEUR_FOND : ""}
                         _hover = {{color : COULEUR_SELECTION, background : COULEUR_FOND}}
-                        onClick = {() => onSelect(lang)}
+                        onClick = {() => onSelectLanguage(lang)}
                     >
                         {lang}
                         &nbsp;

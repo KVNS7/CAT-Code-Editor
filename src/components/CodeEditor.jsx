@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
-import { Box, HStack, Button, Text, Flex, useToast } from "@chakra-ui/react"
+import { Box, HStack, Button, Text, Flex, useToast, Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Divider, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react"
+import { SettingsIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
-import { CODE_SNIPPETS } from "../constantes";
+import { CODE_SNIPPETS, VS_THEMES } from "../constantes";
 import Output from "./Output";
 
 // TODO : onglets pour avoir plusieurs fichiers
@@ -13,18 +14,25 @@ const CodeEditor = () => {
 
     const toast = useToast();
     const editorRef = useRef();
-    const [value, setValue] = useState('');         // Valeur (lignes de code) dans l'éditeur
+    const themes = Object.entries(VS_THEMES)
+    const {isOpen, onOpen, onClose} = useDisclosure()
+    const [value, setValue] = useState('')         // Valeur (lignes de code) dans l'éditeur
     const [language, setLanguage] = useState("c")   // Pour changer le langage (C par défaut)
     const [fontSize, setFontSize] = useState(14)    // Etat taille de la police (12 par défaut)
+    const [theme, setTheme] = useState("vs-dark")
 
     const onMount = (editor) => {                   // Fonction mettant le focus sur l'éditeur quand on arrive sur la page
         editorRef.current = editor;
         editor.focus();
     };
 
-    const onSelect = (language) => {                // Fonction changeant le language de programmation de l'éditeur
+    const onSelectLanguage = (language) => {                // Fonction changeant le langage de programmation de l'éditeur
         setLanguage(language);
         setValue(CODE_SNIPPETS[language])           // Ajoute l'exemple de code associé au langage selectionné dans l'IDE
+    }
+
+    const onSelectTheme = (theme) => {
+        setTheme(theme);
     }
 
     const increaseFontSize = () => fontSize < 30 && setFontSize(fontSize + 1);  // Augmente la taille de la police (si < 30)
@@ -50,23 +58,74 @@ const CodeEditor = () => {
                 {/* Flex contenant les différents boutons */}
                 <Flex alignItems = "center">
                     {/* Menu permettant de changer le langage utilisé */}
-                    <LanguageSelector language={language} onSelect={onSelect}/>
-                
-                    {/* Boutons pour changer la taille de la police */}
-                    <Box mr = "auto" ml = "2%" mb = {4}>
-
-                        <Text mb = {2} fontSize = 'lg'>     
-                            Police : 
-                        </Text>
-                        
-                        <HStack spacing = {2}>
-                            <Button onClick={increaseFontSize}> + </Button>
-                            <Button onClick={decreaseFontSize}> - </Button>
-                        </HStack>
+                    <LanguageSelector language={language} onSelectLanguage={onSelectLanguage}/>
+                    
+                 
+                    <Box ml = "auto" mt = {5} mr = "1%">
+                        <Button leftIcon={<SettingsIcon/>} onClick = {onOpen}>Paramètres IDE</Button>
                     </Box>
 
+                    <Drawer
+                        isOpen = {isOpen}
+                        placement = 'right'
+                        onClose = {onClose}
+                        size = "xs"
+                    >
+                        <DrawerContent>
+                            <DrawerCloseButton/>
+                            <DrawerHeader>
+                                Paramètres de l'IDE
+                            </DrawerHeader>
+
+                            <DrawerBody>
+
+                                {/* Boutons pour changer la taille de la police */}
+                                <Box>
+                                    <Text mb = {2} fontSize = 'lg'>     
+                                            Taille de la police : 
+                                    </Text>
+                                    <HStack spacing = {4}>
+                                        <Button onClick={increaseFontSize} width = "50%"> + </Button>
+                                        <Button onClick={decreaseFontSize} width = "50%"> - </Button>
+                                    </HStack>
+                                </Box>
+
+                                <Divider my = "4" borderWidth = {1}/>
+
+                                {/* Menu pour changer le thème de l'éditeur */}
+                                <Box>
+                                    <Text mb = {2} fontSize = 'lg'>     
+                                        Thème de l'éditeur : 
+                                    </Text>
+
+                                    <Menu>
+                                        <MenuButton as = {Button}>
+                                            {theme}
+                                        </MenuButton>
+
+                                        <MenuList background="#110c1b">
+                                            {themes.map(([nom, code]) => (
+                                                <MenuItem
+                                                    key={nom}
+                                                    color = {code === theme ? "orange.500" : ""}
+                                                    background={code === theme ? "gray.900" : ""}
+                                                    _hover = {{color : "blue.600", background : "gray.900"}}
+                                                    onClick={() => onSelectTheme(code)}
+                                                >
+                                                    {nom}
+                                                </MenuItem>
+                                            ))}
+                                        </MenuList>
+                                    </Menu>
+
+                                </Box>
+
+                            </DrawerBody>
+                        </DrawerContent>
+                    </Drawer>
+
                     {/* Bouton permettant de sauvegarder le/les fichiers */}
-                    <Box ml = "auto" mt = {5}>
+                    <Box mt = {5}>
 
                         <Button 
                             color = {"green.500"}
@@ -96,7 +155,7 @@ const CodeEditor = () => {
                 {/* Fenêtre de l'éditeur */}
                 <Editor 
                     height = "75vh" 
-                    theme = "vs-dark"
+                    theme = {theme}
                     language = {language}   // Met le langage par défaut choisi ligne 12
                     defaultValue = {CODE_SNIPPETS[language]} // Exemple de code associé au langage
                     onMount = {onMount}     // Fonction pour le focus du curseur

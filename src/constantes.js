@@ -19,3 +19,9 @@ export const CODE_SNIPPETS = {  // exemples de code pour chaque langage // ! ser
   csharp: `using System;\n\nnamespace HelloWorld\n{\n\tpublic class Hello { \n\t\tpublic static void Main(string[] args) {\n\t\t\tstring name = "`+ name + `";\n\n\t\t\tConsole.WriteLine("Bonjour Mr. " + name + " en C# !");\n\t\t}\n\t}\n}\n`,
   typescript: `type Params = {\n\tname: string;\n}\n\nfunction salut(data: Params) {\n\tconsole.log("Bonjour Mr. " + data.name + " en TypeScript !");\n}\n\nsalut({ name: "` + name + `" });\n`,
 };
+
+export const VS_THEMES = {
+  "Clair" : "vs",
+  "Sombre" : "vs-dark",
+  "Haut Contraste Sombre" : "hc-black",
+}
