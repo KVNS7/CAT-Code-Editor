@@ -119,7 +119,7 @@ Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au s
 <br/>
 
 - [x] Ajouter le bloc d'éditeur de code à la page
-- [ ] Fenêtre ouvrante avec des paramètres de l'editeur de code (thème, taille de la police, etc... )
+- [x] Fenêtre ouvrante avec des paramètres de l'editeur de code (thème, taille de la police, etc... )
 - [ ] Onglets pour avoir plusieurs fichiers
 - [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers :
   - [ ] En local sur machine dans le dossier téléchargement
