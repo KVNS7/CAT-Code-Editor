@@ -189,6 +189,10 @@ const CodeEditor = () => {
                                     <Text mb={2}>
                                         <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>m</Kbd> : importer un fichier / dossier
                                     </Text>
+                                    
+                                    <Text mb={2}>
+                                        <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>c</Kbd> : stopper l'execution en cours dans le terminal
+                                    </Text>
 
                                 </Box>
 
