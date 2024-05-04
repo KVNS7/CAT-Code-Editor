@@ -47,8 +47,8 @@ Celui-ci sera finalement relié à un terminal réalisé par <a href="https://gi
 <br/><br/>
 
 Ceci a pour but de :
-- simplifier le travail des étudiants sur CAT en leur permettant de compiler et exécuter leurs projets directement sur le site (évite les allé-retour entre IDE et CAT)
-- inciter les étudiants à utiliser le terminal qui est de moins en moins utilisé, étant donné le grand nombre d'interfaces créées masquant son usage
+- simplifier le travail des étudiants sur CAT en leur permettant de compiler et exécuter leurs projets directement sur le site (évite les allés-retour entre IDE et CAT)
+- inciter les étudiants à utiliser le terminal, de moins en moins utilisé étant donné le grand nombre d'interfaces créées masquant son usage
 - permettre aux enseignants un suivi du code des étudiants
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
@@ -75,9 +75,6 @@ Ceci a pour but de :
 ## Pour commencer
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 > Vous trouverez ci-dessous les différentes étapes nécessaires au lancement du projet
-<br/>
-
-**Partie incomplète !!**
 
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 ### Prérequis
@@ -91,10 +88,13 @@ Il faut préalablement installer <a href = "https://nodejs.org/en/download" targ
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 <br/>
 
-Une fois le projet importé, il suffit de se placer dans celui-ci avec un terminal et d'exécuter la commande suivante :
+Une fois le projet importé, il suffit de se placer dans celui-ci avec un terminal et d'exécuter les commandes suivantes :
 
 ```sh
 npm install
+```
+```sh
+npm update
 ```
 
 Puis pour lancer le serveur :
