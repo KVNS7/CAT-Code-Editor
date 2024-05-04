@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Box, HStack, Button, Text, Flex, useToast, Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Divider, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react"
+import { Box, HStack, Button, Text, Flex, useToast, Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Divider, Menu, MenuButton, MenuList, MenuItem, Switch } from "@chakra-ui/react"
 import { SettingsIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
@@ -7,6 +7,7 @@ import { CODE_SNIPPETS, VS_THEMES } from "../constantes";
 import Output from "./Output";
 
 // TODO : onglets pour avoir plusieurs fichiers
+// TODO : switch activation minimap
 // TODO : bouton sauvegarder fonctionnel
 // TODO : bouton importer fonctionnel
 
@@ -15,30 +16,35 @@ const CodeEditor = () => {
     const toast = useToast();
     const editorRef = useRef();
     const themes = Object.entries(VS_THEMES)
-    const {isOpen, onOpen, onClose} = useDisclosure()
-    const [value, setValue] = useState('')         // Valeur (lignes de code) dans l'éditeur
-    const [language, setLanguage] = useState("c")   // Pour changer le langage (C par défaut)
-    const [fontSize, setFontSize] = useState(14)    // Etat taille de la police (12 par défaut)
-    const [theme, setTheme] = useState("vs-dark")
+    const {isOpen, onOpen, onClose} = useDisclosure()   // Variable : ouverture du Drawer des paramètres de l'IDE
+    const [value, setValue] = useState('')              // Variable : valeur dans l'éditeur (lignes de code)
+    const [language, setLanguage] = useState("c")       // Variable : langage de l'IDE (C par défaut)
+    const [fontSize, setFontSize] = useState(14)        // Variable : taille de la police (12 par défaut)
+    const [theme, setTheme] = useState("vs-dark")       // Variable : theme de l'IDE (sombre par défaut)
+    const [minimap, setMinimap] = useState(false)       // Variable : activer/desactiver la minimap
 
-    const onMount = (editor) => {                   // Fonction mettant le focus sur l'éditeur quand on arrive sur la page
+    const onMount = (editor) => {                       // Met le focus sur l'éditeur quand il a fini de charger
         editorRef.current = editor;
         editor.focus();
     };
 
-    const onSelectLanguage = (language) => {                // Fonction changeant le langage de programmation de l'éditeur
+    const onSelectLanguage = (language) => {            // Change le langage de programmation de l'éditeur
         setLanguage(language);
-        setValue(CODE_SNIPPETS[language])           // Ajoute l'exemple de code associé au langage selectionné dans l'IDE
+        setValue(CODE_SNIPPETS[language])               // Ajoute l'exemple de code associé au langage selectionné dans l'IDE
     }
 
-    const onSelectTheme = (theme) => {
+    const onSelectTheme = (theme) => {                  // Change le thème de l'IDE
         setTheme(theme);
     }
 
-    const increaseFontSize = () => fontSize < 30 && setFontSize(fontSize + 1);  // Augmente la taille de la police (si < 30)
-    const decreaseFontSize = () => fontSize > 8 && setFontSize(fontSize - 1);   // Diminue la taille de la police (si > 8)
+    const toggleMinimap = () => {                       // Active / désactive la minimap
+        setMinimap(!minimap);
+    }
 
-    const toastNonImplementee = () => {
+    const decreaseFontSize = () => fontSize > 8 && setFontSize(fontSize - 1);   // Diminue la taille de la police (si > 8)
+    const increaseFontSize = () => fontSize < 30 && setFontSize(fontSize + 1);  // Augmente la taille de la police (si < 30)
+
+    const toastNonImplementee = () => {                 // Toast pour les fonctionnalités non implémentées
         toast({                                                             
             title: "Non implémenté",
             description: "Cette fonction n'a pas encore été ajoutée",
@@ -57,14 +63,16 @@ const CodeEditor = () => {
 
                 {/* Flex contenant les différents boutons */}
                 <Flex alignItems = "center">
+
                     {/* Menu permettant de changer le langage utilisé */}
                     <LanguageSelector language={language} onSelectLanguage={onSelectLanguage}/>
                     
-                 
+                    {/* Bouton ouvrant les paramètres de l'IDE */}
                     <Box ml = "auto" mt = {5} mr = "1%">
                         <Button leftIcon={<SettingsIcon/>} onClick = {onOpen}>Paramètres IDE</Button>
                     </Box>
 
+                    {/* Drawer contenant les paramètres de l'IDE */}
                     <Drawer
                         isOpen = {isOpen}
                         placement = 'right'
@@ -73,6 +81,7 @@ const CodeEditor = () => {
                     >
                         <DrawerContent>
                             <DrawerCloseButton/>
+
                             <DrawerHeader>
                                 Paramètres de l'IDE
                             </DrawerHeader>
@@ -85,8 +94,8 @@ const CodeEditor = () => {
                                             Taille de la police : 
                                     </Text>
                                     <HStack spacing = {4}>
-                                        <Button onClick={increaseFontSize} width = "50%"> + </Button>
                                         <Button onClick={decreaseFontSize} width = "50%"> - </Button>
+                                        <Button onClick={increaseFontSize} width = "50%"> + </Button>
                                     </HStack>
                                 </Box>
 
@@ -98,27 +107,41 @@ const CodeEditor = () => {
                                         Thème de l'éditeur : 
                                     </Text>
 
-                                    <Menu>
-                                        <MenuButton as = {Button}>
-                                            {theme}
-                                        </MenuButton>
+                                    <Box textAlign="center">
+                                        <Menu>
 
-                                        <MenuList background="#110c1b">
-                                            {themes.map(([nom, code]) => (
-                                                <MenuItem
-                                                    key={nom}
-                                                    color = {code === theme ? "orange.500" : ""}
-                                                    background={code === theme ? "gray.900" : ""}
-                                                    _hover = {{color : "blue.600", background : "gray.900"}}
-                                                    onClick={() => onSelectTheme(code)}
-                                                >
-                                                    {nom}
-                                                </MenuItem>
-                                            ))}
-                                        </MenuList>
-                                    </Menu>
+                                            <MenuButton as = {Button} width="82%">
+                                                {themes.find(([_, code]) => code === theme)[0]}
+                                            </MenuButton>
 
+                                            <MenuList background="#110c1b">
+                                                {themes.map(([nom, code]) => (
+                                                    <MenuItem
+                                                        key={nom}
+                                                        color = {code === theme ? "orange.500" : ""}
+                                                        background={code === theme ? "gray.900" : ""}
+                                                        _hover = {{color : "blue.600", background : "gray.900"}}
+                                                        onClick={() => onSelectTheme(code)}
+                                                    >
+                                                        {nom}
+                                                    </MenuItem>
+                                                ))}
+                                            </MenuList>
+                                            
+                                        </Menu>
+                                    </Box>
                                 </Box>
+
+                                <Divider my = "4" borderWidth = {1}/>
+                                
+                                <Box>
+                                    <Flex alignItems="center">
+                                        <Text mb = {2} mr = "auto" fontSize = 'lg'>Minimap :</Text>
+                                        <Switch size="lg" colorScheme="orange" isChecked={minimap} onChange={toggleMinimap} mr="5%"/>
+                                    </Flex>
+                                </Box>
+
+                                <Divider my = "4" borderWidth = {1}/>
 
                             </DrawerBody>
                         </DrawerContent>
@@ -161,7 +184,7 @@ const CodeEditor = () => {
                     onMount = {onMount}     // Fonction pour le focus du curseur
                     value = {value}
                     onChange = {(value) => setValue(value)}
-                    options = {{ fontSize: fontSize }}  // Applique la taille de la police à l'éditeur
+                    options = {{ minimap: {enabled: minimap,}, fontSize: fontSize }}  // Applique la taille de la police à l'éditeur
                 />
 
             </Box>

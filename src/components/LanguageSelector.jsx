@@ -2,7 +2,8 @@ import { Box, Button, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra
 import { LANGUAGE_VERSIONS } from '../constantes'
 import { version } from 'react'
 
-const languages = Object.entries(LANGUAGE_VERSIONS) // Constante dans constantes.js
+const languages = Object.entries(LANGUAGE_VERSIONS) // Constantes des langage de l'IDE et de leur version (supportées par Piston)
+
 const COULEUR_SELECTIONNE = "orange.500"
 const COULEUR_SELECTION = "blue.600"
 const COULEUR_FOND = "gray.900"
@@ -16,23 +17,27 @@ const LanguageSelector = ({language, onSelectLanguage}) => {
             Langage : 
         </Text>
 
+        {/* Menu de choix des langues */}
         <Menu isLazy>
+
+            {/* Bouton d'ouverture du menu */}
             <MenuButton as={Button}>
                 {language}
-                &nbsp; {/* Espace entre langage et version + restent sur même ligne */}
+                &nbsp;  {/* Espace entre langage et version + restent sur même ligne */}
                 {<Text as = "span" fontStyle = "italic" color = {COULEUR_VERSION} fontSize = "xs">
                     (v{LANGUAGE_VERSIONS[language]})
                 </Text>}
             </MenuButton>
             
+            {/* Menu déroulant */}
             <MenuList background = "#110c1b">
                 {languages.map(([lang, version]) => (
                     <MenuItem 
                         key = {lang} 
-                        color = {lang === language ? COULEUR_SELECTIONNE : ""}
-                        background = {lang === language ? COULEUR_FOND : ""}
-                        _hover = {{color : COULEUR_SELECTION, background : COULEUR_FOND}}
-                        onClick = {() => onSelectLanguage(lang)}
+                        color = {lang === language ? COULEUR_SELECTIONNE : ""}  // Couleur texte selon si selectionné actuellement
+                        background = {lang === language ? COULEUR_FOND : ""}    // Couleur fond selon ''
+                        _hover = {{color : COULEUR_SELECTION, background : COULEUR_FOND}}   // Couleur texte et fond si souris dessus
+                        onClick = {() => onSelectLanguage(lang)}    // Change le langage
                     >
                         {lang}
                         &nbsp;
