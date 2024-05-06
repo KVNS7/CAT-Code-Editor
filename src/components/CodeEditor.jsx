@@ -9,6 +9,7 @@ import Output from "./Output";
 // TODO : onglets pour avoir plusieurs fichiers
 // TODO : bouton sauvegarder fonctionnel
 // TODO : bouton importer fonctionnel
+// TODO : retenir les parametres d'IDE (theme, police, minimap,...) selon l'utilisateur
 
 const CodeEditor = () => {
 
