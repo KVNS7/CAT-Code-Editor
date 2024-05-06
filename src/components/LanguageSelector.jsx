@@ -2,7 +2,7 @@ import { Box, Button, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra
 import { LANGUAGE_VERSIONS } from '../constantes'
 import { version } from 'react'
 
-const languages = Object.entries(LANGUAGE_VERSIONS) // Constantes des langage de l'IDE et de leur version (supportées par Piston)
+const languages = Object.entries(LANGUAGE_VERSIONS) // Constantes des langages de l'IDE et de leur version (supportées par Piston)
 
 const COULEUR_SELECTIONNE = "orange.500"
 const COULEUR_SELECTION = "blue.600"

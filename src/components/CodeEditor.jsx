@@ -1,5 +1,25 @@
 import { useRef, useState, useEffect } from "react";
-import { Box, HStack, Button, Text, Flex, useToast, Drawer, DrawerBody, DrawerHeader, DrawerContent, DrawerCloseButton, useDisclosure, Divider, Menu, MenuButton, MenuList, MenuItem, Switch, Kbd } from "@chakra-ui/react"
+import {
+    Box,
+    HStack,
+    Button,
+    Text,
+    Flex,
+    useToast,
+    Drawer,
+    DrawerBody,
+    DrawerHeader,
+    DrawerContent,
+    DrawerCloseButton,
+    useDisclosure,
+    Divider,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    Switch,
+    Kbd
+} from "@chakra-ui/react"
 import { SettingsIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
@@ -9,13 +29,13 @@ import Output from "./Output";
 // TODO : onglets pour avoir plusieurs fichiers
 // TODO : bouton sauvegarder fonctionnel
 // TODO : bouton importer fonctionnel
-// TODO : retenir les parametres d'IDE (theme, police, minimap,...) selon l'utilisateur
+// TODO : retenir les parametres d'IDE (thème, police, minimap,...) selon l'utilisateur
 
 const CodeEditor = () => {
 
     const toast = useToast();
     const editorRef = useRef();
-    const themes = Object.entries(VS_THEMES)
+    const themes = Object.entries(VS_THEMES)            // Constantes des thèmes de l'IDE
     const {isOpen, onOpen, onClose} = useDisclosure()   // Variable : ouverture du Drawer des paramètres de l'IDE
     const [value, setValue] = useState('')              // Variable : valeur dans l'éditeur (lignes de code)
     const [language, setLanguage] = useState("c")       // Variable : langage de l'IDE (C par défaut)
@@ -44,7 +64,6 @@ const CodeEditor = () => {
         };
     }, [fontSize, minimap]);  // Inclure fontSize pour s'assurer que les fonctions utilisent les valeurs à jour
              
-
 
     const onMount = (editor) => {               // Met le focus sur l'éditeur quand il a fini de charger
         editorRef.current = editor;
