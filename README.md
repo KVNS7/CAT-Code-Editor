@@ -46,7 +46,7 @@ L'objectif de ce projet est de proposer une solution contenant un IDE multi-fen�
 Celui-ci sera finalement relié à un terminal réalisé par <a href="https://github.com/PiravineJEYAMOHAN" target = "_blank" rel = "noopener noreferrer">Piravine JEYAMOHAN</a>, ce qui permettra de pouvoir exécuter le code et de réaliser des commandes sur les fichiers qui seront stockés sur un Docker sous un dossier spécifique à chaque étudiant.
 <br/><br/>
 
-![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=PiravineJEYAMOHAN\&repo=composant-terminal-cat\&show_owner=true)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=PiravineJEYAMOHAN\&repo=composant-terminal-cat\&show_owner=true)](https://github.com/PiravineJEYAMOHAN/composant-terminal-cat)
 
 Ceci a pour but de :
 - simplifier le travail des étudiants sur CAT en leur permettant de compiler et exécuter leurs projets directement sur le site (évite les allés-retour entre IDE et CAT)
