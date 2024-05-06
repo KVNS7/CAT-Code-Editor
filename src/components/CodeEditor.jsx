@@ -175,7 +175,7 @@ const CodeEditor = () => {
                                     </Text>
 
                                     <Text mb={2}>
-                                        <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>+</Kbd> : augmenter la taille de la police
+                                        <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>-</Kbd> : diminuer la taille de la police
                                     </Text>
 
                                     <Text mb={2}>
