@@ -2,7 +2,7 @@ import { Box, Text, Button, useToast, Flex } from "@chakra-ui/react"
 import { executeCode } from "../api";
 import { useState } from "react";
 
-const Output = ({editorRef, language}) => {
+const Output = ({content, language}) => {
 
     const toast = useToast();                                                   // Notification en cas d'erreur
     const [output, setOutput] = useState(null)                                  // Stocke le résultat d'exécution
@@ -10,7 +10,7 @@ const Output = ({editorRef, language}) => {
     const [isError, setIsError] = useState(false)                               // Etat en cas d'erreur
 
     const runCode = async () => {
-        const sourceCode = editorRef.current.getValue();                        // Récupère le code depuis l'éditeur
+        const sourceCode = content;                        // Récupère le code depuis l'éditeur
         if(!sourceCode) return;                                                 // Si vide, return
         try {
             setIsLoading(true)                                                  // Début animation chargement
