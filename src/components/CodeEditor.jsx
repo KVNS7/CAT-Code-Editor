@@ -43,9 +43,9 @@ const CodeEditor = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);                          // Variable : ouverture fenetre nouveau onglet
     const [newTabInfo, setNewTabInfo] = useState({ title: '', language: 'c' });     // Variable : contenu fenetre nouveau onglet
 
-    useEffect(() => {
+    useEffect(() => {                                                               // Raccourcis clavier
         const handleKeyDown = (event) => {  
-            if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '=')) {  // Inclure '=' pour les claviers où '+' nécessite Shift
+            if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '=')) {  // Inclu '=' pour les claviers où '+' nécessite Shift
                 event.preventDefault();  // Empêche que le raccourci navigateur prime
                 increaseFontSize();
             } else if ((event.ctrlKey || event.metaKey) && event.key === '-') {
@@ -54,6 +54,9 @@ const CodeEditor = () => {
             } else if ((event.ctrlKey || event.metaKey) && event.key === 'm'){
                 event.preventDefault();
                 toggleMinimap();
+            }else if ((event.ctrlKey || event.metaKey) && event.key === 'o'){
+                event.preventDefault();
+                setIsModalOpen(true);
             }
         };
     
@@ -62,35 +65,34 @@ const CodeEditor = () => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
-    }, [fontSize, minimap]);  // Inclure fontSize pour s'assurer que les fonctions utilisent les valeurs à jour
-             
+    }, [fontSize, minimap, isModalOpen]);
 
     const onMount = (editor) => {               // Met le focus sur l'éditeur quand il a fini de charger
         editorRef.current = editor;
         editor.focus();
     };
 
-    const setTab = (index) => {
-        setTabIndex(index);
-        setLanguage(tabs[index].language); // Mettre à jour le langage à partir de l'onglet sélectionné
-        setValue(tabs[index].content); // Mettre à jour le contenu de l'éditeur
+    const setTab = (index) => {                         // Lors du changement d'onglet
+        setTabIndex(index);                             // Met la sélection sur le nouvel onglet créé
+        setLanguage(tabs[index].language);              // Met à jour le langage à partir de l'onglet sélectionné (pour l'editeur et Piston)
+        setValue(tabs[index].content);                  // Met à jour le contenu de l'éditeur
       };
 
     const toggleMinimap = () => {                       // Active / désactive la minimap
         setMinimap(!minimap);
     }
 
-    const addTab = () => {
+    const addTab = () => {                              // Ajout d'un onglet 
         const newTab = {
             id: tabs.length + 1,
             title: (newTabInfo.title || `NewTab${tabs.length + 1}`) + `.${newTabInfo.language}`,
             language: newTabInfo.language,
             content: CODE_SNIPPETS[newTabInfo.language] || ''
         };
-        setTabs([...tabs, newTab]);
-        setTabIndex(tabs.length); // Définir le nouvel onglet comme actif
-        setIsModalOpen(false); // Fermer le modal après l'ajout
-        setNewTabInfo({ title: '', language: newTab.language }); // Réinitialiser les informations du formulaire
+        setTabs([...tabs, newTab]);                                 // Ajoute l'onglet à la liste des onglets
+        setTabIndex(tabs.length);                                   // Défini le nouvel onglet comme actif
+        setIsModalOpen(false);                                      // Ferme le modal après l'ajout
+        setNewTabInfo({ title: '', language: newTab.language });    // Réinitialise les informations du formulaire
     }
 
     const decreaseFontSize = () => fontSize > 8 && setFontSize(fontSize - 1);   // Diminue la taille de la police (si > 8)
@@ -109,123 +111,112 @@ const CodeEditor = () => {
 
 
   return (
-      <Box>
-        <HStack spacing={4}>
-            <Box w='65%'>
+        <Box>
+            <HStack spacing={4}>
+                <Box w='65%'>
 
-                {/* Flex contenant les différents boutons */}
-                <Flex alignItems = "center" mb="10px">
+                    {/* Flex contenant les différents boutons */}
+                    <Flex alignItems = "center" mb="10px">
 
-                    {/* Bouton ouvrant les paramètres de l'IDE */}
-                    <Box mr = "auto" mt = {5}>
-                        <Button leftIcon={<SettingsIcon/>} onClick = {onOpen}>Paramètres IDE</Button>
-                    </Box>
+                        {/* Bouton ouvrant les paramètres de l'IDE */}
+                        <Box mr = "auto" mt = {5}>
+                            <Button leftIcon={<SettingsIcon/>} onClick = {onOpen}>Paramètres IDE</Button>
+                        </Box>
 
-                    {/* Bouton permettant de sauvegarder le/les fichiers */}
-                    <Box mt = {5}>
+                        {/* Bouton permettant de sauvegarder le/les fichiers */}
+                        <Box mt = {5}>
 
-                        <Button 
-                            color = {"green.500"}
-                            border = {"2px solid"} 
-                            _hover = {{bg :"green.700"}} 
-                            onClick = {toastNonImplementee}
-                        >
-                            Sauvegarder
-                        </Button>
-                        
-                    </Box>
+                            <Button 
+                                color = {"green.500"}
+                                border = {"2px solid"} 
+                                _hover = {{bg :"green.700"}} 
+                                onClick = {toastNonImplementee}
+                            >
+                                Sauvegarder
+                            </Button>
+                            
+                        </Box>
 
-                    {/* Bouton permettant d'importer un/des fichiers */}
-                    <Box ml = "2%" mt = {5}>
-                        <Button
-                            color = {"orange.500"}
-                            border = {"2px solid"}
-                            _hover = {{bg :"orange.700"}}
-                            onClick = {toastNonImplementee}
-                        >
-                            Importer
-                        </Button>
-                    </Box>
+                        {/* Bouton permettant d'importer un/des fichiers */}
+                        <Box ml = "2%" mt = {5}>
+                            <Button
+                                color = {"orange.500"}
+                                border = {"2px solid"}
+                                _hover = {{bg :"orange.700"}}
+                                onClick = {toastNonImplementee}
+                            >
+                                Importer
+                            </Button>
+                        </Box>
 
-                </Flex>
+                    </Flex>
 
-                {/* Drawer contenant les paramètres de l'IDE */}
-                <IDEOptionsDrawer isOpen={isOpen}
-                        onClose={onClose}
-                        fontSize={fontSize}
-                        setFontSize={setFontSize}
-                        theme={theme}
-                        setTheme={setTheme}
-                        minimap={minimap}
-                        setMinimap={setMinimap}
-                />
-
-                <Tabs index={tabIndex} onChange={setTab}>
-                    <TabList>
-                        {tabs.map((tab, index) => (
-                        <Tab key={index}>{tab.title}</Tab>
-                        ))}
-                        <Button onClick={() => setIsModalOpen(true)} ml="auto">+</Button>
-                    </TabList>
-                    <TabPanels>
-                        {tabs.map((tab, index) => (
-                        <TabPanel key={index}>
-                            <Editor
-                            height="75vh"
+                    {/* Drawer contenant les paramètres de l'IDE */}
+                    <IDEOptionsDrawer isOpen={isOpen}
+                            onClose={onClose}
+                            fontSize={fontSize}
+                            setFontSize={setFontSize}
                             theme={theme}
-                            language={tabs[index].language}
-                            defaultValue={tab.content}
-                            onMount={onMount}
-                            value={tabs[index].content}
-                            onChange={(newValue) => {
-                                const newTabs = [...tabs];
-                                newTabs[index].content = newValue;
-                                setTabs(newTabs);
-                            }}
-                            options={{
-                                minimap: { enabled: minimap },
-                                fontSize: fontSize
-                            }}
-                            />
-                    </TabPanel>
-                    ))}
-                    </TabPanels>
-                </Tabs>
+                            setTheme={setTheme}
+                            minimap={minimap}
+                            setMinimap={setMinimap}
+                    />
 
-                <NewTabModal
-                    isOpen={isModalOpen}
-                    onClose={() => setIsModalOpen(false)}
-                    addTab={addTab}
-                    newTabInfo={newTabInfo}
-                    setNewTabInfo={setNewTabInfo}
-                />
+                    {/* Onglets de l'IDE */}
+                    <Tabs index={tabIndex} onChange={setTab} size="sm">
 
+                        <Box overflowX="auto">  {/* Pour le défilement des onglets */}
+                            <TabList display="flex" whiteSpace="nowrap">
+                                {tabs.map((tab, index) => (
+                                    <Tab key={index}>{tab.title}</Tab>
+                                ))}
+                                <Button onClick={() => setIsModalOpen(true)} mr="auto">+</Button>
+                            </TabList>
+                        </Box>
 
+                        <TabPanels>
+                            
+                            {tabs.map((tab, index) => (
 
-                {/* Ancien placement de la fenêtre de l'éditeur */}
-                {/* 
-                <Editor 
-                                height = "75vh" 
-                                theme = {theme}
-                                language = {language}   // Met le langage par défaut choisi ligne 12
-                                defaultValue = {CODE_SNIPPETS[language]} // Exemple de code associé au langage
-                                onMount = {onMount}     // Fonction pour le focus du curseur
-                                value = {value}
-                                onChange = {(value) => setValue(value)}
-                                options = {{ 
-                                    minimap: {enabled: minimap,},       // Active / desactive la minimap
-                                    fontSize: fontSize,                 // Applique la taille de la police à l'éditeur
-                                }}  
-                />
-                */}
-            </Box>
+                            <TabPanel key={index}>
+                                <Editor
+                                height="75vh"
+                                theme={theme}
+                                language={tabs[index].language}
+                                defaultValue={tab.content}
+                                onMount={onMount}
+                                value={tabs[index].content}
+                                onChange={(newValue) => {
+                                    const newTabs = [...tabs];
+                                    newTabs[index].content = newValue;
+                                    setTabs(newTabs);
+                                }}
+                                options={{
+                                    minimap: { enabled: minimap },
+                                    fontSize: fontSize
+                                }}
+                                />
+                            </TabPanel>
 
-            <Output content={tabs[tabIndex].content} language = {tabs[tabIndex].language}/>     {/* Fenêtre résultat d'exécution du code*/}
-        
-        </HStack>
+                            ))}
 
-    
-    </Box>
+                        </TabPanels>
+                    </Tabs>
+
+                    <NewTabModal
+                        isOpen={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
+                        addTab={addTab}
+                        newTabInfo={newTabInfo}
+                        setNewTabInfo={setNewTabInfo}
+                    />
+
+                </Box>
+
+                <Output content={tabs[tabIndex].content} language = {tabs[tabIndex].language}/>     {/* Fenêtre de résultat d'exécution du code*/}
+            
+            </HStack>
+        </Box>
   );
 };
 
