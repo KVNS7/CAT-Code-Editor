@@ -20,7 +20,7 @@ import IDEOptionsDrawer from "./IDEOptionsDrawer";
 import NewTabModal from "./NewTabModal";
 import Output from "./Output";
 
-// TODO : onglets pour avoir plusieurs fichiers
+// TODO : onglets (composants bougent lorsque passe en mode défilement)
     // TODO : detecter le language avec le nom du fichier OU mettre juste le nom du fichier et le choix du langage rajoute l'extension dans le nom
 // TODO : bouton sauvegarder fonctionnel
 // TODO : bouton importer fonctionnel
@@ -29,7 +29,7 @@ import Output from "./Output";
 const CodeEditor = () => {
 
     const toast = useToast();
-    const editorRef = useRef();
+    const editorRef = useRef();                                                     // Ref pour l'editeur
     const {isOpen, onOpen, onClose} = useDisclosure()                               // Variable : ouverture du Drawer des paramètres de l'IDE
     const [value, setValue] = useState('')                                          // Variable : valeur dans l'éditeur (lignes de code)
     const [language, setLanguage] = useState("c")                                   // Variable : langage de l'IDE (C par défaut)
@@ -61,7 +61,7 @@ const CodeEditor = () => {
         };
     
         document.addEventListener('keydown', handleKeyDown);
-    
+
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
@@ -138,7 +138,7 @@ const CodeEditor = () => {
                         </Box>
 
                         {/* Bouton permettant d'importer un/des fichiers */}
-                        <Box ml = "2%" mt = {5}>
+                        <Box ml = "2%" mt = {5} mr="2%">
                             <Button
                                 color = {"orange.500"}
                                 border = {"2px solid"}
@@ -164,13 +164,13 @@ const CodeEditor = () => {
 
                     {/* Onglets de l'IDE */}
                     <Tabs index={tabIndex} onChange={setTab} size="sm">
-
+                    
                         <Box overflowX="auto">  {/* Pour le défilement des onglets */}
                             <TabList display="flex" whiteSpace="nowrap">
                                 {tabs.map((tab, index) => (
                                     <Tab key={index}>{tab.title}</Tab>
                                 ))}
-                                <Button onClick={() => setIsModalOpen(true)} mr="auto">+</Button>
+                                <Button onClick={() => setIsModalOpen(true)}>+</Button>
                             </TabList>
                         </Box>
 
