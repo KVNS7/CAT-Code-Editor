@@ -165,7 +165,14 @@ const CodeEditor = () => {
                     {/* Onglets de l'IDE */}
                     <Tabs index={tabIndex} onChange={setTab} size="sm">
                     
-                        <Box overflowX="auto">  {/* Pour le défilement des onglets */}
+                        <Box    // Pour le défilement des onglets
+                        overflowX="auto"
+                        sx={{
+                            '&::-webkit-scrollbar': { display: 'none' },        // Enleve scrollbar pour Chrome, Safari, et Edge
+                            scrollbarWidth: 'none',                             // pour Firefox
+                            '-ms-overflow-style': 'none'                        // pour Internet Explorer 10+
+                        }}
+                        >  
                             <TabList display="flex" whiteSpace="nowrap">
                                 {tabs.map((tab, index) => (
                                     <Tab key={index}>{tab.title}</Tab>
