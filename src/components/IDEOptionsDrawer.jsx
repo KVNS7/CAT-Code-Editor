@@ -13,7 +13,7 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
   return (
 
     <Drawer isOpen={isOpen} placement='right' onClose={onClose} size="sm">
-      <DrawerContent bg="#333644">
+      <DrawerContent bg="#2C3E50">
         <DrawerCloseButton />
 
         <DrawerHeader>
@@ -67,37 +67,25 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
           </Box>
           <Divider my = "4" borderWidth = {1}/>
 
-          <Box>
+          <Box fontSize='md'>
             <Text mb = {2} fontSize = 'lg'>     
               Raccourcis clavier : 
             </Text>
 
-            <Text mb={2}>
+            <Text lineHeight="taller">
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>+</Kbd> : augmenter la taille de la police
-            </Text>
-
-            <Text mb={2}>
+              <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>-</Kbd> : diminuer la taille de la police
-            </Text>
-
-            <Text mb={2}>
+              <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>m</Kbd> : activer / désactiver la minimap
-            </Text>
-
-            <Text mb={2}>
+              <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>o</Kbd> : créer un nouveau fichier
-            </Text>
-
-            <Text mb={2}>
+              <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>s</Kbd> : sauvegarder les fichiers 
-            </Text>
-
-            <Text mb={2}>
+              <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>m</Kbd> : importer un fichier / dossier
-            </Text>
-
-            <Text mb={2}>
-              <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>c</Kbd> : stopper l'execution en cours dans le terminal
+              <br />
+              <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>c</Kbd> : stopper l'execution dans le terminal
             </Text>
           </Box>
 
