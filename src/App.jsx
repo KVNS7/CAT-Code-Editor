@@ -10,7 +10,7 @@ const BG_NOIR_EBENE = "#0D0D0D"
 
 
 function App() {
-  return  <Box minH = "100vh" bg = {BG_NOIR_EBENE} color = "gray.500" px = {6} py = {8}>
+  return  <Box minH = "100vh" bg = {BG_GRIS_FONCE} color = "gray.500" px = {6} py = {8}>
             <CodeEditor/>   {/* Voir CodeEditos.jsx */}
           </Box>
 
