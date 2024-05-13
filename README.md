@@ -126,7 +126,10 @@ Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au s
 - [ ] Onglets pour avoir plusieurs fichiers
   - [x] Pop-up création de fichier avec choix du langage et du nom du fichier
   - [x] Extension (ex : .c, .py) automatique selon langage du fichier
-  - [ ] Possibilité de fermer (supprimer) un onglet (fichier)
+  - [x] Detection du langage selon le titre du fichier
+  - [x] Possibilité de fermer (supprimer) un onglet (fichier)
+  - [ ] Possibilité de renommer les fichiers
+- [ ] Ajout d'une fonction d'indentation avec un bouton
 - [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers :
   - [ ] En local sur machine dans un dossier premièrement
   - [ ] Sur Docker dans un dossier propre à l'étudiant, exemple : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]*
