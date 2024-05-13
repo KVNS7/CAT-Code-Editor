@@ -120,7 +120,7 @@ Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au s
 <!------------------------------------------------------------------------------------------------------------------------------------------>
 <br/>
 
-- [x] Ajouter le bloc d'éditeur de code à la page
+- [x] Ajout du bloc d'éditeur de code à la page
 - [x] Menu ouvrant avec des paramètres de l'editeur de code (thème, taille de la police, etc... )
 - [x] Raccourcis claviers
 - [ ] Onglets pour avoir plusieurs fichiers
@@ -129,12 +129,12 @@ Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au s
   - [x] Detection du langage selon le titre du fichier
   - [x] Possibilité de fermer (supprimer) un onglet (fichier)
   - [ ] Possibilité de renommer les fichiers
-- [ ] Ajout d'une fonction d'indentation avec un bouton
+- [ ] Fonction d'indentation avec un bouton
+- [ ] Affichage (souligner) des erreurs syntaxiques ( ';' manquant, etc... )
+- [ ] Bouton importer permettant d'importer un fichier / dossier au tp
 - [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers :
   - [ ] En local sur machine dans un dossier premièrement
   - [ ] Sur Docker dans un dossier propre à l'étudiant, exemple : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]*
-- [ ] Bouton importer permettant d'importer un fichier / dossier au tp
-- [ ] Affichage (souligner) des erreurs syntaxiques ( ';' manquant, etc... )
 
 <br/>
 
