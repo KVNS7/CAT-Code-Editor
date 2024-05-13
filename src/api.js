@@ -8,7 +8,7 @@ const API = axios.create(({     // URL de l'API qui exécute le code
 export const executeCode = async (language, sourceCode) => {
      const response = await API.post("/execute", {
         "language": language,
-        "version": LANGUAGE_VERSIONS[language],
+        "version": LANGUAGE_VERSIONS[language].version,
         "files": [
             {
             "content": sourceCode,  // code dans l'IDE

@@ -14,9 +14,9 @@ const LanguageSelector = ({language, onSelectLanguage}) => {
                 onChange={(e) => onSelectLanguage(e.target.value)}
                 placeholder="Sélectionnez un langage"
             >
-                {languages.map(([lang, version]) => (
+                {languages.map(([lang, details]) => (
                     <option key={lang} value={lang}>
-                        {lang} (v{version})
+                        {lang} (v{details.version})
                     </option>
                 ))}
             </Select>

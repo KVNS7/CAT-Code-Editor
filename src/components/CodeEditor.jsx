@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react"
 import { SettingsIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
-import { CODE_SNIPPETS } from "../constantes";
+import { LANGUAGE_VERSIONS, CODE_SNIPPETS } from "../constantes";
 import IDEOptionsDrawer from "./IDEOptionsDrawer";
 import NewTabModal from "./NewTabModal";
 import Output from "./Output";
@@ -39,7 +39,7 @@ const CodeEditor = () => {
     const [theme, setTheme] = useState("vs-dark")                                   // Variable : theme de l'IDE (sombre par défaut)
     const [minimap, setMinimap] = useState(false)                                   // Variable : activer/desactiver la minimap
     const [tabs, setTabs] = useState([                                              // Variable : onglets de l'IDE
-        {id: 1, title: 'main.'+ language, language: 'c', content: CODE_SNIPPETS[language]}
+        {id: 1, title: 'main' + LANGUAGE_VERSIONS[language].extension, language: language, content: CODE_SNIPPETS[language]}
     ])
     const [tabIndex, setTabIndex] = useState(0)                                     // Variable : garder une trace de l'onglet actif
     const [isModalOpen, setIsModalOpen] = useState(false);                          // Variable : ouverture fenetre nouveau onglet
@@ -87,7 +87,7 @@ const CodeEditor = () => {
     const addTab = () => {                              // Ajout d'un onglet 
         const newTab = {
             id: tabs.length + 1,
-            title: (newTabInfo.title || `NewTab${tabs.length + 1}`) + `.${newTabInfo.language}`,
+            title: (newTabInfo.title || `NewTab${tabs.length + 1}`) + `${LANGUAGE_VERSIONS[newTabInfo.language].extension}`,
             language: newTabInfo.language,
             content: CODE_SNIPPETS[newTabInfo.language] || ''
         };

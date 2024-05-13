@@ -1,16 +1,16 @@
 export const LANGUAGE_VERSIONS = {  // Langages du menu déroulant et leur version à vérifier avec "liste_langages_piston.cjs"
-  c: "10.2.0",
-  java : "15.0.2",
-  python : "3.10.0",
-  javascript : "18.15.0",
-  php: "8.2.3",
-  csharp: "6.12.0",
-  typescript : "5.0.3",
+  c: { version: "10.2.0", extension: ".c" },
+  java: { version: "15.0.2", extension: ".java" },
+  python: { version: "3.10.0", extension: ".py" },
+  javascript: { version: "18.15.0", extension: ".js" },
+  php: { version: "8.2.3", extension: ".php" },
+  csharp: { version: "6.12.0", extension: ".cs" },
+  typescript: { version: "5.0.3", extension: ".ts" },
 };
 
 const name = "Delbot";  // :)
 
-export const CODE_SNIPPETS = {  // exemples de code pour chaque langage // ! sera surement à enlever, dangereux en cas de miss click d'étudiant
+export const CODE_SNIPPETS = {  // exemples de code pour chaque langage
   c: `#include <stdio.h>\n\nint main(){\n\n\tchar name[] = "`+ name + `";\n\n\tprintf("Bonjour Mr. %s en C !", name);\n\n\treturn 0;\n\n}`,
   java: `public class HelloWorld {\n\tpublic static void main(String[] args) {\n\t\tString name = "Delbot";\n\t\tSystem.out.println("Bonjour Mr. " + name  + " en Java !");\n\t}\n}\n`,
   python: `def salut(name):\n\tprint("Bonjour Mr. " + name + " en Python !")\n\nsalut("` + name + `")\n`,
