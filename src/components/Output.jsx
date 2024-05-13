@@ -37,11 +37,8 @@ const Output = ({content, language}) => {
 
         <Flex alignItems = "center" >
             <Box ml = "auto">
-                <Text ml = {2} mb = {2} fontSize="lg" textAlign="right">
-                    Résultat
-                </Text>
                 {/* Bouton d'exécution */}
-                <Button variant = 'outline' colorScheme = "green" mb = {4} isLoading = {isLoading} onClick = {runCode}> 
+                <Button variant = 'outline' colorScheme = "green" mb = {2} isLoading = {isLoading} onClick = {runCode}> 
                     Exécuter
                 </Button>
             </Box>
@@ -55,6 +52,7 @@ const Output = ({content, language}) => {
             border = "1px solid"
             borderRadius = {4}
             borderColor = {isError ? "red.500" : "#333"}
+            mt={12}
         >
             {output ? 
                 output.map((line, i) => <Text key = {i}>{line}</Text>)          // Affiche le résultat d'exécution ligne par ligne
