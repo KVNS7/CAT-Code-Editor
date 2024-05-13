@@ -1,6 +1,11 @@
-import { Box, Text, Button, useToast, Flex } from "@chakra-ui/react"
+import { 
+    Box, Flex,
+    Text, Button,
+    useToast
+} from "@chakra-ui/react"
 import { executeCode } from "../api";
 import { useState } from "react";
+import { LANGUAGE_VERSIONS } from "../constantes";
 
 const Output = ({content, language}) => {
 
@@ -10,7 +15,23 @@ const Output = ({content, language}) => {
     const [isError, setIsError] = useState(false)                               // Etat en cas d'erreur
 
     const runCode = async () => {
-        const sourceCode = content;                        // Récupère le code depuis l'éditeur
+        
+        const supportedLanguages = Object.keys(LANGUAGE_VERSIONS);              // Récupère les langages pris en charge
+
+        if (!supportedLanguages.includes(language)) {                           // Si langage du fichier non reconnu, return
+            toast({                                                        
+                title: "Language non reconnu",
+                description: "Aucun langage reconnu pour ce fichier",
+                status: "error",
+                duration: 5000,
+                variant: "left-accent",
+                position: "bottom-right",
+
+            })
+            return;
+        }
+
+        const sourceCode = content;                                             // Récupère le code depuis l'éditeur
         if(!sourceCode) return;                                                 // Si vide, return
         try {
             setIsLoading(true)                                                  // Début animation chargement
@@ -30,6 +51,7 @@ const Output = ({content, language}) => {
         }finally{
             setIsLoading(false);                                                // Fin animation chargement
         }
+    
     }
 
   return (
