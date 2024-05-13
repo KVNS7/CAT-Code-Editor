@@ -1,19 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import {
-    Box,
-    HStack,
-    Button,
-    Text,
-    Flex,
+    Box, HStack, Flex,
+    Button, IconButton,
     useToast,
     useDisclosure,
-    Tabs,
-    Tab,
-    TabList,
-    TabPanels,
-    TabPanel,
+    Tabs, Tab, TabList, TabPanels, TabPanel
 } from "@chakra-ui/react"
-import { SettingsIcon } from "@chakra-ui/icons"
+import { SettingsIcon, SmallCloseIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
 import { LANGUAGE_VERSIONS, CODE_SNIPPETS } from "../constantes";
 import IDEOptionsDrawer from "./IDEOptionsDrawer";
@@ -21,29 +14,31 @@ import NewTabModal from "./NewTabModal";
 import Output from "./Output";
 
 // TODO : revoir tout le placement / les balises du code
+// TODO : importer indentation puis ajouter bouton dans le drawer
+
+// ! CRASH quand je ferme le premier fichier (main.c)
 
 // TODO : onglets (composants bougent lorsque passe en mode défilement)
-    // TODO : detecter le language avec le nom du fichier OU mettre juste le nom du fichier et le choix du langage rajoute l'extension dans le nom
 // TODO : sauvegarder fonctionnel
 // TODO : importer fonctionnel
 // TODO : retenir les parametres d'IDE (thème, police, minimap,...) selon l'utilisateur
+
 
 const CodeEditor = () => {
 
     const toast = useToast();
     const editorRef = useRef();                                                     // Ref pour l'editeur
     const {isOpen, onOpen, onClose} = useDisclosure()                               // Variable : ouverture du Drawer des paramètres de l'IDE
-    const [value, setValue] = useState('')                                          // Variable : valeur dans l'éditeur (lignes de code)
     const [language, setLanguage] = useState("c")                                   // Variable : langage de l'IDE (C par défaut)
     const [fontSize, setFontSize] = useState(14)                                    // Variable : taille de la police (12 par défaut)
     const [theme, setTheme] = useState("vs-dark")                                   // Variable : theme de l'IDE (sombre par défaut)
     const [minimap, setMinimap] = useState(false)                                   // Variable : activer/desactiver la minimap
     const [tabs, setTabs] = useState([                                              // Variable : onglets de l'IDE
-        {id: 1, title: 'main' + LANGUAGE_VERSIONS[language].extension, language: language, content: CODE_SNIPPETS[language]}
+        {id: 1, title: 'main' + LANGUAGE_VERSIONS['c'].extension, language: language, content: CODE_SNIPPETS['c']}
     ])
     const [tabIndex, setTabIndex] = useState(0)                                     // Variable : garder une trace de l'onglet actif
     const [isModalOpen, setIsModalOpen] = useState(false);                          // Variable : ouverture fenetre nouveau onglet
-    const [newTabInfo, setNewTabInfo] = useState({ title: '', language: 'c' });     // Variable : contenu fenetre nouveau onglet
+    const [newTabInfo, setNewTabInfo] = useState({ title: '', language: 'plaintext' });     // Variable : contenu fenetre nouveau onglet
 
     useEffect(() => {                                                               // Raccourcis clavier
         const handleKeyDown = (event) => {  
@@ -77,28 +72,34 @@ const CodeEditor = () => {
     const setTab = (index) => {                         // Lors du changement d'onglet
         setTabIndex(index);                             // Met la sélection sur le nouvel onglet créé
         setLanguage(tabs[index].language);              // Met à jour le langage à partir de l'onglet sélectionné (pour l'editeur et Piston)
-        setValue(tabs[index].content);                  // Met à jour le contenu de l'éditeur
       };
-
-    const toggleMinimap = () => {                       // Active / désactive la minimap
-        setMinimap(!minimap);
-    }
 
     const addTab = () => {                              // Ajout d'un onglet 
         const newTab = {
             id: tabs.length + 1,
-            title: (newTabInfo.title || `NewTab${tabs.length + 1}`) + `${LANGUAGE_VERSIONS[newTabInfo.language].extension}`,
+            title: (newTabInfo.title) || `NewTab${tabs.length + 1}`,
             language: newTabInfo.language,
             content: CODE_SNIPPETS[newTabInfo.language] || ''
         };
         setTabs([...tabs, newTab]);                                 // Ajoute l'onglet à la liste des onglets
         setTabIndex(tabs.length);                                   // Défini le nouvel onglet comme actif
         setIsModalOpen(false);                                      // Ferme le modal après l'ajout
-        setNewTabInfo({ title: '', language: newTab.language });    // Réinitialise les informations du formulaire
+        setNewTabInfo({ title: '', language: 'plaintext' });        // Réinitialise les informations du formulaire
+    }
+
+    const removeTab = (tabIndex) => {
+        const newTabs = tabs.filter((_, index) => index !== tabIndex);
+        setTabs(newTabs);
+    
+        if (tabIndex === tabs.length - 1 && tabIndex > 0) {                 // Si actuellement sur l'onglet supprimé, va sur
+            setTabIndex(tabIndex - 1);
+        }
     }
 
     const decreaseFontSize = () => fontSize > 8 && setFontSize(fontSize - 1);   // Diminue la taille de la police (si > 8)
     const increaseFontSize = () => fontSize < 30 && setFontSize(fontSize + 1);  // Augmente la taille de la police (si < 30)
+
+    const toggleMinimap = () => setMinimap(!minimap);                           // Active / désactive la minimap
 
     const toastNonImplementee = () => {                 // Toast pour les fonctionnalités non implémentées
         toast({                                                             
@@ -179,12 +180,28 @@ const CodeEditor = () => {
                                 sx={{
                                     '&::-webkit-scrollbar': { display: 'none' },        // Enleve scrollbar pour Chrome, Safari, et Edge
                                     scrollbarWidth: 'none',                             // pour Firefox
-                                    '-ms-overflow-style': 'none'                        // pour Internet Explorer 10+
+                                    'msOverflowStyle': 'none'                           // pour Internet Explorer 10+
                                 }}
                             >
                                 
                                 {tabs.map((tab, index) => (
-                                    <Tab key={index}>{tab.title}</Tab>
+                                    <Flex alignItems="center" key={index}>
+                                        <Tab>
+                                            {tab.title}
+                                        </Tab>
+                                        <IconButton
+                                            aria-label = "Fermer l'onglet"
+                                            icon = {<SmallCloseIcon/>}
+                                            variant="unstyled"
+                                            color = {tabIndex === index ? "blue.400" : ""}
+                                            size = "xs"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                removeTab(index);
+                                            }}
+                                            border = "none"
+                                        /> 
+                                    </Flex>
                                 ))}
 
                             </TabList>
@@ -229,7 +246,7 @@ const CodeEditor = () => {
 
                 </Box>
 
-                <Output content={tabs[tabIndex].content} language = {tabs[tabIndex].language}/>     {/* Fenêtre de résultat d'exécution du code*/}
+                <Output content = {tabs[tabIndex].content} language = {tabs[tabIndex].language}/>     {/* Fenêtre de résultat d'exécution du code*/}
             
             </HStack>
         </Box>
