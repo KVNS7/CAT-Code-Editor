@@ -1,11 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody,
-  ModalFooter, Button, FormControl, FormLabel, Input
+  Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, 
+  FormControl, FormLabel,
+  Input,
+  Button
 } from "@chakra-ui/react";
-import LanguageSelector from "./LanguageSelector"; // Assurez-vous que le chemin est correct
+import { LANGUAGE_VERSIONS } from '../constantes';
 
 const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo }) => {
+
+  // Fonction pour déterminer le langage basé sur l'extension du fichier
+  const determineLanguage = (filename) => {
+    const extension = filename.split('.').pop();
+    const foundLanguage = Object.entries(LANGUAGE_VERSIONS).find(([_, value]) => value.extension === `.${extension}`);
+    return foundLanguage ? foundLanguage[0] : 'plaintext';
+  };
+
+  // Effet pour mettre à jour le langage lorsque le titre change
+  useEffect(() => {
+    if (newTabInfo.title) {
+      const detectedLanguage = determineLanguage(newTabInfo.title);
+
+      if (detectedLanguage) {
+        setNewTabInfo(prev => ({ ...prev, language: detectedLanguage}));
+      }
+    }
+  }, [newTabInfo.title, setNewTabInfo]);
+
   return (
     <Modal isOpen = {isOpen} onClose = {onClose}>
       <ModalOverlay/>
@@ -18,17 +39,12 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo }) => 
             <FormLabel>Titre du fichier</FormLabel>
             <Input
               value = {newTabInfo.title}
-              onChange = {(e) => setNewTabInfo({ ...newTabInfo, title: e.target.value })}
+              onChange = {(e) => setNewTabInfo({ title: e.target.value })}
+              onKeyDown={(e) => e.key === 'Enter' && addTab()}
               placeholder="Entrez le titre du fichier"
               autoFocus
             />
           </FormControl>
-
-          <LanguageSelector
-            language = {newTabInfo.language}
-            onSelectLanguage = {(language) => setNewTabInfo({ ...newTabInfo, language })}
-          />
-
         </ModalBody>
 
         <ModalFooter>
