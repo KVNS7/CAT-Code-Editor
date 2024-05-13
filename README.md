@@ -121,13 +121,16 @@ Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au s
 <br/>
 
 - [x] Ajouter le bloc d'éditeur de code à la page
-- [x] Fenêtre ouvrante avec des paramètres de l'editeur de code (thème, taille de la police, etc... )
+- [x] Menu ouvrant avec des paramètres de l'editeur de code (thème, taille de la police, etc... )
 - [x] Raccourcis claviers
-- [x] Onglets pour avoir plusieurs fichiers
+- [ ] Onglets pour avoir plusieurs fichiers
+  - [x] Pop-up création de fichier avec choix du langage et du nom du fichier
+  - [x] Extension (ex : .c, .py) automatique selon langage du fichier
+  - [ ] Possibilité de fermer (supprimer) un onglet (fichier)
 - [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers :
-  - [ ] En local sur machine dans le dossier téléchargement
+  - [ ] En local sur machine dans un dossier premièrement
   - [ ] Sur Docker dans un dossier propre à l'étudiant, exemple : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]*
-- [ ] Bouton importer permettant d'importer un fichier / un dossier au tp
+- [ ] Bouton importer permettant d'importer un fichier / dossier au tp
 - [ ] Affichage (souligner) des erreurs syntaxiques ( ';' manquant, etc... )
 
 <br/>
