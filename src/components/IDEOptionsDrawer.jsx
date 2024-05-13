@@ -1,7 +1,11 @@
 import React from 'react';
 import {
-  Box, Button, Text, Flex, Drawer, DrawerBody, DrawerHeader, DrawerContent, DrawerCloseButton,
-  Divider, Menu, MenuButton, MenuList, MenuItem, Switch, HStack, Kbd, 
+  Box, Flex, HStack,
+  Drawer, DrawerBody, DrawerHeader, DrawerContent, DrawerCloseButton,
+  Menu, MenuButton, MenuList, MenuItem,
+  Switch, Button, Text,
+  Divider,
+  Kbd 
 } from "@chakra-ui/react";
 import { VS_THEMES } from '../constantes';
 
