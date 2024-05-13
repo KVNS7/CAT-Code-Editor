@@ -165,23 +165,30 @@ const CodeEditor = () => {
                     {/* Onglets de l'IDE */}
                     <Tabs index={tabIndex} onChange={setTab} size="sm">
                     
-                        <Box    // Pour le défilement des onglets
-                        overflowX="auto"
-                        sx={{
-                            '&::-webkit-scrollbar': { display: 'none' },        // Enleve scrollbar pour Chrome, Safari, et Edge
-                            scrollbarWidth: 'none',                             // pour Firefox
-                            '-ms-overflow-style': 'none'                        // pour Internet Explorer 10+
-                        }}
+                        <Flex    // Pour le défilement des onglets
+                        position="sticky"
                         >  
-                            <TabList display="flex" whiteSpace="nowrap">
+                            <Button onClick={() => setIsModalOpen(true)} ml="2%" mr="1%">+</Button>
+                            <TabList 
+                                display="flex"
+                                whiteSpace="nowrap"
+                                width="90%"
+                                overflowX="auto"
+                                sx={{
+                                    '&::-webkit-scrollbar': { display: 'none' },        // Enleve scrollbar pour Chrome, Safari, et Edge
+                                    scrollbarWidth: 'none',                             // pour Firefox
+                                    '-ms-overflow-style': 'none'                        // pour Internet Explorer 10+
+                                }}
+                            >
+                                
                                 {tabs.map((tab, index) => (
                                     <Tab key={index}>{tab.title}</Tab>
                                 ))}
-                                <Button onClick={() => setIsModalOpen(true)}>+</Button>
-                            </TabList>
-                        </Box>
 
-                        <TabPanels>
+                            </TabList>
+                        </Flex>
+
+                        <TabPanels mt="-2%">
                             
                             {tabs.map((tab, index) => (
 
