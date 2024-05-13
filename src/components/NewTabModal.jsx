@@ -8,10 +8,10 @@ import LanguageSelector from "./LanguageSelector"; // Assurez-vous que le chemin
 const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo }) => {
   return (
     <Modal isOpen = {isOpen} onClose = {onClose}>
-      <ModalOverlay />
+      <ModalOverlay/>
       <ModalContent bg="#333644">
         <ModalHeader>Ajouter un nouvel onglet</ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton/>
         <ModalBody mb="2%">
 
           <FormControl mb="3%">

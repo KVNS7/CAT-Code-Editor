@@ -14,7 +14,7 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
 
     <Drawer isOpen={isOpen} placement='right' onClose={onClose} size="sm">
       <DrawerContent bg="#2C3E50">
-        <DrawerCloseButton />
+        <DrawerCloseButton/>
 
         <DrawerHeader>
           Paramètres de l'IDE
@@ -74,17 +74,17 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
 
             <Text lineHeight="taller">
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>+</Kbd> : augmenter la taille de la police
-              <br />
+              <br/>
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>-</Kbd> : diminuer la taille de la police
-              <br />
+              <br/>
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>m</Kbd> : activer / désactiver la minimap
-              <br />
+              <br/>
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>o</Kbd> : créer un nouveau fichier
-              <br />
+              <br/>
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>s</Kbd> : sauvegarder les fichiers 
-              <br />
+              <br/>
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>m</Kbd> : importer un fichier / dossier
-              <br />
+              <br/>
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>c</Kbd> : stopper l'execution dans le terminal
             </Text>
           </Box>

@@ -20,10 +20,12 @@ import IDEOptionsDrawer from "./IDEOptionsDrawer";
 import NewTabModal from "./NewTabModal";
 import Output from "./Output";
 
+// TODO : revoir tout le placement / les balises du code
+
 // TODO : onglets (composants bougent lorsque passe en mode défilement)
     // TODO : detecter le language avec le nom du fichier OU mettre juste le nom du fichier et le choix du langage rajoute l'extension dans le nom
-// TODO : bouton sauvegarder fonctionnel
-// TODO : bouton importer fonctionnel
+// TODO : sauvegarder fonctionnel
+// TODO : importer fonctionnel
 // TODO : retenir les parametres d'IDE (thème, police, minimap,...) selon l'utilisateur
 
 const CodeEditor = () => {
