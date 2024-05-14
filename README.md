@@ -68,6 +68,8 @@ Ceci a pour but de :
 
 [![Monaco Editor version][MonacoEditor-badge]][MonacoEditor-url]
 
+[![Docker version][Docker-badge]][Docker-url]
+
 [![Axios version][Axios-badge]][Axios-url]
 
 [![Piston version][Piston-badge]][Piston-url]
@@ -166,6 +168,9 @@ Projet : [https://github.com/KVNS7/Code-editor-cat/tree/main](https://github.com
 
 [MonacoEditor-badge]: https://img.shields.io/badge/Monaco%20Editor%20v0.48.0-%23007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=%23007ACC&labelColor=grey
 [MonacoEditor-url]: https://microsoft.github.io/monaco-editor/docs.html
+
+[Docker-badge]: https://img.shields.io/badge/Docker%20v25.0.3-%232496ED?style=for-the-badge&logo=docker&labelColor=grey
+[Docker-url]: https://www.docker.com/
 
 [Axios-badge]: https://img.shields.io/badge/Axios%20v1.6.8-%235A29E4?style=for-the-badge&logo=axios&logoColor=%235A29E4&labelColor=grey
 [Axios-url]: https://axios-http.com/fr/docs/intro
