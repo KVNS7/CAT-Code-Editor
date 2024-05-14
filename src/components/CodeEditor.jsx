@@ -14,17 +14,15 @@ import NewTabModal from "./NewTabModal";
 import Output from "./Output";
 
 // TODO : revoir tout le placement / les balises du code
+
+// TODO : POPUP confirmation suppression onglet
+// TODO : ROND "?" avec la liste des langages dans le modal newTab
 // TODO : importer indentation puis ajouter bouton dans le drawer
 
-// todo : ROND "?" avec la liste des langages dans le modal newTab
-
-// ! CRASH quand je ferme le premier fichier (main.c)
-
-// TODO : onglets (composants bougent lorsque passe en mode défilement)
 // TODO : sauvegarder fonctionnel
 // TODO : importer fonctionnel
 // TODO : retenir les parametres d'IDE (thème, police, minimap,...) selon l'utilisateur
-
+// TODO : onglets (composants bougent lorsque passe en mode défilement)
 
 const CodeEditor = () => {
 
@@ -90,7 +88,7 @@ const CodeEditor = () => {
     }
 
     const removeTab = (removeIndex) => {
-        if(tabs.length === 1){return;}
+        if(tabs.length === 1){return;}                      // Annule l'opération s'il ne reste qu'un onglet
 
         const newTabs = tabs.filter((_, index) => index !== removeIndex);
         setTabs(newTabs);
