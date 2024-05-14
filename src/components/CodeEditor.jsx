@@ -5,6 +5,7 @@ import {
     useToast,
     useDisclosure,
     Tabs, Tab, TabList, TabPanels, TabPanel,
+    Tooltip,
 } from "@chakra-ui/react"
 import { SettingsIcon, SmallCloseIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
@@ -17,7 +18,6 @@ import TabDeleteDialog from "./TabDeleteDialog";
 
 // TODO : revoir tout le placement / les balises du code
 
-// TODO : ROND "?" avec la liste des langages dans le modal newTab
 // TODO : importer indentation puis ajouter bouton dans le drawer
 
 // TODO : sauvegarder fonctionnel
@@ -92,7 +92,7 @@ const CodeEditor = () => {
         editor.focus();
     };
 
-    const setTab = (index) => {                         // Lors du changement d'onglet
+    const setTab = (index) => {                         // Changement d'onglet
         setTabIndex(index);                             // Met la sélection sur le nouvel onglet créé
         setLanguage(tabs[index].language);              // Met à jour le langage à partir de l'onglet sélectionné (pour l'editeur et Piston)
       };
@@ -111,7 +111,7 @@ const CodeEditor = () => {
     }
 
     const confirmRemoveTab = (index) => {
-        if(tabs.length === 1){return;}                      // Annule l'opération s'il ne reste qu'un onglet
+        if(tabs.length === 1){return;}                  // Annule l'opération s'il ne reste qu'un onglet
 
         setTabToDelete(index);
         setIsAlertOpen(true);
@@ -164,27 +164,33 @@ const CodeEditor = () => {
                         {/* Bouton permettant de sauvegarder le/les fichiers */}
                         <Box mt = {5}>
 
-                            <Button 
-                                color = {"green.500"}
-                                border = {"2px solid"} 
-                                _hover = {{bg :"green.700"}} 
-                                onClick = {toastNonImplementee}
-                            >
-                                Sauvegarder
-                            </Button>
+                            <Tooltip label={"Sauvegarde le fichier dans le dossier étudiant"} openDelay={500} hasArrow>
+                                <Button 
+                                    color = {"green.500"}
+                                    border = {"2px solid"} 
+                                    _hover = {{bg :"green.700"}} 
+                                    onClick = {toastNonImplementee}
+                                >
+                                    Sauvegarder
+                                </Button>
+                            </Tooltip>
                             
                         </Box>
 
                         {/* Bouton permettant d'importer un/des fichiers */}
                         <Box ml = "2%" mt = {5} mr="2%">
-                            <Button
-                                color = {"orange.500"}
-                                border = {"2px solid"}
-                                _hover = {{bg :"orange.700"}}
-                                onClick = {toastNonImplementee}
-                            >
-                                Importer
-                            </Button>
+
+                            <Tooltip label={"Importer un fichier ou un dossier(zip) au TP"} openDelay={500} hasArrow>
+                                <Button
+                                    color = {"orange.500"}
+                                    border = {"2px solid"}
+                                    _hover = {{bg :"orange.700"}}
+                                    onClick = {toastNonImplementee}
+                                >
+                                    Importer
+                                </Button>
+                            </Tooltip>
+
                         </Box>
 
                     </Flex>
@@ -207,6 +213,7 @@ const CodeEditor = () => {
                         position="sticky"
                         >  
                             <Button onClick={() => setIsModalOpen(true)} ml="2%" mr="1%">+</Button>
+
                             <TabList 
                                 display="flex"
                                 whiteSpace="nowrap"
