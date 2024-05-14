@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box, Flex, HStack,
   Drawer, DrawerBody, DrawerHeader, DrawerContent, DrawerCloseButton,
@@ -85,11 +84,14 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
               <br/>
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>o</Kbd> : créer un nouveau fichier
               <br/>
+              <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>w</Kbd> : supprimer le fichier actuel
+              <br/>
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>s</Kbd> : sauvegarder les fichiers 
               <br/>
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>m</Kbd> : importer un fichier / dossier
               <br/>
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>c</Kbd> : stopper l'execution dans le terminal
+              
             </Text>
           </Box>
 
