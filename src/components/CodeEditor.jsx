@@ -4,18 +4,19 @@ import {
     Button, IconButton,
     useToast,
     useDisclosure,
-    Tabs, Tab, TabList, TabPanels, TabPanel
+    Tabs, Tab, TabList, TabPanels, TabPanel,
 } from "@chakra-ui/react"
 import { SettingsIcon, SmallCloseIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
 import { LANGUAGE_VERSIONS, CODE_SNIPPETS } from "../constantes";
+
 import IDEOptionsDrawer from "./IDEOptionsDrawer";
 import NewTabModal from "./NewTabModal";
 import Output from "./Output";
+import TabDeleteDialog from "./TabDeleteDialog";
 
 // TODO : revoir tout le placement / les balises du code
 
-// TODO : POPUP confirmation suppression onglet
 // TODO : ROND "?" avec la liste des langages dans le modal newTab
 // TODO : importer indentation puis ajouter bouton dans le drawer
 
@@ -34,16 +35,25 @@ const CodeEditor = () => {
     const [theme, setTheme] = useState("vs-dark")                                   // Variable : theme de l'IDE (sombre par défaut)
     const [minimap, setMinimap] = useState(false)                                   // Variable : activer/desactiver la minimap
     const [tabs, setTabs] = useState([                                              // Variable : onglets de l'IDE
-        {id: 1, title: 'main' + LANGUAGE_VERSIONS['c'].extension, language: language, content: CODE_SNIPPETS['c']}
+        {
+            id: 1, 
+            title: 'main' + LANGUAGE_VERSIONS['c'].extension,
+            language: language, 
+            content: CODE_SNIPPETS['c']
+        }
     ])
     const [tabIndex, setTabIndex] = useState(0)                                     // Variable : garder une trace de l'onglet actif
     const [isModalOpen, setIsModalOpen] = useState(false);                          // Variable : ouverture fenetre nouveau onglet
     const [newTabInfo, setNewTabInfo] = useState({ title: '', language: 'plaintext' });     // Variable : contenu fenetre nouveau onglet
+    const [isAlertOpen, setIsAlertOpen] = useState(false);                          // Variable : ouverture du TabDeleteDialog
+    const [tabToDelete, setTabToDelete] = useState(null);                           // Variable : table a supprimer
+    const cancelRef = useRef();                                                     // Ref du bouton annuler
+
 
     useEffect(() => {                                                               // Raccourcis clavier
         const handleKeyDown = (event) => {  
-            if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '=')) {  // Inclu '=' pour les claviers où '+' nécessite Shift
-                event.preventDefault();  // Empêche que le raccourci navigateur prime
+            if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '=')) {
+                event.preventDefault();                                             // Empêche que le raccourci navigateur prime
                 increaseFontSize();
             } else if ((event.ctrlKey || event.metaKey) && event.key === '-') {
                 event.preventDefault();
@@ -54,15 +64,28 @@ const CodeEditor = () => {
             }else if ((event.ctrlKey || event.metaKey) && event.key === 'o'){
                 event.preventDefault();
                 setIsModalOpen(true);
+            }else if ((event.ctrlKey || event.metaKey) && event.key === 'w'){
+                event.preventDefault();
+                confirmRemoveTab(tabIndex);
             }
         };
     
         document.addEventListener('keydown', handleKeyDown);
 
+        
+        const handleBeforeUnload = (event) => {                                 // Demande confirmation avant de fermer/actualiser la page
+            const message = "Êtes-vous sûr de vouloir quitter cette page ? Vos modifications non sauvegardées seront perdues.";
+            event.returnValue = message;
+            return message;
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [fontSize, minimap, isModalOpen]);
+    }, [fontSize, minimap, isModalOpen, tabIndex]);
 
     const onMount = (editor) => {               // Met le focus sur l'éditeur quand il a fini de charger
         editorRef.current = editor;
@@ -87,17 +110,23 @@ const CodeEditor = () => {
         setNewTabInfo({ title: '', language: 'plaintext' });        // Réinitialise les informations du formulaire
     }
 
-    const removeTab = (removeIndex) => {
+    const confirmRemoveTab = (index) => {
         if(tabs.length === 1){return;}                      // Annule l'opération s'il ne reste qu'un onglet
 
-        const newTabs = tabs.filter((_, index) => index !== removeIndex);
-        setTabs(newTabs);
+        setTabToDelete(index);
+        setIsAlertOpen(true);
+    } 
 
-        if (removeIndex === tabIndex) {                     // Si l'onglet supprimé est l'onglet actif
-            const newIndex = removeIndex > 0 ? removeIndex - 1 : 0;
+    const removeTab = () => {
+        const newTabs = tabs.filter((_, index) => index !== tabToDelete);
+        setTabs(newTabs);
+        setIsAlertOpen(false);
+
+        if (tabToDelete === tabIndex) {                     // Si l'onglet supprimé est l'onglet actif
+            const newIndex = tabToDelete > 0 ? tabToDelete - 1 : 0;
             setTabIndex(newIndex);
             setLanguage(newTabs[newIndex]?.language || 'plaintext');
-        } else if (removeIndex < tabIndex) {                // Si un onglet avant l'onglet actif est supprimé, décrémente l'index actif
+        } else if (tabToDelete < tabIndex) {                // Si un onglet avant l'onglet actif est supprimé, décrémente l'index actif
             setTabIndex(tabIndex - 1);
         }
     }
@@ -203,7 +232,7 @@ const CodeEditor = () => {
                                             size = "xs"
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                removeTab(index);
+                                                confirmRemoveTab(index);
                                             }}
                                             border = "none"
                                         /> 
@@ -248,6 +277,14 @@ const CodeEditor = () => {
                         addTab={addTab}
                         newTabInfo={newTabInfo}
                         setNewTabInfo={setNewTabInfo}
+                    />
+
+                    <TabDeleteDialog
+                        isOpen={isAlertOpen}
+                        onClose={() => setIsAlertOpen(false)}
+                        onDelete={removeTab}
+                        cancelRef={cancelRef}
+                        tabName={tabs[tabToDelete]?.title}
                     />
 
                 </Box>
