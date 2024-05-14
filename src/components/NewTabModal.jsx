@@ -55,6 +55,7 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo }) => 
                   </Box>
                 } 
                 aria-label="Langages supportés"
+                hasArrow
               >
                 <InfoIcon ml={1} mb={0.5}/>
               </Tooltip>
