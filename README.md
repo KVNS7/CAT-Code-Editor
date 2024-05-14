@@ -37,7 +37,7 @@
 
 <p align = "center" >
   <a href = "http://localhost:5173/" target ="_blank" rel ="noopener noreferrer">
-    <img width="600" src="public/img/interface-IDE.png" alt="Interface IDE">
+    <img width="700" src="public/img/interface-IDE.png" alt="Interface IDE">
   </a>
 </p>
 
