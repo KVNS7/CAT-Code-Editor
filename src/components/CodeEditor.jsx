@@ -16,6 +16,8 @@ import Output from "./Output";
 // TODO : revoir tout le placement / les balises du code
 // TODO : importer indentation puis ajouter bouton dans le drawer
 
+// todo : ROND "?" avec la liste des langages dans le modal newTab
+
 // ! CRASH quand je ferme le premier fichier (main.c)
 
 // TODO : onglets (composants bougent lorsque passe en mode défilement)
@@ -87,11 +89,17 @@ const CodeEditor = () => {
         setNewTabInfo({ title: '', language: 'plaintext' });        // Réinitialise les informations du formulaire
     }
 
-    const removeTab = (tabIndex) => {
-        const newTabs = tabs.filter((_, index) => index !== tabIndex);
+    const removeTab = (removeIndex) => {
+        if(tabs.length === 1){return;}
+
+        const newTabs = tabs.filter((_, index) => index !== removeIndex);
         setTabs(newTabs);
-    
-        if (tabIndex === tabs.length - 1 && tabIndex > 0) {                 // Si actuellement sur l'onglet supprimé, va sur
+
+        if (removeIndex === tabIndex) {                     // Si l'onglet supprimé est l'onglet actif
+            const newIndex = removeIndex > 0 ? removeIndex - 1 : 0;
+            setTabIndex(newIndex);
+            setLanguage(newTabs[newIndex]?.language || 'plaintext');
+        } else if (removeIndex < tabIndex) {                // Si un onglet avant l'onglet actif est supprimé, décrémente l'index actif
             setTabIndex(tabIndex - 1);
         }
     }
