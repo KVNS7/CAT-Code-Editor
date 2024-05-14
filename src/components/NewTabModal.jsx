@@ -3,8 +3,11 @@ import {
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, 
   FormControl, FormLabel,
   Input,
-  Button
+  Button,
+  Tooltip,
+  Box
 } from "@chakra-ui/react";
+import { InfoIcon } from '@chakra-ui/icons';
 import { LANGUAGE_VERSIONS } from '../constantes';
 
 const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo }) => {
@@ -36,7 +39,27 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo }) => 
         <ModalBody mb="2%">
 
           <FormControl mb="3%">
-            <FormLabel>Titre du fichier</FormLabel>
+            <FormLabel>
+              Titre du fichier
+              <Tooltip 
+                label={
+                  <Box whiteSpace="pre">
+                    Langages supportés :{"\n"}
+                    - C{"\n"}
+                    - Java{"\n"}
+                    - Python{"\n"}
+                    - Php{"\n"}
+                    - C#{"\n"}
+                    - TypeScript
+
+                  </Box>
+                } 
+                aria-label="Langages supportés"
+              >
+                <InfoIcon ml={1} mb={0.5}/>
+              </Tooltip>
+
+            </FormLabel> 
             <Input
               value = {newTabInfo.title}
               onChange = {(e) => setNewTabInfo({ title: e.target.value })}
@@ -48,13 +71,19 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo }) => 
         </ModalBody>
 
         <ModalFooter>
+
           <Button colorScheme = "blue" mr={3} onClick={addTab}>
             Ajouter
           </Button>
+
           <Button onClick = {() => onClose()}>Annuler</Button>
+
         </ModalFooter>
       </ModalContent>
+
     </Modal>
+
+    
   );
 };
 
