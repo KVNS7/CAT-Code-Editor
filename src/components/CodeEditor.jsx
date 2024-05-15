@@ -18,6 +18,7 @@ import TabDeleteDialog from "./TabDeleteDialog";
 
 // TODO : revoir tout le placement / les balises du code
 
+// TODO : ajouter renommer fichier (clic droit?)
 // TODO : importer indentation puis ajouter bouton dans le drawer
 
 // TODO : sauvegarder fonctionnel
@@ -97,12 +98,12 @@ const CodeEditor = () => {
         setLanguage(tabs[index].language);              // Met à jour le langage à partir de l'onglet sélectionné (pour l'editeur et Piston)
     };
 
-    const addTab = () => {                              // Ajout d'un onglet 
+    const addTab = (validatedTitle) => {                              // Ajout d'un onglet 
         const newTab = {
             id: tabs.length + 1,
-            title: (newTabInfo.title) || `NewTab${tabs.length + 1}`,
+            title: validatedTitle,
             language: newTabInfo.language,
-            content: CODE_SNIPPETS[newTabInfo.language] || ''
+            content: CODE_SNIPPETS[newTabInfo.language] || 'Aucun langage n\'a été reconnu pour ce fichier'
         };
         setTabs([...tabs, newTab]);                                 // Ajoute l'onglet à la liste des onglets
         setTabIndex(tabs.length);                                   // Défini le nouvel onglet comme actif
@@ -268,7 +269,8 @@ const CodeEditor = () => {
                                         }}
                                         options={{
                                             minimap: { enabled: minimap },
-                                            fontSize: fontSize
+                                            fontSize: fontSize,
+                                            formatOnType: true
                                         }}
                                     />
                                 </TabPanel>
@@ -284,7 +286,7 @@ const CodeEditor = () => {
                         addTab={addTab}
                         newTabInfo={newTabInfo}
                         setNewTabInfo={setNewTabInfo}
-                        tabs = {tabs}
+                        tabs={tabs}
                     />
 
                     <TabDeleteDialog

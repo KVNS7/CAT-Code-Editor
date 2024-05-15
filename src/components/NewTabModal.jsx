@@ -33,11 +33,41 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
     }
   }, [newTabInfo.title, setNewTabInfo]);
 
+  const validateAndFormatTitle = (title) => {
+    if (!title.includes('.')) {
+      title += '.txt';
+    }
+
+    const [name, extension] = title.split('.');
+    if (!name) {
+      return false;
+    }
+    
+    return title;
+  }
+
   const handleAddTab = () => {
-    if(tabs.some(tab => tab.title === newTabInfo.title)){
-      if (!toast.isActive("toast")) {
+    const validatedTitle = validateAndFormatTitle(newTabInfo.title);
+    
+    if (!validatedTitle) {
+      if (!toast.isActive("toast1")) {
         toast({
-          id: "toast",
+          id: "toast1",
+          title: "Erreur",
+          description: "Le nom du fichier ne peut être vide",
+          status: "error",
+          duration: 1500,
+          isClosable: false,
+          position: "top",
+        });
+      }
+      return;
+    }
+
+    if(tabs.some(tab => tab.title === validatedTitle)){
+      if (!toast.isActive("toast2")) {
+        toast({
+          id: "toast2",
           title: "Erreur",
           description: "Un fichier avec ce nom existe déjà.",
           status: "error",
@@ -47,7 +77,7 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
         });
       }
     } else {
-      addTab();
+      addTab(validatedTitle);
     }
   }
 
@@ -103,7 +133,7 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
             Ajouter
           </Button>
 
-          <Button onClick={() => handleClose()}>Annuler</Button>
+          <Button onClick={handleClose}>Annuler</Button>
 
         </ModalFooter>
       </ModalContent>
