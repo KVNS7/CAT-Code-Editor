@@ -27,7 +27,7 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
         <DrawerBody>
 
           <Box>
-            <Button width="100%" onClick={""}>Indenter le code</Button>
+            <Button width="100%">Indenter le code</Button>
           </Box>
 
           <Divider my="5" borderWidth={1} />
