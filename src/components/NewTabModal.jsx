@@ -17,14 +17,14 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
 
   // Fonction pour déterminer le langage basé sur l'extension du fichier
   const determineLanguage = (filename) => {
-    const extension = filename.split('.').pop();
-    const foundLanguage = Object.entries(LANGUAGE_VERSIONS).find(([_, value]) => value.extension === `.${extension}`);
-    return foundLanguage ? foundLanguage[0] : 'plaintext';
+    const extension = filename.split('.').pop();              // Coupe le titre et garde la partie après le point
+    const foundLanguage = Object.entries(LANGUAGE_VERSIONS).find(([_, value]) => value.extension === `.${extension}`); // Compare aux langages enregistrés
+    return foundLanguage ? foundLanguage[0] : 'plaintext';    // Retourne le langage si trouvé, plaintext sinon (texte brut)
   };
 
   // Effet pour mettre à jour le langage lorsque le titre change
   useEffect(() => {
-    if (newTabInfo.title) {
+    if (newTabInfo.title) {                           // A chaque saisie du titre, verifie le langage et le modifie
       const detectedLanguage = determineLanguage(newTabInfo.title);
 
       if (detectedLanguage) {
@@ -33,13 +33,13 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
     }
   }, [newTabInfo.title, setNewTabInfo]);
 
-  const validateAndFormatTitle = (title) => {
-    if (!title.includes('.')) {
+  const validateAndFormatTitle = (title) => {                   // Fonction validant le format du titre
+    if (!title.includes('.')) {                                 // Si titre sans '.', rajout .txt a la fin
       title += '.txt';
     }
 
-    const [name, extension] = title.split('.');
-    if (!name) {
+    const [name, extension] = title.split('.');                 // Separe en 2 partie (avant et après le '.')
+    if (!name) {                                                // Si pas de nom avant le '.', retourne faux
       return false;
     }
     
@@ -49,7 +49,7 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
   const handleAddTab = () => {
     const validatedTitle = validateAndFormatTitle(newTabInfo.title);
     
-    if (!validatedTitle) {
+    if (!validatedTitle) {                                      // Si validateAndFormatTitle retourne faux, toast d'erreur
       if (!toast.isActive("toast1")) {
         toast({
           id: "toast1",
@@ -64,7 +64,7 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
       return;
     }
 
-    if(tabs.some(tab => tab.title === validatedTitle)){
+    if(tabs.some(tab => tab.title === validatedTitle)){         // Si titre déja existant, toast d'erreur
       if (!toast.isActive("toast2")) {
         toast({
           id: "toast2",
@@ -76,14 +76,15 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
           position: "top",
         });
       }
-    } else {
-      addTab(validatedTitle);
+      return;
     }
+    addTab(validatedTitle);                                     // Sinon ajoute le fichier
+    handleClose();
   }
 
-  const handleClose = () => {
-    setNewTabInfo({title: ""});
-    onClose();
+  const handleClose = () => {                                   // Lors de la fermeture
+    setNewTabInfo({title: ""});                                 // Remet le titre a zéro
+    onClose();                                                  // Ferme le modal
   }
 
   return (
@@ -97,7 +98,8 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
           <FormControl mb="3%">
             <FormLabel>
               Titre du fichier
-              <Tooltip
+
+              <Tooltip                                    // Infobulle des langages supportés
                 label={
                   <Box whiteSpace="pre">
                     Langages supportés :{"\n"}

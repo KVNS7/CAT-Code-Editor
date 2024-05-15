@@ -16,6 +16,7 @@ import NewTabModal from "./NewTabModal";
 import Output from "./Output";
 import TabDeleteDialog from "./TabDeleteDialog";
 
+// ! ---------------------------------------------------------------------------------------------------- ! //
 // TODO : revoir tout le placement / les balises du code
 
 // TODO : ajouter renommer fichier (clic droit?)
@@ -25,6 +26,7 @@ import TabDeleteDialog from "./TabDeleteDialog";
 // TODO : importer fonctionnel
 // TODO : retenir les parametres d'IDE (thème, police, minimap,...) selon l'utilisateur
 // TODO : onglets (composants bougent lorsque passe en mode défilement)
+// ! ---------------------------------------------------------------------------------------------------- ! //
 
 const CodeEditor = () => {
 
@@ -88,7 +90,7 @@ const CodeEditor = () => {
         };
     }, [fontSize, minimap, isModalOpen, tabIndex]);
 
-    const onMount = (editor) => {               // Met le focus sur l'éditeur quand il a fini de charger
+    const onMount = (editor) => {                       // Met le focus sur l'éditeur quand il a fini de charger
         editorRef.current = editor;
         editor.focus();
     };
@@ -98,7 +100,7 @@ const CodeEditor = () => {
         setLanguage(tabs[index].language);              // Met à jour le langage à partir de l'onglet sélectionné (pour l'editeur et Piston)
     };
 
-    const addTab = (validatedTitle) => {                              // Ajout d'un onglet 
+    const addTab = (validatedTitle) => {                // Ajout d'un onglet 
         const newTab = {
             id: tabs.length + 1,
             title: validatedTitle,
@@ -118,8 +120,9 @@ const CodeEditor = () => {
         setIsAlertOpen(true);
     }
 
-    const removeTab = () => {
-        const newTabs = tabs.filter((_, index) => index !== tabToDelete);
+    const removeTab = () => {                               // Suppression d'un onglet
+
+        const newTabs = tabs.filter((_, index) => index !== tabToDelete);       // Filtre les onglets en enlevant celui a supprimer
         setTabs(newTabs);
         setIsAlertOpen(false);
 
