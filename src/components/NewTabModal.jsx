@@ -41,8 +41,8 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
           title: "Erreur",
           description: "Un fichier avec ce nom existe déjà.",
           status: "error",
-          duration: 2000,
-          isClosable: true,
+          duration: 1500,
+          isClosable: false,
           position: "top",
         });
       }
