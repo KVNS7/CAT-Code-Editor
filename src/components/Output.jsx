@@ -75,6 +75,8 @@ const Output = ({content, language}) => {
             borderRadius = {4}
             borderColor = {isError ? "red.500" : "#333"}
             mt={12}
+            overflowY="auto"
+            maxHeight="75vh"
         >
             {output ? 
                 output.map((line, i) => <Text key = {i}>{line}</Text>)          // Affiche le résultat d'exécution ligne par ligne
