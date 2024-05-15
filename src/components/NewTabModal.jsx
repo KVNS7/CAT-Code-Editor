@@ -1,16 +1,19 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, 
+  Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter,
   FormControl, FormLabel,
   Input,
   Button,
   Tooltip,
-  Box
+  Box,
+  useToast
 } from "@chakra-ui/react";
 import { InfoIcon } from '@chakra-ui/icons';
 import { LANGUAGE_VERSIONS } from '../constantes';
 
-const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo }) => {
+const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs }) => {
+
+  const toast = useToast();
 
   // Fonction pour déterminer le langage basé sur l'extension du fichier
   const determineLanguage = (filename) => {
@@ -25,23 +28,46 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo }) => 
       const detectedLanguage = determineLanguage(newTabInfo.title);
 
       if (detectedLanguage) {
-        setNewTabInfo(prev => ({ ...prev, language: detectedLanguage}));
+        setNewTabInfo(prev => ({ ...prev, language: detectedLanguage }));
       }
     }
   }, [newTabInfo.title, setNewTabInfo]);
 
+  const handleAddTab = () => {
+    if(tabs.some(tab => tab.title === newTabInfo.title)){
+      if (!toast.isActive("toast")) {
+        toast({
+          id: "toast",
+          title: "Erreur",
+          description: "Un fichier avec ce nom existe déjà.",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+        });
+      }
+    } else {
+      addTab();
+    }
+  }
+
+  const handleClose = () => {
+    setNewTabInfo({title: ""});
+    onClose();
+  }
+
   return (
-    <Modal isOpen = {isOpen} onClose = {onClose}>
-      <ModalOverlay/>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
       <ModalContent bg="#333644">
-        <ModalHeader>Ajouter un nouvel onglet</ModalHeader>
-        <ModalCloseButton/>
+        <ModalHeader>Ajouter un nouveau fichier</ModalHeader>
+        <ModalCloseButton />
         <ModalBody mb="2%">
 
           <FormControl mb="3%">
             <FormLabel>
               Titre du fichier
-              <Tooltip 
+              <Tooltip
                 label={
                   <Box whiteSpace="pre">
                     Langages supportés :{"\n"}
@@ -53,18 +79,18 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo }) => 
                     - TypeScript
 
                   </Box>
-                } 
+                }
                 aria-label="Langages supportés"
                 hasArrow
               >
-                <InfoIcon ml={1} mb={0.5}/>
+                <InfoIcon ml={1} mb={0.5} />
               </Tooltip>
 
-            </FormLabel> 
+            </FormLabel>
             <Input
-              value = {newTabInfo.title}
-              onChange = {(e) => setNewTabInfo({ title: e.target.value })}
-              onKeyDown={(e) => e.key === 'Enter' && addTab()}
+              value={newTabInfo.title}
+              onChange={(e) => setNewTabInfo({ title: e.target.value })}
+              onKeyDown={(e) => e.key === 'Enter' && handleAddTab()}
               placeholder="Entrez le titre du fichier"
               autoFocus
             />
@@ -73,18 +99,18 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo }) => 
 
         <ModalFooter>
 
-          <Button colorScheme = "blue" mr={3} onClick={addTab}>
+          <Button colorScheme="blue" mr={3} onClick={handleAddTab}>
             Ajouter
           </Button>
 
-          <Button onClick = {() => onClose()}>Annuler</Button>
+          <Button onClick={() => handleClose()}>Annuler</Button>
 
         </ModalFooter>
       </ModalContent>
 
     </Modal>
 
-    
+
   );
 };
 
