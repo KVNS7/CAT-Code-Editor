@@ -17,13 +17,21 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
 
     <Drawer isOpen={isOpen} placement='right' onClose={onClose} size="sm">
       <DrawerContent bg="#2C3E50">
-        <DrawerCloseButton />
 
-        <DrawerHeader>
+        <DrawerHeader fontSize="2xl" mx="auto">
           Paramètres de l'IDE
         </DrawerHeader>
 
+        <Divider mt="-2" mb="4" mx="auto" borderWidth={1} width="60%" />
+
         <DrawerBody>
+
+          <Box>
+            <Button width="100%" onClick={""}>Indenter le code</Button>
+          </Box>
+
+          <Divider my="5" borderWidth={1} />
+
           <Box>
             <Text mb={2} fontSize='lg'>
               Taille de la police: {fontSize}
@@ -34,7 +42,7 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
             </HStack>
           </Box>
 
-          <Divider my="4" borderWidth={1} />
+          <Divider my="5" borderWidth={1} />
 
           <Box>
             <Text mb={2} fontSize='lg'>
@@ -60,7 +68,7 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
             </Menu>
           </Box>
 
-          <Divider my="4" borderWidth={1} />
+          <Divider my="5" borderWidth={1} />
 
           <Box>
             <Flex alignItems="center">
@@ -68,7 +76,8 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
               <Switch size="lg" colorScheme="orange" isChecked={minimap} onChange={() => setMinimap(!minimap)} mr="5%" />
             </Flex>
           </Box>
-          <Divider my="4" borderWidth={1} />
+
+          <Divider my="5" borderWidth={1} />
 
           <Box fontSize='md'>
             <Text mb={2} fontSize='lg'>
@@ -88,7 +97,7 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
               <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>s</Kbd> : sauvegarder les fichiers
               <br />
-              <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>m</Kbd> : importer un fichier / dossier
+              <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>i</Kbd> : importer un fichier / dossier
               <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>c</Kbd> : stopper l'execution dans le terminal
 
