@@ -4,20 +4,20 @@ import {
   Menu, MenuButton, MenuList, MenuItem,
   Switch, Button, Text,
   Divider,
-  Kbd 
+  Kbd
 } from "@chakra-ui/react";
 import { VS_THEMES } from '../constantes';
 
 
 const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme, minimap, setMinimap }) => {
-  
+
   const themes = Object.entries(VS_THEMES)                                        // Thèmes de l'IDE
 
   return (
 
     <Drawer isOpen={isOpen} placement='right' onClose={onClose} size="sm">
       <DrawerContent bg="#2C3E50">
-        <DrawerCloseButton/>
+        <DrawerCloseButton />
 
         <DrawerHeader>
           Paramètres de l'IDE
@@ -40,7 +40,7 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
             <Text mb={2} fontSize='lg'>
               Thème de l'éditeur:
             </Text>
-            <Menu placement='bottom' matchWidth ={true}>
+            <Menu placement='bottom' matchWidth={true}>
               <MenuButton as={Button} width="100%">
                 {themes.find(([_, code]) => code === theme)[0]}
               </MenuButton>
@@ -68,30 +68,30 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
               <Switch size="lg" colorScheme="orange" isChecked={minimap} onChange={() => setMinimap(!minimap)} mr="5%" />
             </Flex>
           </Box>
-          <Divider my = "4" borderWidth = {1}/>
+          <Divider my="4" borderWidth={1} />
 
           <Box fontSize='md'>
-            <Text mb = {2} fontSize = 'lg'>     
-              Raccourcis clavier : 
+            <Text mb={2} fontSize='lg'>
+              Raccourcis clavier :
             </Text>
 
             <Text lineHeight="taller">
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>+</Kbd> : augmenter la taille de la police
-              <br/>
+              <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>-</Kbd> : diminuer la taille de la police
-              <br/>
+              <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>m</Kbd> : activer / désactiver la minimap
-              <br/>
+              <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>o</Kbd> : créer un nouveau fichier
-              <br/>
+              <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>w</Kbd> : supprimer le fichier actuel
-              <br/>
-              <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>s</Kbd> : sauvegarder les fichiers 
-              <br/>
+              <br />
+              <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>s</Kbd> : sauvegarder les fichiers
+              <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>m</Kbd> : importer un fichier / dossier
-              <br/>
+              <br />
               <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>c</Kbd> : stopper l'execution dans le terminal
-              
+
             </Text>
           </Box>
 

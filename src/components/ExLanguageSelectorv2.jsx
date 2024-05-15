@@ -2,15 +2,15 @@ import { Select, FormControl, FormLabel } from '@chakra-ui/react'
 import { LANGUAGE_VERSIONS } from '../constantes'
 
 
-const LanguageSelector = ({language, onSelectLanguage}) => {
-    
+const LanguageSelector = ({ language, onSelectLanguage }) => {
+
     const languages = Object.entries(LANGUAGE_VERSIONS) // Constantes des langages de l'IDE et de leur version (supportées par Piston)
     return (
 
         <FormControl>
             <FormLabel>Langage</FormLabel>
-            <Select 
-                value={language} 
+            <Select
+                value={language}
                 onChange={(e) => onSelectLanguage(e.target.value)}
                 placeholder="Sélectionnez un langage"
             >
