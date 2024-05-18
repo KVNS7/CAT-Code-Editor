@@ -99,7 +99,6 @@ const CodeEditor = () => {
             case ('c') :
             case ('java') :
             case ('javascript'):
-            case ('python') :
             case ('csharp') :
             case ('typescript') :
                 code = beautify(code, {indent_size: 4});
@@ -111,7 +110,6 @@ const CodeEditor = () => {
                     description: "Pas d'indentation pour ce langage",
                     status: "error",
                     duration: 3000,
-                    variant: "left-accent",
                     position: "bottom-right",
                 })
                 return;
@@ -123,7 +121,7 @@ const CodeEditor = () => {
             content: code,
         };
         setTabs(newTabs);
-        
+
         return;
     }
 
