@@ -131,7 +131,7 @@ Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au s
   - [x] Detection du langage selon le titre du fichier
   - [x] Possibilité de fermer (supprimer) un onglet (fichier)
   - [ ] Possibilité de renommer les fichiers
-- [ ] Fonction d'indentation avec un bouton
+- [x] Fonction d'indentation avec un bouton
 - [ ] Affichage (souligner) des erreurs syntaxiques ( ';' manquant, etc... )
 - [ ] Bouton importer permettant d'importer un fichier / dossier au tp
 - [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers :
