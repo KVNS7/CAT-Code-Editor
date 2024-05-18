@@ -16,6 +16,8 @@ import NewTabModal from "./NewTabModal";
 import Output from "./Output";
 import TabDeleteDialog from "./TabDeleteDialog";
 
+import beautify from "js-beautify";
+
 // ! ---------------------------------------------------------------------------------------------------- ! //
 // TODO : revoir tout le placement / les balises du code
 
@@ -33,15 +35,15 @@ const CodeEditor = () => {
     const toast = useToast();
     const editorRef = useRef();                                                     // Ref pour l'editeur
     const { isOpen, onOpen, onClose } = useDisclosure()                             // Variable : ouverture du Drawer des paramètres de l'IDE
-    const [language, setLanguage] = useState("c")                                   // Variable : langage de l'IDE (C par défaut)
     const [fontSize, setFontSize] = useState(14)                                    // Variable : taille de la police (12 par défaut)
     const [theme, setTheme] = useState("vs-dark")                                   // Variable : theme de l'IDE (sombre par défaut)
     const [minimap, setMinimap] = useState(false)                                   // Variable : activer/desactiver la minimap
+    //const [language, setLanguage] = useState(tabs[tabIndex].language)               // Variable : langage de l'IDE (C par défaut)
     const [tabs, setTabs] = useState([                                              // Variable : onglets de l'IDE
         {
             id: 1,
             title: 'main' + LANGUAGE_VERSIONS['c'].extension,
-            language: language,
+            language: 'c',
             content: CODE_SNIPPETS['c']
         }
     ])
@@ -90,6 +92,55 @@ const CodeEditor = () => {
         };
     }, [fontSize, minimap, isModalOpen, tabIndex]);
 
+    const handleIndentCode = () => {
+        let code = tabs[tabIndex].content;
+
+        switch(tabs[tabIndex].language){
+            case ('c') :
+                code = beautify(code, { indent_size: 4 });
+                break;
+
+            case ('java') :
+                code = beautify(code, { indent_size: 4 });
+                break;
+
+            case ('javascript'):
+                code = beautify(code, {indent_size: 4});
+                break;
+
+            case ('python') :
+                code = beautify(code, {indent_size: 4});
+                break;
+
+            case ('csharp') :
+                code = beautify(code, {indent_size: 4});
+                break;
+            
+            case ('typescript') :
+                code = beautify(code, {indent_size: 4});
+                break;
+                
+            default :
+                toast({
+                    title: "Echec indentation",
+                    description: "Pas d'indentation pour ce langage",
+                    status: "error",
+                    duration: 3000,
+                    variant: "left-accent",
+                    position: "bottom-right",
+                })
+                return;
+        }
+
+        const newTabs = [...tabs];
+        newTabs[tabIndex] = {
+            ...newTabs[tabIndex],
+            content: code,
+        };
+        setTabs(newTabs);
+        return;
+    }
+
     const onMount = (editor) => {                       // Met le focus sur l'éditeur quand il a fini de charger
         editorRef.current = editor;
         editor.focus();
@@ -97,7 +148,6 @@ const CodeEditor = () => {
 
     const setTab = (index) => {                         // Changement d'onglet
         setTabIndex(index);                             // Met la sélection sur le nouvel onglet créé
-        setLanguage(tabs[index].language);              // Met à jour le langage à partir de l'onglet sélectionné (pour l'editeur et Piston)
     };
 
     const addTab = (validatedTitle) => {                // Ajout d'un onglet 
@@ -129,7 +179,6 @@ const CodeEditor = () => {
         if (tabToDelete === tabIndex) {                     // Si l'onglet supprimé est l'onglet actif
             const newIndex = tabToDelete > 0 ? tabToDelete - 1 : 0;
             setTabIndex(newIndex);
-            setLanguage(newTabs[newIndex]?.language || 'plaintext');
         } else if (tabToDelete < tabIndex) {                // Si un onglet avant l'onglet actif est supprimé, décrémente l'index actif
             setTabIndex(tabIndex - 1);
         }
@@ -208,6 +257,7 @@ const CodeEditor = () => {
                         setTheme={setTheme}
                         minimap={minimap}
                         setMinimap={setMinimap}
+                        onIndentCode={handleIndentCode}
                     />
 
                     {/* Onglets de l'IDE */}

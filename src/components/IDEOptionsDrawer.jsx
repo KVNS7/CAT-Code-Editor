@@ -9,7 +9,7 @@ import {
 import { VS_THEMES } from '../constantes';
 
 
-const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme, minimap, setMinimap }) => {
+const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme, minimap, setMinimap, onIndentCode }) => {
 
   const themes = Object.entries(VS_THEMES)                                        // Thèmes de l'IDE
 
@@ -27,7 +27,7 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
         <DrawerBody>
 
           <Box>
-            <Button width="100%">Indenter le code</Button>
+            <Button width="100%" onClick={onIndentCode}>Indenter le code</Button>
           </Box>
 
           <Divider my="5" borderWidth={1} />
