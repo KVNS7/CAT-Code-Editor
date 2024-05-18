@@ -55,8 +55,8 @@ const CodeEditor = () => {
     const cancelRef = useRef();                                                     // Ref du bouton annuler
 
 
-    useEffect(() => {                                                               // Raccourcis clavier
-        const handleKeyDown = (event) => {
+    useEffect(() => {                                                               
+        const handleKeyDown = (event) => {                                          // Raccourcis clavier
             if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '=')) {
                 event.preventDefault();                                             // Empêche que le raccourci navigateur prime
                 increaseFontSize();
@@ -92,7 +92,7 @@ const CodeEditor = () => {
         };
     }, [fontSize, minimap, isModalOpen, tabIndex]);
 
-    const handleIndentCode = () => {
+    const handleIndentCode = () => {                        // Indente le code dans l'onglet actuel
         let code = tabs[tabIndex].content;
 
         switch(tabs[tabIndex].language){
@@ -123,6 +123,7 @@ const CodeEditor = () => {
             content: code,
         };
         setTabs(newTabs);
+        
         return;
     }
 
