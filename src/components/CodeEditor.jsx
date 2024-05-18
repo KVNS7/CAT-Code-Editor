@@ -97,25 +97,10 @@ const CodeEditor = () => {
 
         switch(tabs[tabIndex].language){
             case ('c') :
-                code = beautify(code, { indent_size: 4 });
-                break;
-
             case ('java') :
-                code = beautify(code, { indent_size: 4 });
-                break;
-
             case ('javascript'):
-                code = beautify(code, {indent_size: 4});
-                break;
-
             case ('python') :
-                code = beautify(code, {indent_size: 4});
-                break;
-
             case ('csharp') :
-                code = beautify(code, {indent_size: 4});
-                break;
-            
             case ('typescript') :
                 code = beautify(code, {indent_size: 4});
                 break;
