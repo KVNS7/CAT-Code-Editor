@@ -21,13 +21,15 @@ import beautify from "js-beautify";
 // ! ---------------------------------------------------------------------------------------------------- ! //
 // TODO : revoir tout le placement / les balises du code
 
-// TODO : ajouter renommer fichier (clic droit?)
-// TODO : importer indentation puis ajouter bouton dans le drawer
+// TODO : INDENTATION EN PHP
+
+// TODO : ajouter fonctionnalité renommer fichier (clic droit?)
 
 // TODO : sauvegarder fonctionnel
 // TODO : importer fonctionnel
+
 // TODO : retenir les parametres d'IDE (thème, police, minimap,...) selon l'utilisateur
-// TODO : onglets (composants bougent lorsque passe en mode défilement)
+
 // ! ---------------------------------------------------------------------------------------------------- ! //
 
 const CodeEditor = () => {
