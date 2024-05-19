@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter,
   FormControl, FormLabel,
@@ -15,13 +15,6 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
 
   const toast = useToast();
 
-  // Fonction pour déterminer le langage basé sur l'extension du fichier
-  const determineLanguage = (filename) => {
-    const extension = filename.split('.').pop();              // Coupe le titre et garde la partie après le point
-    const foundLanguage = Object.entries(LANGUAGE_VERSIONS).find(([_, value]) => value.extension === `.${extension}`); // Compare aux langages enregistrés
-    return foundLanguage ? foundLanguage[0] : 'plaintext';    // Retourne le langage si trouvé, plaintext sinon (texte brut)
-  };
-
   // Effet pour mettre à jour le langage lorsque le titre change
   useEffect(() => {
     if (newTabInfo.title) {                           // A chaque saisie du titre, verifie le langage et le modifie
@@ -33,7 +26,14 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
     }
   }, [newTabInfo.title, setNewTabInfo]);
 
-  const validateAndFormatTitle = (title) => {                   // Fonction validant le format du titre
+  // Fonction pour déterminer le langage basé sur l'extension du fichier
+  const determineLanguage = (filename) => {
+    const extension = filename.split('.').pop();              // Coupe le titre et garde la partie après le point
+    const foundLanguage = Object.entries(LANGUAGE_VERSIONS).find(([_, value]) => value.extension === `.${extension}`); // Compare aux langages enregistrés
+    return foundLanguage ? foundLanguage[0] : 'plaintext';    // Retourne le langage si trouvé, plaintext sinon (texte brut)
+  };
+
+  const validateTitle = (title) => {                            // Fonction validant le format du titre
     if (!title.includes('.')) {                                 // Si titre sans '.', rajout .txt a la fin
       title += '.txt';
     }
@@ -42,14 +42,14 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
     if (!name) {                                                // Si pas de nom avant le '.', retourne faux
       return false;
     }
-    
+
     return title;
   }
 
   const handleAddTab = () => {
-    const validatedTitle = validateAndFormatTitle(newTabInfo.title);
-    
-    if (!validatedTitle) {                                      // Si validateAndFormatTitle retourne faux, toast d'erreur
+    const validatedTitle = validateTitle(newTabInfo.title);
+
+    if (!validatedTitle) {                                      // Si validateTitle retourne faux, toast d'erreur
       if (!toast.isActive("toast1")) {
         toast({
           id: "toast1",
@@ -64,7 +64,7 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
       return;
     }
 
-    if(tabs.some(tab => tab.title === validatedTitle)){         // Si titre déja existant, toast d'erreur
+    if (tabs.some(tab => tab.title === validatedTitle)) {         // Si titre déja existant, toast d'erreur
       if (!toast.isActive("toast2")) {
         toast({
           id: "toast2",
@@ -83,12 +83,12 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
   }
 
   const handleClose = () => {                                   // Lors de la fermeture
-    setNewTabInfo({title: ""});                                 // Remet le titre a zéro
+    setNewTabInfo({ title: "" });                                 // Remet le titre a zéro
     onClose();                                                  // Ferme le modal
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <ModalOverlay />
       <ModalContent bg="#333644">
         <ModalHeader>Ajouter un nouveau fichier</ModalHeader>
