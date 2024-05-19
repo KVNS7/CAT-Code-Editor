@@ -15,6 +15,7 @@ import IDEOptionsDrawer from "./IDEOptionsDrawer";
 import NewTabModal from "./NewTabModal";
 import Output from "./Output";
 import TabDeleteDialog from "./TabDeleteDialog";
+import RenameTabModal from "./RenameTabModal"
 
 import beautify from "js-beautify";
 
@@ -50,14 +51,16 @@ const CodeEditor = () => {
         }
     ])
     const [tabIndex, setTabIndex] = useState(0)                                     // Variable : garder une trace de l'onglet actif
-    const [isModalOpen, setIsModalOpen] = useState(false);                          // Variable : ouverture fenetre nouveau onglet
     const [newTabInfo, setNewTabInfo] = useState({ title: '', language: 'plaintext' });     // Variable : contenu fenetre nouveau onglet
+    const [isModalOpen, setIsModalOpen] = useState(false);                          // Variable : ouverture fenetre nouveau onglet
     const [isAlertOpen, setIsAlertOpen] = useState(false);                          // Variable : ouverture du TabDeleteDialog
+    const [isRenameOpen, setIsRenameOpen] = useState(false);                        // Variable : ouverture fenetre renommer onglet
     const [tabToDelete, setTabToDelete] = useState(null);                           // Variable : table a supprimer
+    const [tabToRename, setTabToRename] = useState(null);
     const cancelRef = useRef();                                                     // Ref du bouton annuler
 
 
-    useEffect(() => {                                                               
+    useEffect(() => {
         const handleKeyDown = (event) => {                                          // Raccourcis clavier
             if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '=')) {
                 event.preventDefault();                                             // Empêche que le raccourci navigateur prime
@@ -97,16 +100,16 @@ const CodeEditor = () => {
     const handleIndentCode = () => {                        // Indente le code dans l'onglet actuel
         let code = tabs[tabIndex].content;
 
-        switch(tabs[tabIndex].language){
-            case ('c') :
-            case ('java') :
+        switch (tabs[tabIndex].language) {
+            case ('c'):
+            case ('java'):
             case ('javascript'):
-            case ('csharp') :
-            case ('typescript') :
-                code = beautify(code, {indent_size: 4});
+            case ('csharp'):
+            case ('typescript'):
+                code = beautify(code, { indent_size: 4 });
                 break;
-                
-            default :
+
+            default:
                 toast({
                     title: "Echec indentation",
                     description: "Pas d'indentation pour ce langage",
@@ -147,6 +150,12 @@ const CodeEditor = () => {
         setTabIndex(tabs.length);                                   // Défini le nouvel onglet comme actif
         setIsModalOpen(false);                                      // Ferme le modal après l'ajout
         setNewTabInfo({ title: '', language: 'plaintext' });        // Réinitialise les informations du formulaire
+    }
+
+    const renameTab = (newTitle, newLanguage) => {
+        tabs[tabIndex].title = newTitle;
+        tabs[tabIndex].language = newLanguage;
+        setIsRenameOpen(false);
     }
 
     const confirmRemoveTab = (index) => {
@@ -199,6 +208,22 @@ const CodeEditor = () => {
                         <Box mr="auto" mt={5}>
                             <Button leftIcon={<SettingsIcon />} onClick={onOpen}>Paramètres IDE</Button>
                         </Box>
+
+                        <Box ml="2%" mt={5} mr="2%">
+
+                            <Tooltip label={"Renomme le fichier"} openDelay={500} hasArrow>
+                                <Button
+                                    color={"blue.500"}
+                                    border={"2px solid"}
+                                    _hover={{ bg: "green.700" }}
+                                    onClick={() => setIsRenameOpen(true)}
+                                >
+                                    Renommer
+                                </Button>
+                            </Tooltip>
+
+                        </Box>
+
 
                         {/* Bouton permettant de sauvegarder le/les fichiers */}
                         <Box mt={5}>
@@ -326,6 +351,14 @@ const CodeEditor = () => {
                         newTabInfo={newTabInfo}
                         setNewTabInfo={setNewTabInfo}
                         tabs={tabs}
+                    />
+
+                    <RenameTabModal
+                        isOpen={isRenameOpen}
+                        onClose={() => setIsRenameOpen(false)}
+                        tabs={tabs}
+                        tabIndex={tabIndex}
+                        renameTab={renameTab}
                     />
 
                     <TabDeleteDialog
