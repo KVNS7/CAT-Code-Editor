@@ -24,7 +24,7 @@ const RenameTabModal = ({ isOpen, onClose, tabs, tabIndex, renameTab }) => {
     }, [isOpen, tabs, tabIndex]);
 
     useEffect(() => {
-        if (newTitle) {                                         // à chaque saisie de titre, verifie le language et le modifie
+        if (newTitle) {                                         // à chaque saisie de nom, verifie le language et le modifie
             const detectedLanguage = determineLanguage(newTitle);
 
             if (detectedLanguage) {
@@ -35,13 +35,13 @@ const RenameTabModal = ({ isOpen, onClose, tabs, tabIndex, renameTab }) => {
 
     // Fonction pour déterminer le langage basé sur l'extension du fichier
     const determineLanguage = (filename) => {
-        const extension = filename.split('.').pop();              // Coupe le titre et garde la partie après le point
+        const extension = filename.split('.').pop();              // Coupe le nom et garde la partie après le point
         const foundLanguage = Object.entries(LANGUAGE_VERSIONS).find(([_, value]) => value.extension === `.${extension}`); // Compare aux langages enregistrés
         return foundLanguage ? foundLanguage[0] : 'plaintext';    // Retourne le langage si trouvé, plaintext sinon (texte brut)
     };
 
-    const validateTitle = (title) => {                            // Fonction validant le format du titre
-        if (!title.includes('.')) {                                 // Si titre sans '.', rajout .txt a la fin
+    const validateTitle = (title) => {                            // Fonction validant le format du nom
+        if (!title.includes('.')) {                                 // Si nom sans '.', rajout .txt a la fin
             title += '.txt';
         }
 
@@ -71,7 +71,7 @@ const RenameTabModal = ({ isOpen, onClose, tabs, tabIndex, renameTab }) => {
             return;
         }
 
-        if (tabs.some(tab => tab.title === validatedTitle)) {         // Si titre déja existant, toast d'erreur
+        if (tabs.some(tab => tab.title === validatedTitle)) {         // Si nom déja existant, toast d'erreur
             if (!toast.isActive("toast2")) {
                 toast({
                     id: "toast2",
@@ -100,7 +100,7 @@ const RenameTabModal = ({ isOpen, onClose, tabs, tabIndex, renameTab }) => {
 
                     <FormControl>
                         <FormLabel>
-                            Titre du fichier
+                            Nom du fichier
 
                             <Tooltip                                    // Infobulle des langages supportés
                                 label={
@@ -127,7 +127,7 @@ const RenameTabModal = ({ isOpen, onClose, tabs, tabIndex, renameTab }) => {
                             value={newTitle}
                             onChange={(e) => setNewTitle(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleRenameTab()}
-                            placeholder="Entrez le titre du fichier"
+                            placeholder="Entrez le nom du fichier"
                             autoFocus
                         />
 

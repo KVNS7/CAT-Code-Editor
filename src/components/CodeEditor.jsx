@@ -13,21 +13,17 @@ import { LANGUAGE_VERSIONS, CODE_SNIPPETS } from "../constantes";
 
 import IDEOptionsDrawer from "./IDEOptionsDrawer";
 import NewTabModal from "./NewTabModal";
-import Output from "./Output";
-import TabDeleteDialog from "./TabDeleteDialog";
 import RenameTabModal from "./RenameTabModal"
+import TabDeleteDialog from "./TabDeleteDialog";
+import Output from "./Output";
 
 import beautify from "js-beautify";
 
 // ! ---------------------------------------------------------------------------------------------------- ! //
 // TODO : revoir tout le placement / les balises du code
 
-// TODO : INDENTATION EN PHP
-
-// TODO : ajouter fonctionnalité renommer fichier (clic droit?)
-
-// TODO : sauvegarder fonctionnel
 // TODO : importer fonctionnel
+// TODO : sauvegarder fonctionnel
 
 // TODO : retenir les parametres d'IDE (thème, police, minimap,...) selon l'utilisateur
 
@@ -38,10 +34,11 @@ const CodeEditor = () => {
     const toast = useToast();
     const editorRef = useRef();                                                     // Ref pour l'editeur
     const { isOpen, onOpen, onClose } = useDisclosure()                             // Variable : ouverture du Drawer des paramètres de l'IDE
+
     const [fontSize, setFontSize] = useState(14)                                    // Variable : taille de la police (12 par défaut)
     const [theme, setTheme] = useState("vs-dark")                                   // Variable : theme de l'IDE (sombre par défaut)
     const [minimap, setMinimap] = useState(false)                                   // Variable : activer/desactiver la minimap
-    //const [language, setLanguage] = useState(tabs[tabIndex].language)               // Variable : langage de l'IDE (C par défaut)
+
     const [tabs, setTabs] = useState([                                              // Variable : onglets de l'IDE
         {
             id: 1,
@@ -52,13 +49,11 @@ const CodeEditor = () => {
     ])
     const [tabIndex, setTabIndex] = useState(0)                                     // Variable : garder une trace de l'onglet actif
     const [newTabInfo, setNewTabInfo] = useState({ title: '', language: 'plaintext' });     // Variable : contenu fenetre nouveau onglet
-    const [isModalOpen, setIsModalOpen] = useState(false);                          // Variable : ouverture fenetre nouveau onglet
-    const [isAlertOpen, setIsAlertOpen] = useState(false);                          // Variable : ouverture du TabDeleteDialog
-    const [isRenameOpen, setIsRenameOpen] = useState(false);                        // Variable : ouverture fenetre renommer onglet
-    const [tabToDelete, setTabToDelete] = useState(null);                           // Variable : table a supprimer
-    const [tabToRename, setTabToRename] = useState(null);
-    const cancelRef = useRef();                                                     // Ref du bouton annuler
 
+    const [isModalOpen, setIsModalOpen] = useState(false);                          // Variable : ouverture fenetre nouveau onglet
+    const [isRenameOpen, setIsRenameOpen] = useState(false);                        // Variable : ouverture fenetre renommer onglet
+    const [isAlertOpen, setIsAlertOpen] = useState(false);                          // Variable : ouverture du TabDeleteDialog
+    const [tabToDelete, setTabToDelete] = useState(null);                           // Variable : table a supprimer
 
     useEffect(() => {
         const handleKeyDown = (event) => {                                          // Raccourcis clavier
@@ -135,10 +130,6 @@ const CodeEditor = () => {
         editor.focus();
     };
 
-    const setTab = (index) => {                         // Changement d'onglet
-        setTabIndex(index);                             // Met la sélection sur le nouvel onglet créé
-    };
-
     const addTab = (validatedTitle) => {                // Ajout d'un onglet 
         const newTab = {
             id: tabs.length + 1,
@@ -156,6 +147,12 @@ const CodeEditor = () => {
         tabs[tabIndex].title = newTitle;
         tabs[tabIndex].language = newLanguage;
         setIsRenameOpen(false);
+    }
+
+    const handleContextMenu = (event, index) => {                               // Gère le clic droit sur les onglets pour les renommer
+        event.preventDefault();
+        setTabIndex(index);
+        setIsRenameOpen(true);
     }
 
     const confirmRemoveTab = (index) => {
@@ -195,7 +192,6 @@ const CodeEditor = () => {
         })
     }
 
-
     return (
         <Box>
             <HStack spacing={4}>
@@ -209,16 +205,16 @@ const CodeEditor = () => {
                             <Button leftIcon={<SettingsIcon />} onClick={onOpen}>Paramètres IDE</Button>
                         </Box>
 
-                        <Box ml="2%" mt={5} mr="2%">
+                        <Box mt={5} mr="2%">
 
-                            <Tooltip label={"Renomme le fichier"} openDelay={500} hasArrow>
+                            <Tooltip label={"Renomme le fichier actuel"} openDelay={500} hasArrow>
                                 <Button
                                     color={"blue.500"}
                                     border={"2px solid"}
-                                    _hover={{ bg: "green.700" }}
+                                    _hover={{ bg: "blue.200" }}
                                     onClick={() => setIsRenameOpen(true)}
                                 >
-                                    Renommer
+                                    Renommer le fichier
                                 </Button>
                             </Tooltip>
 
@@ -232,7 +228,7 @@ const CodeEditor = () => {
                                 <Button
                                     color={"green.500"}
                                     border={"2px solid"}
-                                    _hover={{ bg: "green.700" }}
+                                    _hover={{ bg: "green.200" }}
                                     onClick={toastNonImplementee}
                                 >
                                     Sauvegarder
@@ -248,7 +244,7 @@ const CodeEditor = () => {
                                 <Button
                                     color={"orange.500"}
                                     border={"2px solid"}
-                                    _hover={{ bg: "orange.700" }}
+                                    _hover={{ bg: "orange.200" }}
                                     onClick={toastNonImplementee}
                                 >
                                     Importer
@@ -272,7 +268,7 @@ const CodeEditor = () => {
                     />
 
                     {/* Onglets de l'IDE */}
-                    <Tabs index={tabIndex} onChange={setTab} size="sm">
+                    <Tabs index={tabIndex} onChange={(index) => setTabIndex(index)} size="sm">
 
                         <Flex    // Pour le défilement des onglets
                             position="sticky"
@@ -292,7 +288,7 @@ const CodeEditor = () => {
                             >
 
                                 {tabs.map((tab, index) => (
-                                    <Flex alignItems="center" key={index}>
+                                    <Flex alignItems="center" key={index} onContextMenu={(e) => handleContextMenu(e, index)}>
                                         <Tab>
                                             {tab.title}
                                         </Tab>
@@ -365,7 +361,6 @@ const CodeEditor = () => {
                         isOpen={isAlertOpen}
                         onClose={() => setIsAlertOpen(false)}
                         onDelete={removeTab}
-                        cancelRef={cancelRef}
                         tabName={tabs[tabToDelete]?.title}
                     />
 
