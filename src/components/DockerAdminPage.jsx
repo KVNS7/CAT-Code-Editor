@@ -11,7 +11,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 const DockerAdminPage = () => {
-    const [containers, setContainers] = useState([
+    const [containers, setContainers] = useState([                                      // Conteneurs trouvés
         {
             id: 1,
             name: "CAT_sandbox_SOARES_41001212",
@@ -60,17 +60,18 @@ const DockerAdminPage = () => {
             memoryUsage: 2.49,
             numEtu: "42011891"
         }
-
     ]);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [numEtu, setNumEtu] = useState('');
-    const [creationDisabled, setCreationDisabled] = useState(false);
-    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+    const [searchTerm, setSearchTerm] = useState('');                                   // Terme de la recherche de nom
+    const [numEtu, setNumEtu] = useState('');                                           // Terme de la recherche de num étudiant
+    const [creationDisabled, setCreationDisabled] = useState(false);                    // Bloquage de la création de conteneurs
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });      // Tri du tableau
+
     const toast = useToast();
     const navigate = useNavigate();
 
     useEffect(() => {
         setContainers(containers.filter(container => container.name.startsWith('CAT_sandbox_'))); // A SUPPRIMER AU FINAL
+
         const fetchContainers = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/containers');
@@ -174,7 +175,7 @@ const DockerAdminPage = () => {
     return (
         <Box minH="100vh" bg="#121212" color="gray.500" px={6} py={8}>
 
-            <Image mt="-1%" src='img/CAT.png' mr='auto' ml='auto' alt='Logo CAT' borderRadius="full" boxSize="6%" onClick={() => navigate('/')} cursor="pointer"/>
+            <Image mt="-1%" src='img/CAT.png' mr='auto' ml='auto' alt='Logo CAT' borderRadius="full" boxSize="6%" onClick={() => navigate('/')} cursor="pointer" />
 
             <Flex justifyContent="space-between" mb={4}>
                 <Text fontSize="3xl" color="white">Administration Docker</Text>
@@ -224,10 +225,10 @@ const DockerAdminPage = () => {
                         </Th>
                         <Th color="blue.400">Actions</Th>
                         <Th color="blue.400" onClick={() => requestSort('cpuUsage')} cursor="pointer">
-                            Consommation CPU {getIcon('cpuUsage')}
+                            Utilisation CPU {getIcon('cpuUsage')}
                         </Th>
                         <Th color="blue.400" onClick={() => requestSort('memoryUsage')} cursor="pointer">
-                            Consommation Mémoire {getIcon('memoryUsage')}
+                            Utilisation Mémoire {getIcon('memoryUsage')}
                         </Th>
                     </Tr>
                 </Thead>

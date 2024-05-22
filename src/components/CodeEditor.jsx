@@ -36,18 +36,19 @@ const CodeEditor = () => {
     const toast = useToast();
     const editorRef = useRef();                                                     // Ref pour l'editeur
     const navigate = useNavigate();
-    const { isOpen, onOpen, onClose } = useDisclosure()                             // Variable : ouverture du Drawer des paramètres de l'IDE
+    const { isOpen, onOpen, onClose } = useDisclosure()                             // Ouverture du Drawer des paramètres de l'IDE
 
-    const [fontSize, setFontSize] = useState(14)                                    // Variable : taille de la police (12 par défaut)
-    const [theme, setTheme] = useState("vs-dark")                                   // Variable : theme de l'IDE (sombre par défaut)
-    const [minimap, setMinimap] = useState(false)                                   // Variable : activer/desactiver la minimap
+    const [fontSize, setFontSize] = useState(14)                                    // Taille de la police (12 par défaut)
+    const [theme, setTheme] = useState("vs-dark")                                   // Theme de l'IDE (sombre par défaut)
+    const [minimap, setMinimap] = useState(false)                                   // Activer/desactiver la minimap
 
-    const [tabs, setTabs] = useState([                                              // Variable : onglets de l'IDE
+    const [tabs, setTabs] = useState([                                              // Onglets de l'IDE
         {
             id: 1,
             title: 'main' + LANGUAGE_VERSIONS['c'].extension,
             language: 'c',
             content: CODE_SNIPPETS['c']
+
         },
         {
             id: 2,
@@ -74,13 +75,13 @@ const CodeEditor = () => {
             content: CODE_SNIPPETS['typescript']
         },
     ])
-    const [tabIndex, setTabIndex] = useState(0)                                     // Variable : garder une trace de l'onglet actif
-    const [newTabInfo, setNewTabInfo] = useState({ title: '', language: 'plaintext' });     // Variable : contenu fenetre nouveau onglet
+    const [tabIndex, setTabIndex] = useState(0)                                     // Index onglet actif
+    const [newTabInfo, setNewTabInfo] = useState({ title: '', language: 'plaintext' });     // Contenu fenêtre nouveau onglet
 
-    const [isModalOpen, setIsModalOpen] = useState(false);                          // Variable : ouverture fenetre nouveau onglet
-    const [isRenameOpen, setIsRenameOpen] = useState(false);                        // Variable : ouverture fenetre renommer onglet
-    const [isAlertOpen, setIsAlertOpen] = useState(false);                          // Variable : ouverture du TabDeleteDialog
-    const [tabToDelete, setTabToDelete] = useState(null);                           // Variable : table a supprimer
+    const [isModalOpen, setIsModalOpen] = useState(false);                          // Ouverture fenetre nouveau onglet
+    const [isRenameOpen, setIsRenameOpen] = useState(false);                        // Ouverture fenetre renommer onglet
+    const [isAlertOpen, setIsAlertOpen] = useState(false);                          // Ouverture du TabDeleteDialog
+    const [tabToDelete, setTabToDelete] = useState(null);                           // Table a supprimer
 
     useEffect(() => {
         const handleKeyDown = (event) => {                                          // Raccourcis clavier
@@ -195,10 +196,10 @@ const CodeEditor = () => {
         setTabs(newTabs);
         setIsAlertOpen(false);
 
-        if (tabToDelete === tabIndex) {                     // Si l'onglet supprimé est l'onglet actif
+        if (tabToDelete === tabIndex) {
             const newIndex = tabToDelete > 0 ? tabToDelete - 1 : 0;
             setTabIndex(newIndex);
-        } else if (tabToDelete < tabIndex) {                // Si un onglet avant l'onglet actif est supprimé, décrémente l'index actif
+        } else if (tabToDelete < tabIndex) {
             setTabIndex(tabIndex - 1);
         }
     }
@@ -233,7 +234,7 @@ const CodeEditor = () => {
 
                     {/* Flex contenant les différents boutons */}
                     <Flex alignItems="center" mb="10px">
-                        {/* Bouton ouvrant les paramètres de l'IDE */}
+
                         <Box mr="auto" mt={5}>
 
                             <Button leftIcon={<SettingsIcon />} onClick={onOpen}>Paramètres IDE</Button>
