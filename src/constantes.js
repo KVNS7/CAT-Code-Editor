@@ -8,7 +8,7 @@ export const LANGUAGE_VERSIONS = {  // Langages du menu déroulant et leur versi
   typescript: { version: "5.0.3", extension: ".ts" },
 };
 
-const name = "Delbot";  // :)
+const name = "Bouquet";  // :)
 
 export const CODE_SNIPPETS = {  // exemples de code pour chaque langage
   c: `#include <stdio.h>\n\nint main(){\n\n\tchar name[] = "` + name + `";\n\n\tprintf("Bonjour Mr. %s en C !", name);\n\n\treturn 0;\n\n}`,
