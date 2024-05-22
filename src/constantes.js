@@ -25,3 +25,88 @@ export const VS_THEMES = {
   "Sombre": "vs-dark",
   "Haut Contraste Sombre": "hc-black",
 }
+
+export const ONGLETS_TEST = [
+  {
+    id: 1,
+    title: 'main' + LANGUAGE_VERSIONS['c'].extension,
+    language: 'c',
+    content: CODE_SNIPPETS['c']
+
+  },
+  {
+    id: 2,
+    title: 'script' + LANGUAGE_VERSIONS['java'].extension,
+    language: 'java',
+    content: CODE_SNIPPETS['java']
+  },
+  {
+    id: 3,
+    title: 'script' + LANGUAGE_VERSIONS['javascript'].extension,
+    language: 'javascript',
+    content: CODE_SNIPPETS['javascript']
+  },
+  {
+    id: 4,
+    title: 'main' + LANGUAGE_VERSIONS['csharp'].extension,
+    language: 'csharp',
+    content: CODE_SNIPPETS['csharp']
+  },
+  {
+    id: 5,
+    title: 'main' + LANGUAGE_VERSIONS['typescript'].extension,
+    language: 'typescript',
+    content: CODE_SNIPPETS['typescript']
+  },
+]
+
+export const CONTENEURS_TEST = [
+  {
+    id: 1,
+    name: "CAT_sandbox_SOARES_41001212",
+    state: 'running',
+    cpuUsage: 3.45,
+    memoryUsage: 2.78,
+    numEtu: "41001212"
+  },
+  {
+    id: 2,
+    name: "CAT_sandbox_THOMAS_41005727",
+    state: 'stopped',
+    cpuUsage: 1.67,
+    memoryUsage: 4.12,
+    numEtu: "41005727"
+  },
+  {
+    id: 3,
+    name: "CAT_sandbox_JEYAMOHAN_41007985",
+    state: 'stopped',
+    cpuUsage: 2.34,
+    memoryUsage: 3.56,
+    numEtu: "41007985"
+  },
+  {
+    id: 4,
+    name: "CAT_sandbox_BESNARD_41009842",
+    state: 'running',
+    cpuUsage: 4.02,
+    memoryUsage: 1.24,
+    numEtu: "41009842"
+  },
+  {
+    id: 5,
+    name: "CAT_sandbox_CERNON_40009976",
+    state: 'stopped',
+    cpuUsage: 3.76,
+    memoryUsage: 0.98,
+    numEtu: "40009976"
+  },
+  {
+    id: 6,
+    name: "CAT_sandbox_KACEM_42011891",
+    state: 'running',
+    cpuUsage: 4.65,
+    memoryUsage: 2.49,
+    numEtu: "42011891"
+  }
+]

@@ -12,7 +12,7 @@ import { Editor } from "@monaco-editor/react";
 import { useNavigate } from "react-router-dom";
 import beautify from "js-beautify";
 
-import { LANGUAGE_VERSIONS, CODE_SNIPPETS } from "../constantes";
+import { LANGUAGE_VERSIONS, CODE_SNIPPETS, ONGLETS_TEST } from "../constantes";
 
 import IDEOptionsDrawer from "./IDEOptionsDrawer";
 import NewTabModal from "./NewTabModal";
@@ -42,39 +42,7 @@ const CodeEditor = () => {
     const [theme, setTheme] = useState("vs-dark")                                   // Theme de l'IDE (sombre par défaut)
     const [minimap, setMinimap] = useState(false)                                   // Activer/desactiver la minimap
 
-    const [tabs, setTabs] = useState([                                              // Onglets de l'IDE
-        {
-            id: 1,
-            title: 'main' + LANGUAGE_VERSIONS['c'].extension,
-            language: 'c',
-            content: CODE_SNIPPETS['c']
-
-        },
-        {
-            id: 2,
-            title: 'script' + LANGUAGE_VERSIONS['java'].extension,
-            language: 'java',
-            content: CODE_SNIPPETS['java']
-        },
-        {
-            id: 3,
-            title: 'script' + LANGUAGE_VERSIONS['javascript'].extension,
-            language: 'javascript',
-            content: CODE_SNIPPETS['javascript']
-        },
-        {
-            id: 4,
-            title: 'main' + LANGUAGE_VERSIONS['csharp'].extension,
-            language: 'csharp',
-            content: CODE_SNIPPETS['csharp']
-        },
-        {
-            id: 5,
-            title: 'main' + LANGUAGE_VERSIONS['typescript'].extension,
-            language: 'typescript',
-            content: CODE_SNIPPETS['typescript']
-        },
-    ])
+    const [tabs, setTabs] = useState(ONGLETS_TEST);                                              // Onglets de l'IDE
     const [tabIndex, setTabIndex] = useState(0)                                     // Index onglet actif
     const [newTabInfo, setNewTabInfo] = useState({ title: '', language: 'plaintext' });     // Contenu fenêtre nouveau onglet
 
