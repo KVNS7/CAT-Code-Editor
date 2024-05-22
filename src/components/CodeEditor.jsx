@@ -2,13 +2,16 @@ import { useRef, useState, useEffect } from "react";
 import {
     Box, HStack, Flex,
     Button, IconButton,
-    useToast,
-    useDisclosure,
+    useToast, useDisclosure,
     Tabs, Tab, TabList, TabPanels, TabPanel,
     Tooltip,
+    Image,
 } from "@chakra-ui/react"
 import { SettingsIcon, SmallCloseIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
+import { useNavigate } from "react-router-dom";
+import beautify from "js-beautify";
+
 import { LANGUAGE_VERSIONS, CODE_SNIPPETS } from "../constantes";
 
 import IDEOptionsDrawer from "./IDEOptionsDrawer";
@@ -17,7 +20,6 @@ import RenameTabModal from "./RenameTabModal"
 import TabDeleteDialog from "./TabDeleteDialog";
 import Output from "./Output";
 
-import beautify from "js-beautify";
 
 // ! ---------------------------------------------------------------------------------------------------- ! //
 // TODO : revoir tout le placement / les balises du code
@@ -33,6 +35,7 @@ const CodeEditor = () => {
 
     const toast = useToast();
     const editorRef = useRef();                                                     // Ref pour l'editeur
+    const navigate = useNavigate();
     const { isOpen, onOpen, onClose } = useDisclosure()                             // Variable : ouverture du Drawer des paramètres de l'IDE
 
     const [fontSize, setFontSize] = useState(14)                                    // Variable : taille de la police (12 par défaut)
@@ -45,7 +48,31 @@ const CodeEditor = () => {
             title: 'main' + LANGUAGE_VERSIONS['c'].extension,
             language: 'c',
             content: CODE_SNIPPETS['c']
-        }
+        },
+        {
+            id: 2,
+            title: 'script' + LANGUAGE_VERSIONS['java'].extension,
+            language: 'java',
+            content: CODE_SNIPPETS['java']
+        },
+        {
+            id: 3,
+            title: 'script' + LANGUAGE_VERSIONS['javascript'].extension,
+            language: 'javascript',
+            content: CODE_SNIPPETS['javascript']
+        },
+        {
+            id: 4,
+            title: 'main' + LANGUAGE_VERSIONS['csharp'].extension,
+            language: 'csharp',
+            content: CODE_SNIPPETS['csharp']
+        },
+        {
+            id: 5,
+            title: 'main' + LANGUAGE_VERSIONS['typescript'].extension,
+            language: 'typescript',
+            content: CODE_SNIPPETS['typescript']
+        },
     ])
     const [tabIndex, setTabIndex] = useState(0)                                     // Variable : garder une trace de l'onglet actif
     const [newTabInfo, setNewTabInfo] = useState({ title: '', language: 'plaintext' });     // Variable : contenu fenetre nouveau onglet
@@ -192,16 +219,23 @@ const CodeEditor = () => {
         })
     }
 
+    const handleAdminClick = () => {
+        navigate('/admin');
+    };
+
     return (
-        <Box>
+        <Box minH="100vh" bg="#121212" color="gray.500" px={6} py={8}>
+
+            <Image mt="-1%" src='img/CAT.png' mr='auto' ml='auto' alt='Logo CAT' borderRadius="full" boxSize="6%" onClick={() => navigate('/')} cursor="pointer" />
+
             <HStack spacing={4}>
                 <Box w='65%'>
 
                     {/* Flex contenant les différents boutons */}
                     <Flex alignItems="center" mb="10px">
-
                         {/* Bouton ouvrant les paramètres de l'IDE */}
                         <Box mr="auto" mt={5}>
+
                             <Button leftIcon={<SettingsIcon />} onClick={onOpen}>Paramètres IDE</Button>
                         </Box>
 
@@ -369,6 +403,21 @@ const CodeEditor = () => {
                 <Output content={tabs[tabIndex].content} language={tabs[tabIndex].language} />     {/* Fenêtre de résultat d'exécution du code*/}
 
             </HStack>
+
+            <Box ml="87%">
+
+                <Tooltip label={"Page admin Docker"} openDelay={500} hasArrow>
+                    <Button
+                        color={"red.500"}
+                        border={"2px solid"}
+                        _hover={{ bg: "red.200" }}
+                        onClick={() => navigate('/admin')}
+                    >
+                        Admin Docker
+                    </Button>
+                </Tooltip>
+
+            </Box>
         </Box>
     );
 };
