@@ -27,7 +27,11 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
         <DrawerBody>
 
           <Box>
-            <Button width="100%" onClick={onIndentCode}>Indenter le code</Button>
+            <Text mb={2} fontSize='lg'>
+              Indenter le code:
+            </Text>
+            <Button width="49%" onClick={() => onIndentCode('expand')} mr="2%">Style Allman</Button> 
+            <Button width="49%" onClick={() => onIndentCode('collapse')}>Style K&R</Button>
           </Box>
 
           <Divider my="5" borderWidth={1} />
