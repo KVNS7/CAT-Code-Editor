@@ -31,32 +31,36 @@ export const ONGLETS_TEST = [
     id: 1,
     title: 'main' + LANGUAGE_VERSIONS['c'].extension,
     language: 'c',
-    content: CODE_SNIPPETS['c']
-
+    content: CODE_SNIPPETS['c'],
+    displayed : true
   },
   {
     id: 2,
     title: 'script' + LANGUAGE_VERSIONS['java'].extension,
     language: 'java',
-    content: CODE_SNIPPETS['java']
+    content: CODE_SNIPPETS['java'],
+    displayed : true
   },
   {
     id: 3,
     title: 'script' + LANGUAGE_VERSIONS['javascript'].extension,
     language: 'javascript',
-    content: CODE_SNIPPETS['javascript']
+    content: CODE_SNIPPETS['javascript'],
+    displayed : true
   },
   {
     id: 4,
     title: 'main' + LANGUAGE_VERSIONS['csharp'].extension,
     language: 'csharp',
-    content: CODE_SNIPPETS['csharp']
+    content: CODE_SNIPPETS['csharp'],
+    displayed : true
   },
   {
     id: 5,
     title: 'main' + LANGUAGE_VERSIONS['typescript'].extension,
     language: 'typescript',
-    content: CODE_SNIPPETS['typescript']
+    content: CODE_SNIPPETS['typescript'],
+    displayed : true
   },
 ]
 
