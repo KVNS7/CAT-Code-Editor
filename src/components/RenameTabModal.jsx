@@ -11,7 +11,7 @@ import {
 import { InfoIcon } from '@chakra-ui/icons';
 import { LANGUAGE_VERSIONS } from '../constantes';
 
-const RenameTabModal = ({ isOpen, onClose, tabs, tabIndex, renameTab }) => {
+const RenameTabModal = ({ isOpen, onClose, displayedTabs, tabs, tabIndex, renameTab }) => {
 
     const [newTitle, setNewTitle] = useState("");
     const [newLanguage, setNewLanguage] = useState("");
@@ -19,9 +19,9 @@ const RenameTabModal = ({ isOpen, onClose, tabs, tabIndex, renameTab }) => {
 
     useEffect(() => {
         if (isOpen) {
-            setNewTitle(tabs[tabIndex].title);                  // Met à jour newTitle quand le modal est ouvert
+            setNewTitle(displayedTabs[tabIndex].title);                  // Met à jour newTitle quand le modal est ouvert
         }
-    }, [isOpen, tabs, tabIndex]);
+    }, [isOpen, displayedTabs, tabIndex]);
 
     useEffect(() => {
         if (newTitle) {                                         // à chaque saisie de nom, verifie le language et le modifie

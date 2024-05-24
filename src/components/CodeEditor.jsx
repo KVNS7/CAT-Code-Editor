@@ -1,18 +1,20 @@
 import { useRef, useState, useEffect } from "react";
 import {
     Box, HStack, Flex,
+    Menu, MenuButton, MenuList, MenuItem,
     Button, IconButton,
     useToast, useDisclosure,
     Tabs, Tab, TabList, TabPanels, TabPanel,
     Tooltip,
-    Image,
+    Image, Text,
+    Checkbox
 } from "@chakra-ui/react"
-import { SettingsIcon, SmallCloseIcon } from "@chakra-ui/icons"
+import { SettingsIcon, SmallCloseIcon, TriangleDownIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
 import { useNavigate } from "react-router-dom";
 import beautify from "js-beautify";
 
-import { LANGUAGE_VERSIONS, CODE_SNIPPETS, ONGLETS_TEST } from "../constantes";
+import { CODE_SNIPPETS, ONGLETS_TEST } from "../constantes";
 
 import IDEOptionsDrawer from "./IDEOptionsDrawer";
 import NewTabModal from "./NewTabModal";
@@ -42,14 +44,17 @@ const CodeEditor = () => {
     const [theme, setTheme] = useState("vs-dark")                                   // Theme de l'IDE (sombre par défaut)
     const [minimap, setMinimap] = useState(false)                                   // Activer/desactiver la minimap
 
-    const [tabs, setTabs] = useState(ONGLETS_TEST);                                              // Onglets de l'IDE
+    const [tabs, setTabs] = useState(ONGLETS_TEST);                                 // Fichiers du TP
+    const [displayedTabs, setDisplayedTabs] = useState(                             // Onglets de l'IDE
+        () => tabs.filter(tab => tab.displayed)
+    );
     const [tabIndex, setTabIndex] = useState(0)                                     // Index onglet actif
     const [newTabInfo, setNewTabInfo] = useState({ title: '', language: 'plaintext' });     // Contenu fenêtre nouveau onglet
 
     const [isModalOpen, setIsModalOpen] = useState(false);                          // Ouverture fenetre nouveau onglet
     const [isRenameOpen, setIsRenameOpen] = useState(false);                        // Ouverture fenetre renommer onglet
     const [isAlertOpen, setIsAlertOpen] = useState(false);                          // Ouverture du TabDeleteDialog
-    const [tabToDelete, setTabToDelete] = useState(null);                           // Table a supprimer
+    const [idToDelete, setidToDelete] = useState(null);                           // Table a supprimer
 
     useEffect(() => {
         const handleKeyDown = (event) => {                                          // Raccourcis clavier
@@ -61,13 +66,13 @@ const CodeEditor = () => {
                 decreaseFontSize();
             } else if ((event.ctrlKey || event.metaKey) && event.key === 'm') {
                 event.preventDefault();
-                toggleMinimap();
+                setMinimap(!minimap);
             } else if ((event.ctrlKey || event.metaKey) && event.key === 'o') {
                 event.preventDefault();
                 setIsModalOpen(true);
             } else if ((event.ctrlKey || event.metaKey) && event.key === 'w') {
                 event.preventDefault();
-                confirmRemoveTab(tabIndex);
+                confirmRemoveTab(displayedTabs[tabIndex].id);
             }
         };
 
@@ -86,18 +91,22 @@ const CodeEditor = () => {
             document.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [fontSize, minimap, isModalOpen, tabIndex]);
+    }, [fontSize, minimap, isModalOpen, tabIndex, displayedTabs]);
 
-    const handleIndentCode = () => {                        // Indente le code dans l'onglet actuel
-        let code = tabs[tabIndex].content;
+    useEffect(() => {
+        setDisplayedTabs(tabs.filter(tab => tab.displayed));
+    }, [tabs]);
 
-        switch (tabs[tabIndex].language) {
+    const handleIndentCode = (indentType) => {                        // Indente le code dans l'onglet actuel
+        let code = displayedTabs[tabIndex].content;
+
+        switch (displayedTabs[tabIndex].language) {
             case ('c'):
             case ('java'):
             case ('javascript'):
             case ('csharp'):
             case ('typescript'):
-                code = beautify(code, { indent_size: 4 });
+                code = beautify(code, { indent_size: 4, brace_style: indentType });
                 break;
 
             default:
@@ -111,9 +120,10 @@ const CodeEditor = () => {
                 return;
         }
 
-        const newTabs = [...tabs];
-        newTabs[tabIndex] = {
-            ...newTabs[tabIndex],
+        let indentIndex = tabs.findIndex(tab => tab.id === displayedTabs[tabIndex].id);
+        let newTabs = [...tabs];
+        newTabs[indentIndex] = {
+            ...newTabs[indentIndex],
             content: code,
         };
         setTabs(newTabs);
@@ -131,17 +141,18 @@ const CodeEditor = () => {
             id: tabs.length + 1,
             title: validatedTitle,
             language: newTabInfo.language,
-            content: CODE_SNIPPETS[newTabInfo.language] || 'Aucun langage n\'a été reconnu pour ce fichier'
+            content: CODE_SNIPPETS[newTabInfo.language] || 'Aucun langage n\'a été reconnu pour ce fichier',
+            displayed: true,
         };
         setTabs([...tabs, newTab]);                                 // Ajoute l'onglet à la liste des onglets
-        setTabIndex(tabs.length);                                   // Défini le nouvel onglet comme actif
+        setTabIndex(displayedTabs.length);                                   // Défini le nouvel onglet comme actif
         setIsModalOpen(false);                                      // Ferme le modal après l'ajout
         setNewTabInfo({ title: '', language: 'plaintext' });        // Réinitialise les informations du formulaire
     }
 
     const renameTab = (newTitle, newLanguage) => {
-        tabs[tabIndex].title = newTitle;
-        tabs[tabIndex].language = newLanguage;
+        displayedTabs[tabIndex].title = newTitle;
+        displayedTabs[tabIndex].language = newLanguage;
         setIsRenameOpen(false);
     }
 
@@ -151,31 +162,30 @@ const CodeEditor = () => {
         setIsRenameOpen(true);
     }
 
-    const confirmRemoveTab = (index) => {
+    const confirmRemoveTab = (removeId) => {
         if (tabs.length === 1) { return; }                  // Annule l'opération s'il ne reste qu'un onglet
-
-        setTabToDelete(index);
+        
+        setidToDelete(removeId);
         setIsAlertOpen(true);
     }
 
     const removeTab = () => {                               // Suppression d'un onglet
 
-        const newTabs = tabs.filter((_, index) => index !== tabToDelete);       // Filtre les onglets en enlevant celui a supprimer
+        const newTabs = tabs.filter(tab => tab.id !== idToDelete);       // Filtre les onglets en enlevant celui a supprimer
+        let deleteIndex = tabs.findIndex(tab => tab.id === idToDelete);
         setTabs(newTabs);
         setIsAlertOpen(false);
 
-        if (tabToDelete === tabIndex) {
-            const newIndex = tabToDelete > 0 ? tabToDelete - 1 : 0;
+        if (deleteIndex === tabIndex) {
+            const newIndex = deleteIndex > 0 ? deleteIndex - 1 : 0;
             setTabIndex(newIndex);
-        } else if (tabToDelete < tabIndex) {
+        } else if (deleteIndex < tabIndex) {
             setTabIndex(tabIndex - 1);
         }
     }
 
     const decreaseFontSize = () => fontSize > 8 && setFontSize(fontSize - 1);   // Diminue la taille de la police (si > 8)
     const increaseFontSize = () => fontSize < 30 && setFontSize(fontSize + 1);  // Augmente la taille de la police (si < 30)
-
-    const toggleMinimap = () => setMinimap(!minimap);                           // Active / désactive la minimap
 
     const toastNonImplementee = () => {                                         // Toast pour les fonctionnalités non implémentées
         toast({
@@ -188,8 +198,11 @@ const CodeEditor = () => {
         })
     }
 
-    const handleAdminClick = () => {
-        navigate('/admin');
+    const handleCheckbox = (id) => { // ! AJOUTER GESTION DE LA MODIFICATION DU tabIndex
+        const indentIndex = tabs.findIndex(tab => tab.id === id);
+        let newTabs = [...tabs];
+        newTabs[indentIndex].displayed = !newTabs[indentIndex].displayed;
+        setTabs(newTabs);
     };
 
     return (
@@ -207,22 +220,6 @@ const CodeEditor = () => {
 
                             <Button leftIcon={<SettingsIcon />} onClick={onOpen}>Paramètres IDE</Button>
                         </Box>
-
-                        <Box mt={5} mr="2%">
-
-                            <Tooltip label={"Renomme le fichier actuel"} openDelay={500} hasArrow>
-                                <Button
-                                    color={"blue.500"}
-                                    border={"2px solid"}
-                                    _hover={{ bg: "blue.200" }}
-                                    onClick={() => setIsRenameOpen(true)}
-                                >
-                                    Renommer le fichier
-                                </Button>
-                            </Tooltip>
-
-                        </Box>
-
 
                         {/* Bouton permettant de sauvegarder le/les fichiers */}
                         <Box mt={5}>
@@ -256,6 +253,35 @@ const CodeEditor = () => {
 
                         </Box>
 
+                        <Box mt={5} mr="2%">
+
+                            <Menu closeOnSelect={false} placement="bottom">
+                                <Tooltip label={"Liste des fichiers du TP"} openDelay={500} hasArrow>
+                                    <MenuButton
+                                        as={Button}
+                                        color={"blue.500"}
+                                        border={"2px solid"}
+                                        _hover={{ bg: "blue.200" }}
+                                        rightIcon={<TriangleDownIcon />}
+                                    >
+                                        Fichiers du TP
+                                    </MenuButton>
+                                </Tooltip>
+                                <MenuList>
+                                    {tabs.map(tab => (
+                                        <MenuItem key={tab.id} onClick={() => handleCheckbox(tab.id)}>
+                                            {tab.title}
+                                            <Checkbox
+                                                ml="auto"
+                                                isChecked={tab.displayed}
+                                                onChange={() => handleCheckbox(tab.id)}
+                                            />
+                                        </MenuItem>
+                                    ))}
+                                </MenuList>
+                            </Menu>
+                        </Box>
+
                     </Flex>
 
                     {/* Drawer contenant les paramètres de l'IDE */}
@@ -273,9 +299,7 @@ const CodeEditor = () => {
                     {/* Onglets de l'IDE */}
                     <Tabs index={tabIndex} onChange={(index) => setTabIndex(index)} size="sm">
 
-                        <Flex    // Pour le défilement des onglets
-                            position="sticky"
-                        >
+                        <Flex position="sticky">
                             <Button onClick={() => setIsModalOpen(true)} ml="2%" mr="1%">+</Button>
 
                             <TabList
@@ -290,7 +314,7 @@ const CodeEditor = () => {
                                 }}
                             >
 
-                                {tabs.map((tab, index) => (
+                                {displayedTabs.map((tab, index) => (
                                     <Flex alignItems="center" key={index} onContextMenu={(e) => handleContextMenu(e, index)}>
                                         <Tab>
                                             {tab.title}
@@ -302,8 +326,7 @@ const CodeEditor = () => {
                                             color={tabIndex === index ? "blue.400" : ""}
                                             size="xs"
                                             onClick={(e) => {
-                                                e.stopPropagation();
-                                                confirmRemoveTab(index);
+                                                handleCheckbox(tab.id);
                                             }}
                                             border="none"
                                         />
@@ -315,30 +338,38 @@ const CodeEditor = () => {
 
                         <TabPanels mt="-2%">
 
-                            {tabs.map((tab, index) => (
+                            {displayedTabs.length > 0 ? (
+                                displayedTabs.map((tab, index) => (
 
-                                <TabPanel key={index}>
-                                    <Editor
-                                        height="75vh"
-                                        theme={theme}
-                                        language={tabs[index].language}
-                                        defaultValue={tab.content}
-                                        onMount={onMount}
-                                        value={tabs[index].content}
-                                        onChange={(newValue) => {
-                                            const newTabs = [...tabs];
-                                            newTabs[index].content = newValue;
-                                            setTabs(newTabs);
-                                        }}
-                                        options={{
-                                            minimap: { enabled: minimap },
-                                            fontSize: fontSize,
-                                            formatOnType: true
-                                        }}
-                                    />
+                                    <TabPanel key={index}>
+                                        <Editor
+                                            height="75vh"
+                                            theme={theme}
+                                            language={tab.language}
+                                            defaultValue={tab.content}
+                                            onMount={onMount}
+                                            value={tab.content}
+                                            onChange={(newValue) => {
+                                                const newTabs = [...tabs];
+                                                newTabs[index].content = newValue;
+                                                setTabs(newTabs);
+                                            }}
+                                            options={{
+                                                minimap: { enabled: minimap },
+                                                fontSize: fontSize,
+                                                formatOnType: true
+                                            }}
+                                        />
+                                    </TabPanel>
+
+                                ))
+                            ) : (
+                                <TabPanel>
+                                    <Box display="flex" justifyContent="center" alignItems="center" height="75vh">
+                                        <Text fontSize="2xl" color="gray.500">Aucun onglet ouvert</Text>
+                                    </Box>
                                 </TabPanel>
-
-                            ))}
+                            )}
 
                         </TabPanels>
                     </Tabs>
@@ -356,6 +387,7 @@ const CodeEditor = () => {
                         isOpen={isRenameOpen}
                         onClose={() => setIsRenameOpen(false)}
                         tabs={tabs}
+                        displayedTabs={displayedTabs}
                         tabIndex={tabIndex}
                         renameTab={renameTab}
                     />
@@ -364,13 +396,16 @@ const CodeEditor = () => {
                         isOpen={isAlertOpen}
                         onClose={() => setIsAlertOpen(false)}
                         onDelete={removeTab}
-                        tabName={tabs[tabToDelete]?.title}
+                        tabName={tabs.find(tab => tab.id === idToDelete)?.title}
                     />
 
                 </Box>
 
-                <Output content={tabs[tabIndex].content} language={tabs[tabIndex].language} />     {/* Fenêtre de résultat d'exécution du code*/}
-
+                {tabIndex !== -1 && displayedTabs[tabIndex] ? (
+                    <Output content={displayedTabs[tabIndex].content} language={displayedTabs[tabIndex].language} />
+                ) : (
+                    <Output />
+                )}
             </HStack>
 
             <Box ml="87%">
