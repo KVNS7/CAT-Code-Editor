@@ -97,7 +97,7 @@ const CodeEditor = () => {
         setDisplayedTabs(tabs.filter(tab => tab.displayed));
     }, [tabs]);
 
-    const handleIndentCode = (indentType) => {                        // Indente le code dans l'onglet actuel
+    const handleIndentCode = (indentType) => {                          // Indente le code dans l'onglet actuel
         let code = displayedTabs[tabIndex].content;
 
         switch (displayedTabs[tabIndex].language) {
@@ -131,12 +131,12 @@ const CodeEditor = () => {
         return;
     }
 
-    const onMount = (editor) => {                       // Met le focus sur l'éditeur quand il a fini de charger
+    const onMount = (editor) => {                                       // Met le focus sur l'éditeur quand il a fini de charger
         editorRef.current = editor;
         editor.focus();
     };
 
-    const addTab = (validatedTitle) => {                // Ajout d'un onglet 
+    const addTab = (validatedTitle) => {                                // Ajout d'un onglet 
         const newTab = {
             id: tabs.length + 1,
             title: validatedTitle,
@@ -156,7 +156,7 @@ const CodeEditor = () => {
         setIsRenameOpen(false);
     }
 
-    const handleContextMenu = (event, index) => {                               // Gère le clic droit sur les onglets pour les renommer
+    const handleContextMenu = (event, index) => {                       // Gère le clic droit sur les onglets pour les renommer
         event.preventDefault();
         setTabIndex(index);
         setIsRenameOpen(true);
@@ -167,14 +167,16 @@ const CodeEditor = () => {
         setIsAlertOpen(true);
     }
 
-    const removeTab = () => {                                               // Suppression d'un onglet
+    const removeTab = () => {                                           // Suppression d'un onglet
         const newTabs = tabs.filter(tab => tab.id !== idToDelete);
         let deleteIndex = displayedTabs.findIndex(tab => tab.id === idToDelete);
         setTabs(newTabs);
         setIsAlertOpen(false);
 
+        if (deleteIndex === null) return;
+
         if (deleteIndex === tabIndex) {
-            if(deleteIndex === displayedTabs.length-1) setTabIndex(deleteIndex-1);
+            if (deleteIndex === displayedTabs.length - 1) setTabIndex(deleteIndex - 1);
         } else if (deleteIndex < tabIndex) {
             setTabIndex(tabIndex - 1);
         }
@@ -194,7 +196,7 @@ const CodeEditor = () => {
         })
     }
 
-    const handleCheckbox = (id) => { // ! AJOUTER GESTION DE LA MODIFICATION DU tabIndex
+    const handleCheckbox = (id) => { // ! AJOUTER GESTION MODIFICATION DU tabIndex
         const indentIndex = tabs.findIndex(tab => tab.id === id);
         let newTabs = [...tabs];
         newTabs[indentIndex].displayed = !newTabs[indentIndex].displayed;
