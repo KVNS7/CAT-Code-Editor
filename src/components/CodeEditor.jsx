@@ -57,21 +57,21 @@ const CodeEditor = () => {
     const [idToDelete, setidToDelete] = useState(null);                           // Table a supprimer
 
     useEffect(() => {
-        const handleKeyDown = (event) => {                                          // Raccourcis clavier
-            if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '=')) {
-                event.preventDefault();                                             // Empêche que le raccourci navigateur prime
+        const handleKeyDown = (e) => {                                          // Raccourcis clavier
+            if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=')) {
+                e.preventDefault();                                             // Empêche que le raccourci navigateur prime
                 increaseFontSize();
-            } else if ((event.ctrlKey || event.metaKey) && event.key === '-') {
-                event.preventDefault();
+            } else if ((e.ctrlKey || e.metaKey) && e.key === '-') {
+                e.preventDefault();
                 decreaseFontSize();
-            } else if ((event.ctrlKey || event.metaKey) && event.key === 'm') {
-                event.preventDefault();
+            } else if ((e.ctrlKey || e.metaKey) && e.key === 'm') {
+                e.preventDefault();
                 setMinimap(!minimap);
-            } else if ((event.ctrlKey || event.metaKey) && event.key === 'o') {
-                event.preventDefault();
+            } else if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
+                e.preventDefault();
                 setIsModalOpen(true);
-            } else if ((event.ctrlKey || event.metaKey) && event.key === 'w') {
-                event.preventDefault();
+            } else if ((e.ctrlKey || e.metaKey) && e.key === 'w') {
+                e.preventDefault();
                 confirmRemoveTab(displayedTabs[tabIndex].id);
             }
         };
@@ -197,10 +197,22 @@ const CodeEditor = () => {
     }
 
     const handleCheckbox = (id) => { // ! AJOUTER GESTION MODIFICATION DU tabIndex
-        const indentIndex = tabs.findIndex(tab => tab.id === id);
+
+        
+        // si le fichier coché est displayed ->
+            // si avant l'onglet actuel (tabIndex) -> tabIndex -= 1
+            // si après l'onglet actuel (tabIndex) -> ne rien toucher
+            // si === le fichier actuel ->
+                // si onglet après -> tabIndex inchangé
+                // si pas onglet après -> tabIndex -=1
+        // si pas displayed -> trouver l'index avec l'id une fois affiché et mettre tabIndex dessus
+        
+
+        const deleteIndex = tabs.findIndex(tab => tab.id === id);
         let newTabs = [...tabs];
-        newTabs[indentIndex].displayed = !newTabs[indentIndex].displayed;
+        newTabs[deleteIndex].displayed = !newTabs[deleteIndex].displayed;
         setTabs(newTabs);
+
     };
 
     return (
@@ -294,6 +306,7 @@ const CodeEditor = () => {
                         onIndentCode={handleIndentCode}
                     />
 
+                    <Button onClick={() =>console.log("Index : " + tabIndex + "\n Longueur : " + displayedTabs.length)}>AAA</Button>
                     {/* Onglets de l'IDE */}
                     <Tabs index={tabIndex} onChange={(index) => setTabIndex(index)} size="sm">
 
@@ -336,7 +349,7 @@ const CodeEditor = () => {
 
                         <TabPanels mt="-2%">
 
-                            {displayedTabs.length > 0 ? (
+                            {(displayedTabs.length > 0) ? (
                                 displayedTabs.map((tab, index) => (
 
                                     <TabPanel key={index}>
@@ -364,7 +377,7 @@ const CodeEditor = () => {
                             ) : (
                                 <TabPanel>
                                     <Box display="flex" justifyContent="center" alignItems="center" height="75vh">
-                                        <Text fontSize="2xl" color="gray.500">Aucun onglet ouvert</Text>
+                                        <Text fontSize="2xl" color="gray.500">Aucun onglet ouvert / selectionné</Text>
                                     </Box>
                                 </TabPanel>
                             )}
