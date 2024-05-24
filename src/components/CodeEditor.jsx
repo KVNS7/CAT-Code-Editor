@@ -163,22 +163,18 @@ const CodeEditor = () => {
     }
 
     const confirmRemoveTab = (removeId) => {
-        if (tabs.length === 1) { return; }                  // Annule l'opération s'il ne reste qu'un onglet
-        
         setidToDelete(removeId);
         setIsAlertOpen(true);
     }
 
-    const removeTab = () => {                               // Suppression d'un onglet
-
-        const newTabs = tabs.filter(tab => tab.id !== idToDelete);       // Filtre les onglets en enlevant celui a supprimer
-        let deleteIndex = tabs.findIndex(tab => tab.id === idToDelete);
+    const removeTab = () => {                                               // Suppression d'un onglet
+        const newTabs = tabs.filter(tab => tab.id !== idToDelete);
+        let deleteIndex = displayedTabs.findIndex(tab => tab.id === idToDelete);
         setTabs(newTabs);
         setIsAlertOpen(false);
 
         if (deleteIndex === tabIndex) {
-            const newIndex = deleteIndex > 0 ? deleteIndex - 1 : 0;
-            setTabIndex(newIndex);
+            if(deleteIndex === displayedTabs.length-1) setTabIndex(deleteIndex-1);
         } else if (deleteIndex < tabIndex) {
             setTabIndex(tabIndex - 1);
         }
