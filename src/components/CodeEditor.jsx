@@ -91,7 +91,7 @@ const CodeEditor = () => {
             document.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [fontSize, minimap, isModalOpen, tabIndex]);
+    }, [fontSize, minimap, isModalOpen, tabIndex, displayedTabs]);
 
     useEffect(() => {
         setDisplayedTabs(tabs.filter(tab => tab.displayed));
@@ -201,25 +201,18 @@ const CodeEditor = () => {
         const indexCheck = displayedTabs.findIndex(tab => tab.id === tabID);
         const displayed = indexCheck !== -1;
 
-        if (displayed) {
-            if (indexCheck < tabIndex) {
-                setTabIndex(tabIndex - 1);
-            }
-            if (indexCheck === tabIndex) {
-                if (tabIndex >= displayedTabs.length - 1) {
-                    setTabIndex(tabIndex - 1);
-                }
-            }
+        if (displayed && (indexCheck < tabIndex || (indexCheck === tabIndex && tabIndex >= displayedTabs.length - 1))) {
+            setTabIndex(tabIndex - 1);
         }
 
-        const checkIndex = tabs.findIndex(tab => tab.id === tabID);
-        const newTabs = tabs.map((tab, index) =>
-            index === checkIndex ? { ...tab, displayed: !tab.displayed } : tab
+        const newTabs = tabs.map(tab =>
+            tab.id === tabID ? { ...tab, displayed: !tab.displayed } : tab
         );
         setTabs(newTabs);
 
         if (!displayed) {
             const newDisplayedTabs = newTabs.filter(tab => tab.displayed);
+            setDisplayedTabs(newDisplayedTabs);
             setTabIndex(newDisplayedTabs.findIndex(tab => tab.id === tabID));
         }
     }
@@ -287,16 +280,20 @@ const CodeEditor = () => {
                                     </MenuButton>
                                 </Tooltip>
                                 <MenuList>
-                                    {tabs.map(tab => (
-                                        <MenuItem key={tab.id} onClick={() => handleCheckbox(tab.id)}>
-                                            {tab.title}
-                                            <Checkbox
-                                                ml="auto"
-                                                isChecked={tab.displayed}
-                                                onChange={() => handleCheckbox(tab.id)}
-                                            />
-                                        </MenuItem>
-                                    ))}
+                                    {(tabs.length === 0) ? (
+                                        <MenuItem> Aucun fichier dans le TP</MenuItem>
+                                    ) : (
+                                        tabs.map(tab => (
+                                            <MenuItem key={tab.id} onClick={() => handleCheckbox(tab.id)}>
+                                                {tab.title}
+                                                <Checkbox
+                                                    ml="auto"
+                                                    isChecked={tab.displayed}
+                                                    onChange={() => handleCheckbox(tab.id)}
+                                                />
+                                            </MenuItem>
+                                        ))
+                                    )}
                                 </MenuList>
                             </Menu>
                         </Box>
@@ -358,7 +355,13 @@ const CodeEditor = () => {
 
                         <TabPanels mt="-2%">
 
-                            {(displayedTabs.length > 0) ? (
+                            {(displayedTabs.length === 0) ? (
+                                <TabPanel>
+                                    <Box display="flex" justifyContent="center" alignItems="center" height="75vh">
+                                        <Text fontSize="2xl" color="gray.500">Aucun onglet ouvert / selectionné</Text>
+                                    </Box>
+                                </TabPanel>
+                            ) : (
                                 displayedTabs.map((tab, index) => (
 
                                     <TabPanel key={index}>
@@ -381,14 +384,7 @@ const CodeEditor = () => {
                                             }}
                                         />
                                     </TabPanel>
-
                                 ))
-                            ) : (
-                                <TabPanel>
-                                    <Box display="flex" justifyContent="center" alignItems="center" height="75vh">
-                                        <Text fontSize="2xl" color="gray.500">Aucun onglet ouvert / selectionné</Text>
-                                    </Box>
-                                </TabPanel>
                             )}
 
                         </TabPanels>
@@ -421,7 +417,7 @@ const CodeEditor = () => {
 
                 </Box>
 
-                {tabIndex !== -1 && displayedTabs[tabIndex] ? (
+                {displayedTabs[tabIndex] ? (
                     <Output content={displayedTabs[tabIndex].content} language={displayedTabs[tabIndex].language} />
                 ) : (
                     <Output />
