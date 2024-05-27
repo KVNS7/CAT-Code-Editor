@@ -91,7 +91,7 @@ const CodeEditor = () => {
             document.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [fontSize, minimap, isModalOpen, tabIndex, displayedTabs]);
+    }, [fontSize, minimap, isModalOpen, tabIndex]);
 
     useEffect(() => {
         setDisplayedTabs(tabs.filter(tab => tab.displayed));
@@ -196,24 +196,33 @@ const CodeEditor = () => {
         })
     }
 
-    const handleCheckbox = (id) => { // ! AJOUTER GESTION MODIFICATION DU tabIndex
+    const handleCheckbox = (tabID) => {                                         // Gère la fermeture / ouverture d'onglet
 
-        
-        // si le fichier coché est displayed ->
-            // si avant l'onglet actuel (tabIndex) -> tabIndex -= 1
-            // si après l'onglet actuel (tabIndex) -> ne rien toucher
-            // si === le fichier actuel ->
-                // si onglet après -> tabIndex inchangé
-                // si pas onglet après -> tabIndex -=1
-        // si pas displayed -> trouver l'index avec l'id une fois affiché et mettre tabIndex dessus
-        
+        const indexCheck = displayedTabs.findIndex(tab => tab.id === tabID);
+        const displayed = indexCheck !== -1;
 
-        const deleteIndex = tabs.findIndex(tab => tab.id === id);
-        let newTabs = [...tabs];
-        newTabs[deleteIndex].displayed = !newTabs[deleteIndex].displayed;
+        if (displayed) {
+            if (indexCheck < tabIndex) {
+                setTabIndex(tabIndex - 1);
+            }
+            if (indexCheck === tabIndex) {
+                if (tabIndex >= displayedTabs.length - 1) {
+                    setTabIndex(tabIndex - 1);
+                }
+            }
+        }
+
+        const checkIndex = tabs.findIndex(tab => tab.id === tabID);
+        const newTabs = tabs.map((tab, index) =>
+            index === checkIndex ? { ...tab, displayed: !tab.displayed } : tab
+        );
         setTabs(newTabs);
 
-    };
+        if (!displayed) {
+            const newDisplayedTabs = newTabs.filter(tab => tab.displayed);
+            setTabIndex(newDisplayedTabs.findIndex(tab => tab.id === tabID));
+        }
+    }
 
     return (
         <Box minH="100vh" bg="#121212" color="gray.500" px={6} py={8}>
@@ -306,7 +315,6 @@ const CodeEditor = () => {
                         onIndentCode={handleIndentCode}
                     />
 
-                    <Button onClick={() =>console.log("Index : " + tabIndex + "\n Longueur : " + displayedTabs.length)}>AAA</Button>
                     {/* Onglets de l'IDE */}
                     <Tabs index={tabIndex} onChange={(index) => setTabIndex(index)} size="sm">
 
@@ -337,6 +345,7 @@ const CodeEditor = () => {
                                             color={tabIndex === index ? "blue.400" : ""}
                                             size="xs"
                                             onClick={(e) => {
+
                                                 handleCheckbox(tab.id);
                                             }}
                                             border="none"
