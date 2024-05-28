@@ -6,7 +6,7 @@ import {
     useToast, useDisclosure,
     Tabs, Tab, TabList, TabPanels, TabPanel,
     Tooltip,
-    Image, Text,
+    Image, Text, Input,
     Checkbox
 } from "@chakra-ui/react"
 import { SettingsIcon, SmallCloseIcon, TriangleDownIcon } from "@chakra-ui/icons"
@@ -16,8 +16,9 @@ import beautify from "js-beautify";
 
 import { CODE_SNIPPETS, ONGLETS_TEST } from "../constantes";
 
-import IDEOptionsDrawer from "./IDEOptionsDrawer";
-import NewTabModal from "./NewTabModal";
+import ImportFileButton from "./ImportFileButton";
+import OptionsDrawer from "./OptionsDrawer";
+import NewFileModal from "./NewFileModal";
 import RenameTabModal from "./RenameTabModal"
 import TabDeleteDialog from "./TabDeleteDialog";
 import Output from "./Output";
@@ -37,6 +38,7 @@ const CodeEditor = () => {
 
     const toast = useToast();
     const editorRef = useRef();                                                     // Ref pour l'editeur
+    const fileInputRef = useRef(null);                                                  // Ref input fichier
     const navigate = useNavigate();
     const { isOpen, onOpen, onClose } = useDisclosure()                             // Ouverture du Drawer des paramètres de l'IDE
 
@@ -49,7 +51,6 @@ const CodeEditor = () => {
         () => tabs.filter(tab => tab.displayed)
     );
     const [tabIndex, setTabIndex] = useState(0)                                     // Index onglet actif
-    const [newTabInfo, setNewTabInfo] = useState({ title: '', language: 'plaintext' });     // Contenu fenêtre nouveau onglet
 
     const [isModalOpen, setIsModalOpen] = useState(false);                          // Ouverture fenetre nouveau onglet
     const [isRenameOpen, setIsRenameOpen] = useState(false);                        // Ouverture fenetre renommer onglet
@@ -136,18 +137,17 @@ const CodeEditor = () => {
         editor.focus();
     };
 
-    const addTab = (validatedTitle) => {                                // Ajout d'un onglet 
+    const addTab = (validatedTitle, content, lang) => {                                // Ajout d'un onglet 
         const newTab = {
-            id: tabs.length + 1,
+            id: (tabs[tabs.length-1].id) + 1,
             title: validatedTitle,
-            language: newTabInfo.language,
-            content: CODE_SNIPPETS[newTabInfo.language] || 'Aucun langage n\'a été reconnu pour ce fichier',
+            language: lang,
+            content: content !== null ? content : (CODE_SNIPPETS[lang] || 'Aucun langage n\'a été reconnu pour ce fichier'),
             displayed: true,
         };
         setTabs([...tabs, newTab]);                                 // Ajoute l'onglet à la liste des onglets
-        setTabIndex(displayedTabs.length);                                   // Défini le nouvel onglet comme actif
+        setTabIndex(displayedTabs.length);                          // Défini le nouvel onglet comme actif
         setIsModalOpen(false);                                      // Ferme le modal après l'ajout
-        setNewTabInfo({ title: '', language: 'plaintext' });        // Réinitialise les informations du formulaire
     }
 
     const renameTab = (newTitle, newLanguage) => {
@@ -225,15 +225,12 @@ const CodeEditor = () => {
             <HStack spacing={4}>
                 <Box w='65%'>
 
-                    {/* Flex contenant les différents boutons */}
                     <Flex alignItems="center" mb="10px">
 
                         <Box mr="auto" mt={5}>
-
-                            <Button leftIcon={<SettingsIcon />} onClick={onOpen}>Paramètres IDE</Button>
+                            <Button leftIcon={<SettingsIcon />} onClick={onOpen}>Paramètres</Button>
                         </Box>
 
-                        {/* Bouton permettant de sauvegarder le/les fichiers */}
                         <Box mt={5}>
 
                             <Tooltip label={"Sauvegarde le fichier dans le dossier étudiant"} openDelay={500} hasArrow>
@@ -249,21 +246,10 @@ const CodeEditor = () => {
 
                         </Box>
 
-                        {/* Bouton permettant d'importer un/des fichiers */}
-                        <Box ml="2%" mt={5} mr="2%">
-
-                            <Tooltip label={"Importer un fichier ou un dossier(zip) au TP"} openDelay={500} hasArrow>
-                                <Button
-                                    color={"orange.500"}
-                                    border={"2px solid"}
-                                    _hover={{ bg: "orange.200" }}
-                                    onClick={toastNonImplementee}
-                                >
-                                    Importer
-                                </Button>
-                            </Tooltip>
-
-                        </Box>
+                        <ImportFileButton
+                            addTab={addTab}
+                            tabs={tabs}
+                        />
 
                         <Box mt={5} mr="2%">
 
@@ -301,7 +287,7 @@ const CodeEditor = () => {
                     </Flex>
 
                     {/* Drawer contenant les paramètres de l'IDE */}
-                    <IDEOptionsDrawer isOpen={isOpen}
+                    <OptionsDrawer isOpen={isOpen}
                         onClose={onClose}
                         fontSize={fontSize}
                         setFontSize={setFontSize}
@@ -390,12 +376,10 @@ const CodeEditor = () => {
                         </TabPanels>
                     </Tabs>
 
-                    <NewTabModal
+                    <NewFileModal
                         isOpen={isModalOpen}
                         onClose={() => setIsModalOpen(false)}
                         addTab={addTab}
-                        newTabInfo={newTabInfo}
-                        setNewTabInfo={setNewTabInfo}
                         tabs={tabs}
                     />
 
