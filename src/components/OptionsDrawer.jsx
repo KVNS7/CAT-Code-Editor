@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import { VS_THEMES } from '../constantes';
 
-
 const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme, minimap, setMinimap, onIndentCode }) => {
 
     const themes = Object.entries(VS_THEMES)                                        // Thèmes de l'IDE
@@ -28,7 +27,7 @@ const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme
 
                     <Box>
                         <Text mb={2} fontSize='lg'>
-                            Indenter le code:
+                            Indenter le code :
                         </Text>
                         <Button width="49%" onClick={() => onIndentCode('expand')} mr="2%">Style Allman</Button>
                         <Button width="49%" onClick={() => onIndentCode('collapse')}>Style K&R</Button>
@@ -38,7 +37,7 @@ const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme
 
                     <Box>
                         <Text mb={2} fontSize='lg'>
-                            Taille de la police: {fontSize}
+                            Taille de la police : {fontSize}
                         </Text>
                         <HStack spacing={4}>
                             <Button onClick={() => setFontSize(fontSize - 1)} width="50%"> - </Button>
@@ -50,7 +49,7 @@ const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme
 
                     <Box>
                         <Text mb={2} fontSize='lg'>
-                            Thème de l'éditeur:
+                            Thème de l'éditeur :
                         </Text>
                         <Menu placement='bottom' matchWidth={true}>
                             <MenuButton as={Button} width="100%">
@@ -76,9 +75,16 @@ const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme
 
                     <Box>
                         <Flex alignItems="center">
-                            <Text mb={2} mr="auto" fontSize='lg'>Minimap:</Text>
+                            <Text mb={2} mr="auto" fontSize='lg'>Minimap :</Text>
                             <Switch size="lg" colorScheme="orange" isChecked={minimap} onChange={() => setMinimap(!minimap)} mr="5%" />
                         </Flex>
+                    </Box>
+
+                    <Divider my="5" borderWidth={1} />
+
+                    <Box>
+                        <Text mb={2} mr="auto" fontSize='lg'>Exporter les fichiers du TP :</Text>
+                        <Button width="100%"> Exporter </Button>
                     </Box>
 
                     <Divider my="5" borderWidth={1} />
