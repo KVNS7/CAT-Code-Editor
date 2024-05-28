@@ -72,6 +72,8 @@ Ceci a pour but de :
 
 [![Axios version][Axios-badge]][Axios-url]
 
+[![JS-beautify version][js-beautify-badge]][JS-beautify-url]
+
 [![Piston version][Piston-badge]][Piston-url]
 
 
@@ -176,6 +178,9 @@ Projet : [https://github.com/KVNS7/Code-editor-cat/tree/main](https://github.com
 
 [Axios-badge]: https://img.shields.io/badge/Axios%20v1.6.8-%235A29E4?style=for-the-badge&logo=axios&logoColor=%235A29E4&labelColor=grey
 [Axios-url]: https://axios-http.com/fr/docs/intro
+
+[JS-beautify-badge]: https://img.shields.io/badge/js--beautify%20v1.15.1-%23FF9A00?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAFlElEQVR4nOyZb2wTZRzHf7279c/RrqxbYX+6dWtnxPjKaNDwSnFzGyCGRHxhRDGGEITBcKXDbk0YFLJEWzAxvBDQGN+ggGEr3YTXi4nGKCBjQDfJBKKCrBsdvV7vn3lutN7au1vLJtuk3zc8PM/z+z333HP36fd3w2CBK7+BuRahNNDW1tZsMBiMj/Zy5MUwDL1///6A3JhGKYggCALDsHlxQoIg8AzDsHJjaiew1Wg0pk6AoijK5/MFrp60/7Ds9evPe9q9LSRJLpKLTSQS9N69ewO/buAuGQhYVHsM7J6O6ecPHK/qX7b++gqPx9NsMpkKk+PxeDze2dnpz3nnC0GKJ+D1infMlPw/RVExn8/nv33WMVJsJspQ33u+PzZ81Rc70dHR4dJqtbpQKNTX39//08W3YaCyEJ6Q5ptIwKjjKFQ889zyp9etW/eaIAhCIBD4dMVT1LPd/so+cU6Mj5hevLbU4/FsN5lM5mQsTdPxPXv2fPSf3YW5VNYUSiQSVFdX16GRnpqw2Ygvlc6Nxfnx0sahStQe3AjDRi1Y5XImOIgu+wLsDA/sjTNOxTxut3srSZKpd2BWKMTzPM+yLGvQafQ4NnXjHA8sRQtx1NbjkDGeyiEAR7FAobZanvS1Z5VCvwcdl0vMeGn6/MgEf8daH7bHOYhfeBMuVpmhVjoepSHiPAZVqH0r5LxcXkJUp+eIxvixwpfC5W63e0ueQtlQKF1jUe5u0cthcWzgHQiXm8CO2uM03K0+AmI/evZtSwrscvF5CkmVC4WSilF8pLRpSLy7P78FA1YSRDLFWIg8+fnkaQx96xhYYiEqZePnikJJKdEI9aOXW+zXavQErh6fC4UUN9De3r5DjkJ/fef4TY5CSOP3+dHFK8M21L68Ea6UGSepc4+GUfsREPtvhpxXKkqIKrn4JIXyXghkKAQSGvzZVzu8tDjzOZZSCCZ/la8iN+o8BjZOmOxTohCKtb4SLv/Q492htO7Db3MeK+eKjKbpWFdX1yc3Q45hE4nLeh6a4aMVTUP2BAupF+9Wr3Pa+dtbXJuMRuPi9PFZrciypBFH0QIl7ctmPkEQOIZhePr4rHghqRCRUAV1vdtxsbq0oFYpRza6F+MjJfXhqt27d28zm81muTmPJ4XgVMOPsP7ccm97x06SJGVPAtWynZ2dH98I1gyWWwtqcll4LMrdLqkP2zzt3mnz88frvoc3zr2QS/4FI+UT6GkKg1H7r+eJsxF4tbe6zeXelk6nJCVGepyDRYV4hdqCyC/Z1gxVt7raFPPA6aZBKNRWSNYeh1UhWf+kSCHQ4XqQUoMHFmguw6eAhBJqPicpJb8jzQNaTA+4JmPt3DaA1Lv6Glj0til90cQdaAjavQrfhRAx9u3bF+C7GwfBapj0PBPMKNT12Hbt2rXFYrFY0mOS34W40w2XwGqYWqmh2IZgJXCCoHqtC1WKx+1yuTb5/f4jwtk1N6BQK+v/RU0k7kLDmXKvp0P0MDRNo98IP3+68RosMdhTc+qCZW63+/2ioqLilLcJrR6GYr3ssy0KPft1PWWtOz7Y6Pf7j850s/NSql4Ix3H8wIEDh+Dr+l/ASjpVM8WYv2Ftr6N1Z+vmgwcPfsZ/U38JLA/uLiLYqpC9ubn53cOHD3/Jnai7AIv1snVxSnF2DNb21rhaWjfrdDr9Q3kh9C/yPaDFdIBrClQXfEAKHMcxjuP4KSTJHMs6H7oOjUYDM/JCqpRIE3efiUBDsApONZ5PpxB3sv48lC1S904ylHs8vZDSdyG+b9UImHWy34VmrBgbgZXd+e9CoqaryIRg0zCQBbIVVs5iuCisDtldLa2PriIDHaYHTKPqe7IWDxzQ3KOryJLKhU4ZmsZTSZWn0Fzrf02hefGH7Jkov4G51j8BAAD//22ifgqEqAVmAAAAAElFTkSuQmCC&logoColor=FF9A00&labelColor=grey
+[JS-beautify-url]: https://github.com/beautifier/js-beautify
 
 [Piston-badge]: https://img.shields.io/badge/Piston-rgb(67%2C126%2C180)?style=for-the-badge&labelColor=black
 [Piston-url]: https://piston.readthedocs.io/en/latest/
