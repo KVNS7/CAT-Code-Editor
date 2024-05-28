@@ -9,7 +9,7 @@ const TabDeleteDialog = ({ isOpen, onClose, onDelete, cancelRef, tabName }) => {
 
         <AlertDialog
             isOpen={isOpen}
-            leastDestructiveRef={cancelRef}         // place le focus sur le bouton "le moins destructeur"
+            leastDestructiveRef={cancelRef}
             onClose={onClose}
         >
             <AlertDialogOverlay>
