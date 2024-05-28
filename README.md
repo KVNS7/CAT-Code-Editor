@@ -137,7 +137,7 @@ Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au s
   - [x] Supprimer les fichiers depuis le menu déroulant
 - [x] Fonction d'indentation avec un bouton
 - [x] Importation d'un ou plusieurs fichier(s) au tp
-- [ ] Affichage (souligner) des erreurs syntaxiques ( ';' manquant, etc... )
+- [ ] Affichage des erreurs syntaxiques en les soulignants ( ';' manquant, etc... )
 - [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers :
   - [ ] En local sur machine dans un dossier premièrement
   - [ ] Sur Docker dans un dossier propre à l'étudiant, exemple : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]*
