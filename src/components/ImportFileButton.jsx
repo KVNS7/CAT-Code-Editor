@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react'
 import { LANGUAGE_VERSIONS } from '../constantes';
 
-const ImportFileButton = ({ addTab, tabs }) => {
+const ImportFileButton = ({ addTab, tabs, ml, mr, mt }) => {
 
     const toast = useToast();
     const fileInputRef = useRef(null);                                                  // Ref input fichier
@@ -69,7 +69,7 @@ const ImportFileButton = ({ addTab, tabs }) => {
 
 
     return (
-        <Box ml="2%" mt={5} mr="2%">
+        <Box ml={ml} mr={mr} mt={mt}>
             <Tooltip label={"Importer un fichier ou un dossier(zip) au TP"} openDelay={500} hasArrow>
                 <Button
                     color={"orange.500"}
