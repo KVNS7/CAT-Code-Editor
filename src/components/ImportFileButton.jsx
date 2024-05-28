@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, forwardRef } from 'react';
 import {
     Box,
     Tooltip,
@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react'
 import { LANGUAGE_VERSIONS } from '../constantes';
 
-const ImportFileButton = ({ tabs, displayedTabs, setTabs, setTabIndex, ml, mr, mt }) => {
+const ImportFileButton = forwardRef(({ tabs, displayedTabs, setTabs, setTabIndex, ml, mr, mt }, ref) => {
 
     const toast = useToast();
     const fileInputRef = useRef(null);                                                  // Ref input fichier
@@ -50,7 +50,7 @@ const ImportFileButton = ({ tabs, displayedTabs, setTabs, setTabIndex, ml, mr, m
         }]);
     };
 
-    const handleFileImport = (event) => {         // Importe titre et contenu des fichiers
+    const handleFileImport = (event) => {                               // Importe titre et contenu des fichiers
         const files = Array.from(event.target.files);
         let fileID = tabs[tabs.length - 1].id + 1;
         let index = displayedTabs.length;
@@ -72,6 +72,7 @@ const ImportFileButton = ({ tabs, displayedTabs, setTabs, setTabIndex, ml, mr, m
         <Box ml={ml} mr={mr} mt={mt}>
             <Tooltip label={"Importer des fichiers au TP"} openDelay={500} hasArrow>
                 <Button
+                    ref={ref}
                     color={"orange.500"}
                     border={"2px solid"}
                     _hover={{ bg: "orange.200" }}
@@ -89,6 +90,6 @@ const ImportFileButton = ({ tabs, displayedTabs, setTabs, setTabIndex, ml, mr, m
             />
         </Box>
     );
-};
+});
 
 export default ImportFileButton;
