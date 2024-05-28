@@ -9,7 +9,7 @@ import {
     Image, Text, Input,
     Checkbox
 } from "@chakra-ui/react"
-import { SettingsIcon, SmallCloseIcon, TriangleDownIcon } from "@chakra-ui/icons"
+import { SettingsIcon, SmallCloseIcon, TriangleDownIcon, DeleteIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
 import { useNavigate } from "react-router-dom";
 import beautify from "js-beautify";
@@ -139,7 +139,7 @@ const CodeEditor = () => {
 
     const addTab = (validatedTitle, content, lang) => {                                // Ajout d'un onglet 
         const newTab = {
-            id: (tabs[tabs.length-1].id) + 1,
+            id: (tabs[tabs.length - 1].id) + 1,
             title: validatedTitle,
             language: lang,
             content: content !== null ? content : (CODE_SNIPPETS[lang] || 'Aucun langage n\'a été reconnu pour ce fichier'),
@@ -167,13 +167,13 @@ const CodeEditor = () => {
         setIsAlertOpen(true);
     }
 
-    const removeTab = () => {                                           // Suppression d'un onglet
+    const removeTab = () => {                                           // Suppression d'un fichier
         const newTabs = tabs.filter(tab => tab.id !== idToDelete);
         let deleteIndex = displayedTabs.findIndex(tab => tab.id === idToDelete);
         setTabs(newTabs);
         setIsAlertOpen(false);
 
-        if (deleteIndex === null) return;
+        if (deleteIndex === -1) return;
 
         if (deleteIndex === tabIndex) {
             if (deleteIndex === displayedTabs.length - 1) setTabIndex(deleteIndex - 1);
@@ -231,8 +231,11 @@ const CodeEditor = () => {
                             <Button leftIcon={<SettingsIcon />} onClick={onOpen}>Paramètres</Button>
                         </Box>
 
-                        <Box mt={5}>
+                        
+                        
+                        
 
+                        <Box mt={5}>
                             <Tooltip label={"Sauvegarde le fichier dans le dossier étudiant"} openDelay={500} hasArrow>
                                 <Button
                                     color={"green.500"}
@@ -243,12 +246,14 @@ const CodeEditor = () => {
                                     Sauvegarder
                                 </Button>
                             </Tooltip>
-
                         </Box>
 
                         <ImportFileButton
                             addTab={addTab}
                             tabs={tabs}
+                            ml="2%"
+                            mr="2%"
+                            mt={5}
                         />
 
                         <Box mt={5} mr="2%">
@@ -276,6 +281,14 @@ const CodeEditor = () => {
                                                     ml="auto"
                                                     isChecked={tab.displayed}
                                                     onChange={() => handleCheckbox(tab.id)}
+                                                />
+                                                <DeleteIcon
+                                                    ml={3}
+                                                    color="red.300"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        confirmRemoveTab(tab.id)
+                                                    }}
                                                 />
                                             </MenuItem>
                                         ))
@@ -341,7 +354,7 @@ const CodeEditor = () => {
 
                         <TabPanels mt="-2%">
 
-                            {(displayedTabs.length === 0) ? (
+                            {(displayedTabs.length === 0) || (tabIndex < 0 || tabIndex > displayedTabs.length - 1) ? (
                                 <TabPanel>
                                     <Box display="flex" justifyContent="center" alignItems="center" height="75vh">
                                         <Text fontSize="2xl" color="gray.500">Aucun onglet ouvert / selectionné</Text>
