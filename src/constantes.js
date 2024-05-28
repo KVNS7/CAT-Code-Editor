@@ -23,7 +23,7 @@ export const CODE_SNIPPETS = {  // exemples de code pour chaque langage
 export const VS_THEMES = {
   "Clair": "vs",
   "Sombre": "vs-dark",
-  "Haut Contraste Sombre": "hc-black",
+  "Haut contraste sombre": "hc-black",
 }
 
 export const ONGLETS_TEST = [
@@ -32,35 +32,35 @@ export const ONGLETS_TEST = [
     title: 'main' + LANGUAGE_VERSIONS['c'].extension,
     language: 'c',
     content: CODE_SNIPPETS['c'],
-    displayed : true
+    displayed : false
   },
   {
     id: 2,
     title: 'script' + LANGUAGE_VERSIONS['java'].extension,
     language: 'java',
     content: CODE_SNIPPETS['java'],
-    displayed : true
+    displayed : false
   },
   {
     id: 3,
     title: 'script' + LANGUAGE_VERSIONS['javascript'].extension,
     language: 'javascript',
     content: CODE_SNIPPETS['javascript'],
-    displayed : true
+    displayed : false
   },
   {
     id: 4,
     title: 'main' + LANGUAGE_VERSIONS['csharp'].extension,
     language: 'csharp',
     content: CODE_SNIPPETS['csharp'],
-    displayed : true
+    displayed : false
   },
   {
     id: 5,
     title: 'main' + LANGUAGE_VERSIONS['typescript'].extension,
     language: 'typescript',
     content: CODE_SNIPPETS['typescript'],
-    displayed : true
+    displayed : false
   },
 ]
 
