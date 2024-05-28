@@ -9,7 +9,7 @@ import {
 import { VS_THEMES } from '../constantes';
 
 
-const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme, minimap, setMinimap, onIndentCode }) => {
+const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme, minimap, setMinimap, onIndentCode }) => {
 
   const themes = Object.entries(VS_THEMES)                                        // Thèmes de l'IDE
 
@@ -19,7 +19,7 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
       <DrawerContent bg="#2C3E50">
 
         <DrawerHeader fontSize="2xl" mx="auto">
-          Paramètres de l'IDE
+          Paramètres
         </DrawerHeader>
 
         <Divider mt="-2" mb="4" mx="auto" borderWidth={1} width="60%" />
@@ -114,4 +114,4 @@ const IDEOptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTh
   );
 };
 
-export default IDEOptionsDrawer;
+export default OptionsDrawer;
