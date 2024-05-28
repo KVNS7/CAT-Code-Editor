@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
     Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter,
-    FormControl, FormLabel,
+    FormControl, FormLabel, FormErrorMessage,
     Input,
     Button,
     Tooltip,
@@ -16,6 +16,8 @@ const RenameTabModal = ({ isOpen, onClose, displayedTabs, tabs, tabIndex, rename
     const [newTitle, setNewTitle] = useState("");
     const [newLanguage, setNewLanguage] = useState("");
     const toast = useToast();
+
+    const isError = newTitle === '';
 
     useEffect(() => {
         if (isOpen) {
@@ -98,7 +100,7 @@ const RenameTabModal = ({ isOpen, onClose, displayedTabs, tabs, tabIndex, rename
                 <ModalCloseButton />
                 <ModalBody>
 
-                    <FormControl>
+                    <FormControl isInvalid={isError}>
                         <FormLabel>
                             Nom du fichier
 
@@ -130,6 +132,9 @@ const RenameTabModal = ({ isOpen, onClose, displayedTabs, tabs, tabIndex, rename
                             placeholder="Entrez le nom du fichier"
                             autoFocus
                         />
+                        {isError ? (
+                            <FormErrorMessage>Nom de fichier requis</FormErrorMessage>
+                        ) : null}
 
                     </FormControl>
                 </ModalBody>
