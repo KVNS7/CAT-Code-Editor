@@ -129,11 +129,13 @@ Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au s
   - [x] Pop-up création de fichier avec choix du langage et du nom du fichier
   - [x] Extension (ex : .c, .py) automatique selon langage du fichier
   - [x] Detection du langage selon le titre du fichier
-  - [x] Possibilité de fermer (supprimer) un onglet (fichier)
+  - [x] Possibilité de fermer un onglet
   - [x] Possibilité de renommer les fichiers
+  - [x] Menu déroulant listant les fichiers pour les affichers en onglet ou non
+  - [x] Supprimer les fichiers depuis le menu déroulant
 - [x] Fonction d'indentation avec un bouton
+- [x] Importation d'un ou plusieurs fichier(s) au tp
 - [ ] Affichage (souligner) des erreurs syntaxiques ( ';' manquant, etc... )
-- [ ] Bouton importer permettant d'importer un/des fichier(s) au tp
 - [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers :
   - [ ] En local sur machine dans un dossier premièrement
   - [ ] Sur Docker dans un dossier propre à l'étudiant, exemple : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]*
