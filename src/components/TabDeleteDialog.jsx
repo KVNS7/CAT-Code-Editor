@@ -16,11 +16,11 @@ const TabDeleteDialog = ({ isOpen, onClose, onDelete, cancelRef, tabName }) => {
                 <AlertDialogContent>
 
                     <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                        Supprimer l'onglet
+                        Supprimer le fichier
                     </AlertDialogHeader>
 
                     <AlertDialogBody>
-                        Êtes-vous sûr de vouloir supprimer le fichier "{tabName}" ?
+                        Supprimmer <b><u>définitivement</u></b> le fichier {tabName} ?
                     </AlertDialogBody>
 
                     <AlertDialogFooter>
