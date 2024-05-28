@@ -15,7 +15,6 @@ const Output = ({ content, language }) => {
     const [isError, setIsError] = useState(false)                               // Etat en cas d'erreur
 
     const runCode = async () => {
-
         const supportedLanguages = Object.keys(LANGUAGE_VERSIONS);              // Récupère les langages pris en charge
 
         if (!supportedLanguages.includes(language)) {                           // Si langage du fichier non reconnu, return
