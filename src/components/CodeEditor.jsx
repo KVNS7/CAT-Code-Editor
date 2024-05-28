@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import {
     Box, HStack, Flex,
     Menu, MenuButton, MenuList, MenuItem,
@@ -35,7 +35,9 @@ import Output from "./Output";
 const CodeEditor = () => {
 
     const toast = useToast();
-    const editorRef = useRef();                                                     // Ref pour l'editeur
+    const editorRef = useRef();                                                     // Ref editeur
+    const importButtonRef = useRef();                                               // Ref bouton importer
+    const menuButtonRef = useRef();                                                 // Ref bouton menu
     const navigate = useNavigate();                                                 // Pour naviguer entre les pages
     const { isOpen, onOpen, onClose } = useDisclosure()                             // Ouverture du Drawer des paramètres de l'IDE
 
@@ -48,48 +50,49 @@ const CodeEditor = () => {
         () => tabs.filter(tab => tab.displayed)
     );
     const [tabIndex, setTabIndex] = useState(0)                                     // Index onglet actif
+    const [idToDelete, setidToDelete] = useState(null);                             // Id fichier à supprimer
 
     const [isModalOpen, setIsModalOpen] = useState(false);                          // Ouverture fenetre nouveau onglet
     const [isRenameOpen, setIsRenameOpen] = useState(false);                        // Ouverture fenetre renommer onglet
     const [isAlertOpen, setIsAlertOpen] = useState(false);                          // Ouverture du TabDeleteDialog
-    const [idToDelete, setidToDelete] = useState(null);                           // Table a supprimer
+
+    const handleKeyDown = useCallback((e) => {                                      // Gestion des raccourcis clavier
+        if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=')) {
+            e.preventDefault();
+            increaseFontSize();
+        } else if ((e.ctrlKey || e.metaKey) && e.key === '-') {
+            e.preventDefault();
+            decreaseFontSize();
+        } else if ((e.ctrlKey || e.metaKey) && e.key === 'm') {
+            e.preventDefault();
+            setMinimap(!minimap);
+        } else if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
+            e.preventDefault();
+            setIsModalOpen(true);
+        } else if ((e.ctrlKey || e.metaKey) && e.key === 'w') {
+            e.preventDefault();
+            confirmRemoveTab(displayedTabs[tabIndex].id);
+        } else if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
+            e.preventDefault();
+            importButtonRef.current.click();
+        }
+    }, [fontSize, minimap, tabIndex, displayedTabs]);
+
+    const handleBeforeUnload = useCallback((event) => {                             // Gestion fermeture/rechargement de la page
+        const message = "Êtes-vous sûr de vouloir quitter cette page ? Vos modifications non sauvegardées seront perdues.";
+        event.returnValue = message;
+        return message;
+    }, []);
 
     useEffect(() => {
-        const handleKeyDown = (e) => {                                          // Raccourcis clavier
-            if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=')) {
-                e.preventDefault();                                             // Empêche que le raccourci navigateur prime
-                increaseFontSize();
-            } else if ((e.ctrlKey || e.metaKey) && e.key === '-') {
-                e.preventDefault();
-                decreaseFontSize();
-            } else if ((e.ctrlKey || e.metaKey) && e.key === 'm') {
-                e.preventDefault();
-                setMinimap(!minimap);
-            } else if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
-                e.preventDefault();
-                setIsModalOpen(true);
-            } else if ((e.ctrlKey || e.metaKey) && e.key === 'w') {
-                e.preventDefault();
-                confirmRemoveTab(displayedTabs[tabIndex].id);
-            }
-        };
-
         document.addEventListener('keydown', handleKeyDown);
-
-
-        const handleBeforeUnload = (event) => {                                 // Demande confirmation avant de fermer/actualiser la page
-            const message = "Êtes-vous sûr de vouloir quitter cette page ? Vos modifications non sauvegardées seront perdues.";
-            event.returnValue = message;
-            return message;
-        };
-
         window.addEventListener('beforeunload', handleBeforeUnload);
 
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [fontSize, minimap, isModalOpen, tabIndex, displayedTabs]);
+    }, [handleKeyDown, handleBeforeUnload]);
 
     useEffect(() => {
         setDisplayedTabs(tabs.filter(tab => tab.displayed));
@@ -145,7 +148,7 @@ const CodeEditor = () => {
         setTabs([...tabs, newTab]);                                 // Ajoute l'onglet à la liste des onglets
         setTabIndex(displayedTabs.length);                          // Défini le nouvel onglet comme actif
         setIsModalOpen(false);                                      // Ferme le modal après l'ajout
-        
+
         console.log("titre : " + validatedTitle + "\nlangage : " + lang);
     }
 
@@ -230,19 +233,6 @@ const CodeEditor = () => {
                             <Button leftIcon={<SettingsIcon />} onClick={onOpen}>Paramètres</Button>
                         </Box>
 
-                        <Box>
-                            <Button
-                                onClick={() => {
-                                    tabs.forEach(tab => {
-                                        console.log(`ID: ${tab.id}, Title: ${tab.title}`);
-                                    });
-                                    console.log("\n\nIndex : " + tabIndex);
-                                }}
-                            >
-                                SeeTabs
-                            </Button>
-                        </Box>
-
                         <Box mt={5}>
                             <Tooltip label={"Sauvegarde le fichier dans le dossier étudiant"} openDelay={500} hasArrow>
                                 <Button
@@ -257,6 +247,7 @@ const CodeEditor = () => {
                         </Box>
 
                         <ImportFileButton
+                            ref={importButtonRef}
                             addTab={addTab}
                             tabs={tabs}
                             displayedTabs={displayedTabs}
@@ -272,6 +263,7 @@ const CodeEditor = () => {
                             <Menu closeOnSelect={false} placement="bottom">
                                 <Tooltip label={"Liste des fichiers du TP"} openDelay={500} hasArrow>
                                     <MenuButton
+                                        ref={menuButtonRef}
                                         as={Button}
                                         color={"blue.500"}
                                         border={"2px solid"}
@@ -281,7 +273,7 @@ const CodeEditor = () => {
                                         Fichiers du TP
                                     </MenuButton>
                                 </Tooltip>
-                                <MenuList>
+                                <MenuList zIndex={100}>
                                     {(tabs.length === 0) ? (
                                         <MenuItem> Aucun fichier dans le TP</MenuItem>
                                     ) : (
@@ -298,7 +290,7 @@ const CodeEditor = () => {
                                                     color="red.300"
                                                     onClick={(e) => {
                                                         e.stopPropagation();
-                                                        confirmRemoveTab(tab.id)
+                                                        confirmRemoveTab(tab.id);
                                                     }}
                                                 />
                                             </MenuItem>
@@ -352,7 +344,6 @@ const CodeEditor = () => {
                                             color={tabIndex === index ? "blue.400" : ""}
                                             size="xs"
                                             onClick={(e) => {
-
                                                 handleCheckbox(tab.id);
                                             }}
                                             border="none"
@@ -367,7 +358,7 @@ const CodeEditor = () => {
 
                             {(displayedTabs.length === 0) || (tabIndex < 0 || tabIndex > displayedTabs.length - 1) ? (
                                 <TabPanel>
-                                    <Box display="flex" justifyContent="center" alignItems="center" height="75vh">
+                                    <Box display="flex" justifyContent="center" alignItems="center" height="75vh" border="1px solid grey">
                                         <Text fontSize="2xl" color="gray.500">Aucun onglet ouvert / selectionné</Text>
                                     </Box>
                                 </TabPanel>
