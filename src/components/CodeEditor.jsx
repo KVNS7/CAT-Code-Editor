@@ -27,8 +27,6 @@ import Output from "./Output";
 // ! ---------------------------------------------------------------------------------------------------- ! //
 // TODO : revoir tout le placement / les balises du code
 
-// TODO : importation de PLUSIEURS fichiers
-
 // TODO : sauvegarder fonctionnel
 
 // TODO : retenir les parametres d'IDE (thème, police, minimap,...) selon l'utilisateur
