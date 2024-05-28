@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter,
-  FormControl, FormLabel,
+  FormControl, FormLabel, FormErrorMessage,
   Input,
   Button,
   Tooltip,
@@ -11,20 +11,12 @@ import {
 import { InfoIcon } from '@chakra-ui/icons';
 import { LANGUAGE_VERSIONS } from '../constantes';
 
-const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs }) => {
+const NewFileModal = ({ isOpen, onClose, addTab, tabs }) => {
 
   const toast = useToast();
+  const [fileTitle, setFileTitle] = useState('');
 
-  // Effet pour mettre à jour le langage lorsque le nom change
-  useEffect(() => {
-    if (newTabInfo.title) {                           // A chaque saisie du nom, verifie le langage et le modifie
-      const detectedLanguage = determineLanguage(newTabInfo.title);
-
-      if (detectedLanguage) {
-        setNewTabInfo(prev => ({ ...prev, language: detectedLanguage }));
-      }
-    }
-  }, [newTabInfo.title, setNewTabInfo]);
+  const isError = fileTitle === '';
 
   // Fonction pour déterminer le langage basé sur l'extension du fichier
   const determineLanguage = (filename) => {
@@ -33,21 +25,8 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
     return foundLanguage ? foundLanguage[0] : 'plaintext';    // Retourne le langage si trouvé, plaintext sinon (texte brut)
   };
 
-  const validateTitle = (title) => {                            // Fonction validant le format du nom
-    if (!title.includes('.')) {                                 // Si nom sans '.', rajout .txt a la fin
-      title += '.txt';
-    }
-
-    const [name, extension] = title.split('.');                 // Separe en 2 partie (avant et après le '.')
-    if (!name) {                                                // Si pas de nom avant le '.', retourne faux
-      return false;
-    }
-
-    return title;
-  }
-
   const handleAddTab = () => {
-    const validatedTitle = validateTitle(newTabInfo.title);
+    const validatedTitle = fileTitle;
 
     if (!validatedTitle) {                                      // Si validateTitle retourne faux, toast d'erreur
       if (!toast.isActive("toast1")) {
@@ -78,12 +57,14 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
       }
       return;
     }
-    addTab(validatedTitle);                                     // Sinon ajoute le fichier
+    const detectedLanguage = determineLanguage(validatedTitle);
+
+    addTab(validatedTitle, null, detectedLanguage);                               // Sinon ajoute le fichier
     handleClose();
   }
 
   const handleClose = () => {                                   // Lors de la fermeture
-    setNewTabInfo({ title: "" });                                 // Remet le nom a zéro
+    setFileTitle('');                                           // Remet le nom de fichier a zéro
     onClose();                                                  // Ferme le modal
   }
 
@@ -95,7 +76,7 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
         <ModalCloseButton />
         <ModalBody mb="2%">
 
-          <FormControl mb="3%">
+          <FormControl mb="3%" isInvalid={isError}>
             <FormLabel>
               Nom du fichier
 
@@ -120,12 +101,15 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
 
             </FormLabel>
             <Input
-              value={newTabInfo.title}
-              onChange={(e) => setNewTabInfo({ title: e.target.value })}
+              value={fileTitle}
+              onChange={(e) => setFileTitle(e.target.value )}
               onKeyDown={(e) => e.key === 'Enter' && handleAddTab()}
               placeholder="Entrez le nom du fichier"
               autoFocus
             />
+            {isError ? (
+              <FormErrorMessage>Nom de fichier requis</FormErrorMessage>
+            ) : null}
           </FormControl>
         </ModalBody>
 
@@ -146,4 +130,4 @@ const NewTabModal = ({ isOpen, onClose, addTab, newTabInfo, setNewTabInfo, tabs 
   );
 };
 
-export default NewTabModal;
+export default NewFileModal;
