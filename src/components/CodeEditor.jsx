@@ -6,7 +6,7 @@ import {
     useToast, useDisclosure,
     Tabs, Tab, TabList, TabPanels, TabPanel,
     Tooltip,
-    Image, Text, Input,
+    Image, Text,
     Checkbox
 } from "@chakra-ui/react"
 import { SettingsIcon, SmallCloseIcon, TriangleDownIcon, DeleteIcon } from "@chakra-ui/icons"
@@ -38,8 +38,7 @@ const CodeEditor = () => {
 
     const toast = useToast();
     const editorRef = useRef();                                                     // Ref pour l'editeur
-    const fileInputRef = useRef(null);                                                  // Ref input fichier
-    const navigate = useNavigate();
+    const navigate = useNavigate();                                                 // Pour naviguer entre les pages
     const { isOpen, onOpen, onClose } = useDisclosure()                             // Ouverture du Drawer des paramètres de l'IDE
 
     const [fontSize, setFontSize] = useState(14)                                    // Taille de la police (12 par défaut)
@@ -148,6 +147,8 @@ const CodeEditor = () => {
         setTabs([...tabs, newTab]);                                 // Ajoute l'onglet à la liste des onglets
         setTabIndex(displayedTabs.length);                          // Défini le nouvel onglet comme actif
         setIsModalOpen(false);                                      // Ferme le modal après l'ajout
+        
+        console.log("titre : " + validatedTitle + "\nlangage : " + lang);
     }
 
     const renameTab = (newTitle, newLanguage) => {
@@ -231,9 +232,18 @@ const CodeEditor = () => {
                             <Button leftIcon={<SettingsIcon />} onClick={onOpen}>Paramètres</Button>
                         </Box>
 
-                        
-                        
-                        
+                        <Box>
+                            <Button
+                                onClick={() => {
+                                    tabs.forEach(tab => {
+                                        console.log(`ID: ${tab.id}, Title: ${tab.title}`);
+                                    });
+                                    console.log("\n\nIndex : " + tabIndex);
+                                }}
+                            >
+                                SeeTabs
+                            </Button>
+                        </Box>
 
                         <Box mt={5}>
                             <Tooltip label={"Sauvegarde le fichier dans le dossier étudiant"} openDelay={500} hasArrow>
@@ -251,6 +261,9 @@ const CodeEditor = () => {
                         <ImportFileButton
                             addTab={addTab}
                             tabs={tabs}
+                            displayedTabs={displayedTabs}
+                            setTabs={setTabs}
+                            setTabIndex={setTabIndex}
                             ml="2%"
                             mr="2%"
                             mt={5}

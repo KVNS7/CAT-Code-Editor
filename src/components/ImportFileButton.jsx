@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import {
     Box,
     Tooltip,
@@ -8,10 +8,21 @@ import {
 } from '@chakra-ui/react'
 import { LANGUAGE_VERSIONS } from '../constantes';
 
-const ImportFileButton = ({ addTab, tabs, ml, mr, mt }) => {
+const ImportFileButton = ({ tabs, displayedTabs, setTabs, setTabIndex, ml, mr, mt }) => {
 
     const toast = useToast();
     const fileInputRef = useRef(null);                                                  // Ref input fichier
+
+    const makeToast = (decription) => {
+        toast({
+            title: "Erreur",
+            description: decription,
+            status: "error",
+            duration: 1500,
+            isClosable: false,
+            position: "top",
+        });
+    }
 
     const determineLanguage = (filename) => {               // Détermine le langage avec l'extension du fichier
         const extension = filename.split('.').pop();
@@ -19,58 +30,47 @@ const ImportFileButton = ({ addTab, tabs, ml, mr, mt }) => {
         return foundLanguage ? foundLanguage[0] : 'plaintext';
     };
 
-    const handleAddTab = (fileTitle, fileContent) => {          // Gère l'import du fichier dans les fichiers du TP
 
+    const handleAddTab = (fileTitle, fileContent, fileID) => {          // Gère l'import des fichiers dans les fichiers du TP
         if (!fileTitle) {
-            if (!toast.isActive("toast1")) {
-                toast({
-                    id: "toast1",
-                    title: "Erreur",
-                    description: "Le nom du fichier ne peut être vide",
-                    status: "error",
-                    duration: 1500,
-                    isClosable: false,
-                    position: "top",
-                });
-            }
+            makeToast("Le nom du fichier ne peut être vide");
             return;
         }
-
         if (tabs.some(tab => tab.title === fileTitle)) {
-            if (!toast.isActive("toast2")) {
-                toast({
-                    id: "toast2",
-                    title: "Erreur",
-                    description: "Un fichier avec ce nom existe déjà.",
-                    status: "error",
-                    duration: 1500,
-                    isClosable: false,
-                    position: "top",
-                });
-            }
+            makeToast("Un fichier existe déjà avec ce nom : " + fileTitle);
             return;
         }
 
-        const detectedLanguage = determineLanguage(fileTitle);
-        addTab(fileTitle, fileContent, detectedLanguage);
-    }
+        setTabs(prevTabs => [...prevTabs, {
+            id: fileID,
+            title: fileTitle,
+            content: fileContent,
+            language: determineLanguage(fileTitle),
+            displayed: true
+        }]);
+    };
 
-    const handleFileImport = async (event) => {     // Importe le titre et le contenu du fichier
-        const file = event.target.files[0];
-        if (file) {
+    const handleFileImport = (event) => {         // Importe titre et contenu des fichiers
+        const files = Array.from(event.target.files);
+        let fileID = tabs[tabs.length - 1].id + 1;
+        let index = displayedTabs.length;
+
+        for (const file of files) {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const fileContent = e.target.result;
-                handleAddTab(file.name, fileContent);
-            }
+                handleAddTab(file.name, fileContent, fileID);
+                fileID++;;
+            };
+            index++;
             reader.readAsText(file);
         }
+        setTabIndex(index-1);
     };
-
 
     return (
         <Box ml={ml} mr={mr} mt={mt}>
-            <Tooltip label={"Importer un fichier ou un dossier(zip) au TP"} openDelay={500} hasArrow>
+            <Tooltip label={"Importer des fichiers au TP"} openDelay={500} hasArrow>
                 <Button
                     color={"orange.500"}
                     border={"2px solid"}
@@ -85,6 +85,7 @@ const ImportFileButton = ({ addTab, tabs, ml, mr, mt }) => {
                 ref={fileInputRef}
                 display="none"
                 onChange={handleFileImport}
+                multiple
             />
         </Box>
     );

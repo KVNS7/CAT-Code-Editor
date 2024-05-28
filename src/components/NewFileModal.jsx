@@ -18,6 +18,20 @@ const NewFileModal = ({ isOpen, onClose, addTab, tabs }) => {
 
     const isError = fileTitle === '';
 
+    const makeToast = (id, decription) => {
+        if (!toast.isActive(id)) {
+            toast({
+                id: id,
+                title: "Erreur",
+                description: decription,
+                status: "error",
+                duration: 1500,
+                isClosable: false,
+                position: "top",
+            });
+        }
+    }
+
     const determineLanguage = (filename) => {               // Détermine le langage avec l'extension du fichier
         const extension = filename.split('.').pop();
         const foundLanguage = Object.entries(LANGUAGE_VERSIONS).find(([_, value]) => value.extension === `.${extension}`);
@@ -25,40 +39,18 @@ const NewFileModal = ({ isOpen, onClose, addTab, tabs }) => {
     };
 
     const handleAddTab = () => {
-        const validatedTitle = fileTitle;
-
-        if (!validatedTitle) {
-            if (!toast.isActive("toast1")) {
-                toast({
-                    id: "toast1",
-                    title: "Erreur",
-                    description: "Le nom du fichier ne peut être vide",
-                    status: "error",
-                    duration: 1500,
-                    isClosable: false,
-                    position: "top",
-                });
-            }
+        if (!fileTitle) {
+            makeToast("toast1", "Le nom du fichier ne peut être vide");
             return;
         }
 
-        if (tabs.some(tab => tab.title === validatedTitle)) {
-            if (!toast.isActive("toast2")) {
-                toast({
-                    id: "toast2",
-                    title: "Erreur",
-                    description: "Un fichier avec ce nom existe déjà.",
-                    status: "error",
-                    duration: 1500,
-                    isClosable: false,
-                    position: "top",
-                });
-            }
+        if (tabs.some(tab => tab.title === fileTitle)) {
+            makeToast("toast2", "Un fichier avec ce nom existe déjà");
             return;
         }
 
-        const detectedLanguage = determineLanguage(validatedTitle);
-        addTab(validatedTitle, null, detectedLanguage);
+        const detectedLanguage = determineLanguage(fileTitle);
+        addTab(fileTitle, null, detectedLanguage);
         handleClose();
     }
 
