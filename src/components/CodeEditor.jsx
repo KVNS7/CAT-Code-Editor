@@ -27,11 +27,11 @@ import Output from "./Output";
 // ! ---------------------------------------------------------------------------------------------------- ! //
 // TODO : revoir tout le placement / les balises du code
 
-// TODO : importer fonctionnel
+// TODO : importation de PLUSIEURS fichiers
+
 // TODO : sauvegarder fonctionnel
 
 // TODO : retenir les parametres d'IDE (thème, police, minimap,...) selon l'utilisateur
-
 // ! ---------------------------------------------------------------------------------------------------- ! //
 
 const CodeEditor = () => {
@@ -348,9 +348,9 @@ const CodeEditor = () => {
                                     </Box>
                                 </TabPanel>
                             ) : (
-                                displayedTabs.map((tab, index) => (
+                                displayedTabs.map((tab) => (
 
-                                    <TabPanel key={index}>
+                                    <TabPanel key={tab.id}>
                                         <Editor
                                             height="75vh"
                                             theme={theme}
@@ -360,7 +360,8 @@ const CodeEditor = () => {
                                             value={tab.content}
                                             onChange={(newValue) => {
                                                 const newTabs = [...tabs];
-                                                newTabs[index].content = newValue;
+                                                const newIndex = newTabs.findIndex(t => t.id === tab.id);
+                                                newTabs[newIndex].content = newValue;
                                                 setTabs(newTabs);
                                             }}
                                             options={{
