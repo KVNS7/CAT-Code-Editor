@@ -190,10 +190,9 @@ const CodeEditor = () => {
     const toastNonImplementee = () => {                                         // Toast pour les fonctionnalités non implémentées
         toast({
             title: "Non implémenté",
-            description: "Cette fonction n'a pas encore été ajoutée",
+            description: "Cette fonction n'a pas encore été implémentée",
             status: "error",
             duration: 5000,
-            variant: "left-accent",
             position: "bottom-right",
         })
     }
@@ -312,6 +311,7 @@ const CodeEditor = () => {
                         minimap={minimap}
                         setMinimap={setMinimap}
                         onIndentCode={handleIndentCode}
+                        toastNonImplementee={toastNonImplementee}
                     />
 
                     {/* Onglets de l'IDE */}

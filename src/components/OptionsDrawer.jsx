@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { VS_THEMES } from '../constantes';
 
-const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme, minimap, setMinimap, onIndentCode }) => {
+const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme, minimap, setMinimap, onIndentCode, toastNonImplementee }) => {
 
     const themes = Object.entries(VS_THEMES)                                        // Thèmes de l'IDE
 
@@ -84,7 +84,7 @@ const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme
 
                     <Box>
                         <Text mb={2} mr="auto" fontSize='lg'>Exporter les fichiers du TP :</Text>
-                        <Button width="100%"> Exporter </Button>
+                        <Button width="100%" onClick={toastNonImplementee}> Exporter </Button>
                     </Box>
 
                     <Divider my="5" borderWidth={1} />
