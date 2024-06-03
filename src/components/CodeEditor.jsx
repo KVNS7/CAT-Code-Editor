@@ -9,7 +9,7 @@ import {
     Image, Text,
     Checkbox
 } from "@chakra-ui/react"
-import { SettingsIcon, SmallCloseIcon, TriangleDownIcon, DeleteIcon } from "@chakra-ui/icons"
+import { SettingsIcon, SmallCloseIcon, TriangleDownIcon, DeleteIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
 import { useNavigate } from "react-router-dom";
 import beautify from "js-beautify";
@@ -279,18 +279,25 @@ const CodeEditor = () => {
                                         tabs.map(tab => (
                                             <MenuItem key={tab.id} onClick={() => handleCheckbox(tab.id)}>
                                                 {tab.title}
-                                                <Checkbox
+                                                <IconButton
+                                                    icon={tab.displayed ? <ViewIcon /> : <ViewOffIcon />}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleCheckbox(tab.id);
+                                                    }}
+                                                    color={tab.displayed ? "blue.400" : "grey.200"}
                                                     ml="auto"
-                                                    isChecked={tab.displayed}
-                                                    onChange={() => handleCheckbox(tab.id)}
+                                                    variant="ghost"
                                                 />
-                                                <DeleteIcon
+                                                <IconButton
+                                                    icon={<DeleteIcon/>}
                                                     ml={3}
                                                     color="red.300"
                                                     onClick={(e) => {
                                                         e.stopPropagation();
                                                         confirmRemoveTab(tab.id);
                                                     }}
+                                                    variant="ghost"
                                                 />
                                             </MenuItem>
                                         ))
