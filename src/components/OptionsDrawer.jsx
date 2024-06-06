@@ -91,7 +91,7 @@ const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme
 
                     <Box fontSize='md'>
                         <Text mb={2} fontSize='lg'>
-                            Raccourcis clavier :
+                            Commandes et raccourcis clavier :
                         </Text>
 
                         <Text lineHeight="taller">
@@ -107,9 +107,12 @@ const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme
                             <br />
                             <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>s</Kbd> : sauvegarder les fichiers
                             <br />
-                            <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>i</Kbd> : importer un fichier / dossier
+                            <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>i</Kbd> : importer un fichier
                             <br />
                             <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>c</Kbd> : stopper l'execution dans le terminal
+                            <br />
+                            <Kbd>Clic droit</Kbd> (sur un onglet) : renommer le fichier
+
 
                         </Text>
                     </Box>
