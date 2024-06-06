@@ -75,7 +75,7 @@ const ImportFileButton = forwardRef(({ tabs, displayedTabs, setTabs, setTabIndex
                     ref={ref}
                     color={"orange.500"}
                     border={"2px solid"}
-                    _hover={{ bg: "orange.200" }}
+                    _hover={{ bg: "orange.900", color: "white", borderColor: "orange.500" }}
                     onClick={() => fileInputRef.current.click()}
                 >
                     Importer
