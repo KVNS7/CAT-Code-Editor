@@ -129,14 +129,13 @@ Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au s
 - [x] Raccourcis claviers
 - [x] Onglets pour avoir plusieurs fichiers
   - [x] Pop-up création de fichier avec choix du langage et du nom du fichier
-  - [x] Extension (ex : .c, .py) automatique selon langage du fichier
   - [x] Detection du langage selon le titre du fichier
   - [x] Possibilité de fermer un onglet
   - [x] Possibilité de renommer les fichiers
   - [x] Menu déroulant listant les fichiers pour les affichers en onglet ou non
-  - [x] Supprimer les fichiers depuis le menu déroulant
+  - [x] Suppression multi-ichier depuis le menu déroulant
 - [x] Fonction d'indentation avec un bouton
-- [x] Importation d'un ou plusieurs fichier(s) au TP
+- [x] Importation d'un ou plusieurs fichier(s) au TP depuis le menu déroulant
 - [x] Exportation des fichiers du TP sur la machine
 - [ ] Affichage des erreurs syntaxiques en les soulignants ( ';' manquant, etc... )
 
