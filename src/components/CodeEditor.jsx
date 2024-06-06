@@ -248,7 +248,7 @@ const CodeEditor = () => {
     return (
         <Box minH="100vh" bg="#121212" color="gray.500" px={6} py={8}>
 
-            <Image mt="-1%" src='img/CAT.png' mr='auto' ml='auto' alt='Logo CAT' borderRadius="full" boxSize="6%" onClick={() => navigate('/')} cursor="pointer" />
+            <Image mt="-1%" src='img/CAT.png' mr='auto' ml='auto' alt='Logo CAT' border="2px solid teal" borderRadius="full" boxSize="6%" onClick={() => navigate('/')} cursor="pointer" />
 
             <HStack spacing={4}>
                 <Box w='65%'>
@@ -304,7 +304,7 @@ const CodeEditor = () => {
                                 <MenuList zIndex={100}>
                                     <Box display="flex" justifyContent="space-between" mb={2}>
                                         <Button
-                                            colorScheme="green"
+                                            colorScheme="teal"
                                             width="47%"
                                             ml="2%"
                                             onClick={() => {
