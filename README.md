@@ -136,11 +136,9 @@ Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au s
   - [x] Menu déroulant listant les fichiers pour les affichers en onglet ou non
   - [x] Supprimer les fichiers depuis le menu déroulant
 - [x] Fonction d'indentation avec un bouton
-- [x] Importation d'un ou plusieurs fichier(s) au tp
+- [x] Importation d'un ou plusieurs fichier(s) au TP
+- [x] Exportation des fichiers du TP sur la machine
 - [ ] Affichage des erreurs syntaxiques en les soulignants ( ';' manquant, etc... )
-- [ ] Bouton sauvegarder permettant d'enregistrer le/les fichiers :
-  - [ ] En local sur machine dans un dossier premièrement
-  - [ ] Sur Docker dans un dossier propre à l'étudiant, exemple : *\[numEtudiant] / AlgoProg / TP2 / \[fichier]*
 
 <br/>
 
