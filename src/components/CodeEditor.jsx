@@ -9,7 +9,7 @@ import {
     Image, Text,
     Checkbox
 } from "@chakra-ui/react"
-import { SettingsIcon, SmallCloseIcon, TriangleDownIcon, DeleteIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
+import { SettingsIcon, SmallCloseIcon, TriangleDownIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
 import { useNavigate } from "react-router-dom";
 import beautify from "js-beautify";
@@ -49,8 +49,8 @@ const CodeEditor = () => {
     const [displayedTabs, setDisplayedTabs] = useState(                             // Onglets de l'IDE
         () => tabs.filter(tab => tab.displayed)
     );
-    const [tabIndex, setTabIndex] = useState(0)                                     // Index onglet actif
-    const [idToDelete, setidToDelete] = useState(null);                             // Id fichier à supprimer
+    const [tabIndex, setTabIndex] = useState(0);                                    // Index onglet actif
+    const [selectedTabs, setSelectedTabs] = useState([]);                           // Liste des onglets selectionnés (pour suppression / exportation)
 
     const [isModalOpen, setIsModalOpen] = useState(false);                          // Ouverture fenetre nouveau onglet
     const [isRenameOpen, setIsRenameOpen] = useState(false);                        // Ouverture fenetre renommer onglet
@@ -71,7 +71,8 @@ const CodeEditor = () => {
             setIsModalOpen(true);
         } else if ((e.ctrlKey || e.metaKey) && e.key === 'w') {
             e.preventDefault();
-            confirmRemoveTab(displayedTabs[tabIndex].id);
+            setSelectedTabs([displayedTabs[tabIndex]]);
+            confirmRemoveTab();
         } else if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
             e.preventDefault();
             importButtonRef.current.click();
@@ -164,24 +165,50 @@ const CodeEditor = () => {
         setIsRenameOpen(true);
     }
 
-    const confirmRemoveTab = (removeId) => {
-        setidToDelete(removeId);
+    const handleSelectTab = (tab) => {
+        setSelectedTabs(prev => {
+            if (prev.some(selectedTab => selectedTab.id === tab.id)) {
+                return prev.filter(selectedTab => selectedTab.id !== tab.id);
+            } else {
+                return [...prev, tab];
+            }
+        });
+    };
+
+    const confirmRemoveTab = () => {
         setIsAlertOpen(true);
     }
 
-    const removeTab = () => {                                           // Suppression d'un fichier
-        const newTabs = tabs.filter(tab => tab.id !== idToDelete);
-        let deleteIndex = displayedTabs.findIndex(tab => tab.id === idToDelete);
+    const removeTab = () => {                                                   // Suppression d'un fichier
+        let newTabs = tabs;
+
+        selectedTabs.forEach(delTab => {
+            newTabs = newTabs.filter(tab => tab.id !== delTab.id);
+            let deleteIndex = displayedTabs.findIndex(tab => tab.id === delTab.id);
+
+            if (deleteIndex === -1) return;
+            else if (deleteIndex == tabIndex) {
+                if (deleteIndex === displayedTabs.length - 1) setTabIndex(deleteIndex - 1);
+            } else if (deleteIndex < tabIndex) {
+                setTabIndex(tabIndex - 1);
+            }
+        });
+
         setTabs(newTabs);
+        setSelectedTabs([]);
         setIsAlertOpen(false);
+    }
 
-        if (deleteIndex === -1) return;
-
-        if (deleteIndex === tabIndex) {
-            if (deleteIndex === displayedTabs.length - 1) setTabIndex(deleteIndex - 1);
-        } else if (deleteIndex < tabIndex) {
-            setTabIndex(tabIndex - 1);
-        }
+    const handleExportFiles = () => {                                           // exporter les fichiers sélectionnés
+        selectedTabs.forEach(tab => {           // ! si besoin de faire un zip, nécessite d'installer JSZip et file-saver
+            const element = document.createElement('a');
+            const file = new Blob([tab.content], { type: 'text/plain' });
+            element.href = URL.createObjectURL(file);
+            element.download = tab.title;
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        });
     }
 
     const decreaseFontSize = () => fontSize > 8 && setFontSize(fontSize - 1);   // Diminue la taille de la police (si > 8)
@@ -197,7 +224,7 @@ const CodeEditor = () => {
         })
     }
 
-    const handleCheckbox = (tabID) => {                                         // Gère la fermeture / ouverture d'onglet
+    const handleTabView = (tabID) => {                                         // Gère la fermeture / ouverture d'onglet
 
         const indexCheck = displayedTabs.findIndex(tab => tab.id === tabID);
         const displayed = indexCheck !== -1;
@@ -237,7 +264,7 @@ const CodeEditor = () => {
                                 <Button
                                     color={"green.500"}
                                     border={"2px solid"}
-                                    _hover={{ bg: "green.200" }}
+                                    _hover={{ bg: "green.900", color: 'white', borderColor: 'green.500' }}
                                     onClick={toastNonImplementee}
                                 >
                                     Sauvegarder
@@ -257,47 +284,84 @@ const CodeEditor = () => {
                             mt={5}
                         />
 
+
+
                         <Box mt={5} mr="2%">
 
-                            <Menu closeOnSelect={false} placement="bottom">
+                            <Menu closeOnSelect={false} placement="bottom" /* // ! onClose={() => setSelectedTabs([])}*/>
                                 <Tooltip label={"Liste des fichiers du TP"} openDelay={500} hasArrow>
                                     <MenuButton
                                         ref={menuButtonRef}
                                         as={Button}
                                         color={"blue.500"}
                                         border={"2px solid"}
-                                        _hover={{ bg: "blue.200" }}
+                                        _hover={{ bg: "blue.900", color: 'white', borderColor: 'blue.500' }}
                                         rightIcon={<TriangleDownIcon />}
                                     >
                                         Fichiers du TP
                                     </MenuButton>
                                 </Tooltip>
                                 <MenuList zIndex={100}>
+                                    <Box display="flex" justifyContent="space-between" mb={2}>
+                                        <Button
+                                            colorScheme="green"
+                                            width="47%"
+                                            ml="2%"
+                                            onClick={() => {
+                                                if (selectedTabs.length > 0) handleExportFiles();
+                                            }}
+                                        >
+                                            Exporter
+                                        </Button>
+                                        <Button
+                                            colorScheme="red"
+                                            width="47%"
+                                            mr="2%"
+                                            onClick={() => {
+                                                if (selectedTabs.length > 0) confirmRemoveTab();
+                                            }}
+                                        >
+                                            Supprimer
+                                        </Button>
+                                    </Box>
+
+
                                     {(tabs.length === 0) ? (
                                         <MenuItem> Aucun fichier dans le TP</MenuItem>
                                     ) : (
                                         tabs.map(tab => (
-                                            <MenuItem key={tab.id} onClick={() => handleCheckbox(tab.id)}>
+                                            <MenuItem key={tab.id} /*onClick={() => handleTabView(tab.id)}*/ color="gray.200">
+
                                                 {tab.title}
-                                                <IconButton
-                                                    icon={tab.displayed ? <ViewIcon /> : <ViewOffIcon />}
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        handleCheckbox(tab.id);
-                                                    }}
-                                                    color={tab.displayed ? "blue.400" : "grey.200"}
-                                                    ml="auto"
-                                                    variant="ghost"
-                                                />
-                                                <IconButton
-                                                    icon={<DeleteIcon/>}
+
+                                                {tab.displayed ? (
+                                                    <ViewIcon
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleTabView(tab.id);
+                                                        }}
+                                                        color="blue.400"
+                                                        ml="auto"
+                                                        height={8}
+                                                    />
+                                                ) : (
+                                                    <ViewOffIcon
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleTabView(tab.id);
+                                                        }}
+                                                        color="gray.400"
+                                                        ml="auto"
+                                                        height={8}
+                                                    />
+                                                )}
+
+
+                                                <Checkbox
                                                     ml={3}
-                                                    color="red.300"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        confirmRemoveTab(tab.id);
-                                                    }}
-                                                    variant="ghost"
+                                                    mr={2}
+                                                    isChecked={selectedTabs.includes(tab)}
+                                                    onChange={() => handleSelectTab(tab)}
                                                 />
                                             </MenuItem>
                                         ))
@@ -351,7 +415,7 @@ const CodeEditor = () => {
                                             color={tabIndex === index ? "blue.400" : ""}
                                             size="xs"
                                             onClick={(e) => {
-                                                handleCheckbox(tab.id);
+                                                handleTabView(tab.id);
                                             }}
                                             border="none"
                                         />
@@ -417,9 +481,12 @@ const CodeEditor = () => {
 
                     <TabDeleteDialog
                         isOpen={isAlertOpen}
-                        onClose={() => setIsAlertOpen(false)}
-                        onDelete={removeTab}
-                        tabName={tabs.find(tab => tab.id === idToDelete)?.title}
+                        onClose={() => {
+                            setIsAlertOpen(false);
+                            setSelectedTabs([]);
+                        }}
+                        removeTab={removeTab}
+                        selectedTabs={selectedTabs}
                     />
 
                 </Box>
