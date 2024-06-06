@@ -29,8 +29,8 @@ const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme
                         <Text mb={2} fontSize='lg'>
                             Indenter le code :
                         </Text>
-                        <Button width="49%" onClick={() => onIndentCode('expand')} mr="2%">Style Allman</Button>
-                        <Button width="49%" onClick={() => onIndentCode('collapse')}>Style K&R</Button>
+                        <Button width="49%" onClick={() => onIndentCode('expand')} mr="2%">Allman</Button>
+                        <Button width="49%" onClick={() => onIndentCode('collapse')}>K&R</Button>
                     </Box>
 
                     <Divider my="5" borderWidth={1} />

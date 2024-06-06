@@ -127,7 +127,7 @@ const DockerAdminPage = () => {
     return (
         <Box minH="100vh" bg="#121212" color="gray.500" px={6} py={8}>
 
-            <Image mt="-1%" src='img/CAT.png' mr='auto' ml='auto' alt='Logo CAT' borderRadius="full" boxSize="6%" onClick={() => navigate('/')} cursor="pointer" />
+            <Image mt="-1%" src='img/CAT.png' mr='auto' ml='auto' alt='Logo CAT' border="2px solid teal" borderRadius="full" boxSize="6%" onClick={() => navigate('/')} cursor="pointer" />
 
             <Flex justifyContent="space-between" mb={4}>
                 <Text fontSize="3xl" color="white">Administration Docker</Text>

@@ -32,12 +32,14 @@ import Output from "./Output";
 // TODO : retenir les parametres d'IDE (thème, police, minimap,...) selon l'utilisateur
 // ! ---------------------------------------------------------------------------------------------------- ! //
 
+
 const CodeEditor = () => {
 
     const toast = useToast();
     const editorRef = useRef();                                                     // Ref editeur
     const importButtonRef = useRef();                                               // Ref bouton importer
     const menuButtonRef = useRef();                                                 // Ref bouton menu
+
     const navigate = useNavigate();                                                 // Pour naviguer entre les pages
     const { isOpen, onOpen, onClose } = useDisclosure()                             // Ouverture du Drawer des paramètres de l'IDE
 
@@ -49,12 +51,12 @@ const CodeEditor = () => {
     const [displayedTabs, setDisplayedTabs] = useState(                             // Onglets de l'IDE
         () => tabs.filter(tab => tab.displayed)
     );
+    const [selectedTabs, setSelectedTabs] = useState([]);                           // Onglets selectionnés (suppression / exportation)
     const [tabIndex, setTabIndex] = useState(0);                                    // Index onglet actif
-    const [selectedTabs, setSelectedTabs] = useState([]);                           // Liste des onglets selectionnés (pour suppression / exportation)
 
-    const [isModalOpen, setIsModalOpen] = useState(false);                          // Ouverture fenetre nouveau onglet
-    const [isRenameOpen, setIsRenameOpen] = useState(false);                        // Ouverture fenetre renommer onglet
-    const [isAlertOpen, setIsAlertOpen] = useState(false);                          // Ouverture du TabDeleteDialog
+    const [isModalOpen, setIsModalOpen] = useState(false);                          // Ouverture modale nouveau onglet
+    const [isRenameOpen, setIsRenameOpen] = useState(false);                        // Ouverture modale renommer onglet
+    const [isAlertOpen, setIsAlertOpen] = useState(false);                          // Ouverture dialogue suppresion onglet
 
     const handleKeyDown = useCallback((e) => {                                      // Gestion des raccourcis clavier
         if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=')) {
@@ -283,8 +285,6 @@ const CodeEditor = () => {
                             mr="2%"
                             mt={5}
                         />
-
-
 
                         <Box mt={5} mr="2%">
 
