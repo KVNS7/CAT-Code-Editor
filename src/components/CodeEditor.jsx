@@ -25,9 +25,7 @@ import Output from "./Output";
 
 
 // ! ---------------------------------------------------------------------------------------------------- ! //
-// TODO : revoir tout le placement / les balises du code
-
-// TODO : sauvegarder fonctionnel
+// TODO : revoir tout le placement / les balises du code / repartition en composants
 
 // TODO : retenir les parametres d'IDE (thème, police, minimap,...) selon l'utilisateur
 // ! ---------------------------------------------------------------------------------------------------- ! //
@@ -266,7 +264,7 @@ const CodeEditor = () => {
                                 <Button
                                     color={"green.500"}
                                     border={"2px solid"}
-                                    _hover={{ bg: "green.900", color: 'white', borderColor: 'green.500' }}
+                                    _hover={{ bg: "green.900", color: 'white', borderColor: "green.500" }}
                                     onClick={toastNonImplementee}
                                 >
                                     Sauvegarder
@@ -330,7 +328,7 @@ const CodeEditor = () => {
                                         <MenuItem> Aucun fichier dans le TP</MenuItem>
                                     ) : (
                                         tabs.map(tab => (
-                                            <MenuItem key={tab.id} /*onClick={() => handleTabView(tab.id)}*/ color="gray.200">
+                                            <MenuItem key={tab.id} onClick={() => handleSelectTab(tab)} color="gray.200">
 
                                                 {tab.title}
 
