@@ -48,6 +48,8 @@ Celui-ci sera finalement relié à un terminal réalisé par <a href="https://gi
 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=PiravineJEYAMOHAN&repo=composant-terminal-cat&border_color=7F3FBF&bg_color=0D1117&title_color=C9D1D9&text_color=8B949E&icon_color=7F3FBF)](https://github.com/PiravineJEYAMOHAN/composant-terminal-cat)
 
+[![Readme Card2](https://github-readme-stats.vercel.app/api/pin/?username=PiravineJEYAMOHAN&repo=serveur-flask-cat&border_color=7F3FBF&bg_color=0D1117&title_color=C9D1D9&text_color=8B949E&icon_color=7F3FBF)](https://github.com/PiravineJEYAMOHAN/serveur-flask-cat)
+
 Ceci a pour but de :
 - simplifier le travail des étudiants sur CAT en leur permettant de compiler et exécuter leurs projets directement sur le site (évite les allés-retour entre IDE et CAT)
 - inciter les étudiants à utiliser le terminal, de moins en moins utilisé étant donné le grand nombre d'interfaces créées masquant son usage
