@@ -2,12 +2,11 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import {
     Box, HStack, Flex,
     Menu, MenuButton, MenuList, MenuItem,
-    Button, IconButton,
+    Button, IconButton, Checkbox,
     useToast, useDisclosure,
     Tabs, Tab, TabList, TabPanels, TabPanel,
     Tooltip,
     Image, Text,
-    Checkbox
 } from "@chakra-ui/react"
 import { SettingsIcon, SmallCloseIcon, TriangleDownIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
