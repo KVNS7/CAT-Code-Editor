@@ -6,7 +6,7 @@ import {
     useToast, useDisclosure,
     Tabs, Tab, TabList, TabPanels, TabPanel,
     Tooltip,
-    Image, Text,
+    Image, Text, Divider
 } from "@chakra-ui/react"
 import { SettingsIcon, SmallCloseIcon, TriangleDownIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
 import { Editor } from "@monaco-editor/react";
@@ -25,6 +25,8 @@ import Output from "./Output";
 
 // ! ---------------------------------------------------------------------------------------------------- ! //
 // TODO : revoir tout le placement / les balises du code / repartition en composants
+
+// * react beautiful dnd (deplacer tabs en drag n' drop)
 
 // TODO : retenir les parametres d'IDE (thème, police, minimap,...) selon l'utilisateur
 // ! ---------------------------------------------------------------------------------------------------- ! //
@@ -174,6 +176,20 @@ const CodeEditor = () => {
         });
     };
 
+    const handleSelectAll = () => {
+        if (selectedTabs.length < tabs.length) {
+            const newSelectedTabs = [...selectedTabs];
+            tabs.forEach(tab => {
+                if (!newSelectedTabs.includes(tab)) {
+                    newSelectedTabs.push(tab);
+                }
+            });
+            setSelectedTabs(newSelectedTabs);
+        } else {
+            setSelectedTabs([]);
+        }
+    };
+
     const confirmRemoveTab = () => {
         setIsAlertOpen(true);
     }
@@ -285,7 +301,7 @@ const CodeEditor = () => {
 
                         <Box mt={5} mr="2%">
 
-                            <Menu closeOnSelect={false} placement="bottom" /* // ! onClose={() => setSelectedTabs([])}*/>
+                            <Menu closeOnSelect={false} placement="bottom">
                                 <Tooltip label={"Liste des fichiers du TP"} openDelay={500} hasArrow>
                                     <MenuButton
                                         ref={menuButtonRef}
@@ -322,6 +338,28 @@ const CodeEditor = () => {
                                         </Button>
                                     </Box>
 
+                                    <Box
+                                        display="flex"
+                                        justifyContent="space-between"
+                                        ml="5%"
+                                        mr="9%"
+                                    >
+                                        <Text
+                                            color="gray.200"
+                                            mt={2}
+                                            onClick={handleSelectAll}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            Selectionner tout
+                                        </Text>
+                                        <Checkbox
+                                            onChange={handleSelectAll}
+                                            isChecked={selectedTabs.length === tabs.length && tabs.length !== 0}
+                                            mt={2}
+                                        />
+                                    </Box>
+
+                                    <Divider borderWidth={1} my="3" />
 
                                     {(tabs.length === 0) ? (
                                         <MenuItem> Aucun fichier dans le TP</MenuItem>
