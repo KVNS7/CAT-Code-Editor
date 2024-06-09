@@ -109,8 +109,6 @@ const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme
                             <br />
                             <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>i</Kbd> : importer un fichier
                             <br />
-                            <Kbd>Ctrl</Kbd> / <Kbd>⌘</Kbd> + <Kbd>c</Kbd> : stopper l'execution dans le terminal
-                            <br />
                             <Kbd>Clic droit</Kbd> (sur un onglet) : renommer le fichier
 
 
