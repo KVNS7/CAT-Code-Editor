@@ -135,7 +135,7 @@ Il ne reste qu'à mettre l'URL donné dans votre navigateur afin d'accéder au s
   - [x] Possibilité de fermer un onglet
   - [x] Possibilité de renommer les fichiers
   - [x] Menu déroulant listant les fichiers pour les affichers en onglet ou non
-  - [x] Suppression multi-ichier depuis le menu déroulant
+  - [x] Suppression multi-fichier depuis le menu déroulant
 - [x] Fonction d'indentation avec un bouton
 - [x] Importation d'un ou plusieurs fichier(s) au TP depuis le menu déroulant
 - [x] Exportation des fichiers du TP sur la machine
