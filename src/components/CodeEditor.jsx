@@ -72,8 +72,10 @@ const CodeEditor = () => {
             setIsModalOpen(true);
         } else if ((e.ctrlKey || e.metaKey) && e.key === 'w') {
             e.preventDefault();
-            setSelectedTabs([displayedTabs[tabIndex]]);
-            confirmRemoveTab();
+            if (displayedTabs.length > 0) {
+                setSelectedTabs([displayedTabs[tabIndex]]);
+                confirmRemoveTab();
+            }
         } else if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
             e.preventDefault();
             importButtonRef.current.click();
@@ -215,7 +217,7 @@ const CodeEditor = () => {
     }
 
     const handleExportFiles = () => {                                           // exporter les fichiers sélectionnés
-        selectedTabs.forEach(tab => {           // ! si besoin de faire un zip, nécessite d'installer JSZip et file-saver
+        selectedTabs.forEach(tab => {
             const element = document.createElement('a');
             const file = new Blob([tab.content], { type: 'text/plain' });
             element.href = URL.createObjectURL(file);
@@ -263,7 +265,7 @@ const CodeEditor = () => {
     return (
         <Box minH="100vh" bg="#121212" color="gray.500" px={6} py={8}>
 
-            <Image mt="-1%" src='img/CAT.png' mr='auto' ml='auto' alt='Logo CAT' border="2px solid teal" borderRadius="full" boxSize="7%" onClick={() => navigate('/')} cursor="pointer" />
+            <Image mt="-1%" src='img/CAT.png' mr='auto' ml='auto' alt='Logo CAT' border="2px solid teal" borderRadius="full" boxSize="6%" onClick={() => navigate('/')} cursor="pointer" />
 
             <HStack spacing={4}>
                 <Box w='65%'>
