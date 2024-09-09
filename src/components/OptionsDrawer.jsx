@@ -82,13 +82,6 @@ const OptionsDrawer = ({ isOpen, onClose, fontSize, setFontSize, theme, setTheme
 
                     <Divider my="5" borderWidth={1} />
 
-                    <Box>
-                        <Text mb={2} mr="auto" fontSize='lg'>Exporter les fichiers du TP :</Text>
-                        <Button width="100%" onClick={toastNonImplementee}> Exporter </Button>
-                    </Box>
-
-                    <Divider my="5" borderWidth={1} />
-
                     <Box fontSize='md'>
                         <Text mb={2} fontSize='lg'>
                             Commandes et raccourcis clavier :
